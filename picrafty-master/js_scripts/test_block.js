@@ -1,7 +1,7 @@
 Blockly.Blocks['hello_world'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Hello world, My name is ")
+        .appendField("Hello world, My name is Joe. ")
         .appendField(new Blockly.FieldTextInput("Joe"), "NAME");
     this.setColour(180);
  this.setTooltip("");
