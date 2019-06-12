@@ -10,7 +10,7 @@
   <script src="js_scripts/python_compressed.js"></script>
   <script src="js_scripts/test_block.js"></script>
   <script src="js_scripts/connect_server.js"></script>
-  <script src="js_scripts/get_block.js"></script>
+  <script src="js_scripts/getBlock.js"></script>
   <script src="js_scripts/setBlock.js"></script>
   <script src="blocks/lists.js"></script>
   <script src="blocks/logic.js"></script>
@@ -361,10 +361,10 @@
         <field name="PORT">25565</field>
       </block>
 
-      <block type="get_block">
-        <field name="GETBLOCKXCOORD">0</field>
-        <field name="GETBLOCKYCOORD">0</field>
-        <field name="GETBLOCKZCOORD">0</field>
+      <block type="getBlock">
+        <field name="X">0</field>
+        <field name="Y">0</field>
+        <field name="Z">0</field>
       </block>
 
       <block type="setBlock">
@@ -393,7 +393,9 @@
 	//This helps Blockly avoid getting hung up
 	Blockly.Python.INFINITE_LOOP_TRAP = null;
 	//This converts the workspace into Code using the Code generation snippet in test_block
-    let preamble = "from mine import *";
+    let preamble = "from mine import *\n\n" +
+        "mc = Minecraft().create()\n" +
+        "\n";
 	var code = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
 	//This is all Preperation For Downloading the file
 	var PythonStub = new Blob([code], {type:"text/plain"});
