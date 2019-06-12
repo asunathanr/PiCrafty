@@ -387,7 +387,7 @@
 	var PythonStub = new Blob([code], {type:"text/plain"});
 	var textToSaveAsURL = window.URL.createObjectURL(PythonStub);
 	var downloadLink = document.createElement("a");
-		downloadLink.download = 'Pythong_stub.py';
+		downloadLink.download = 'Python_stub.py';
 		downloadLink.innerHTML = "Download File";
 		downloadLink.href = textToSaveAsURL;
 		downloadLink.onclick = destroyClickedElement;
