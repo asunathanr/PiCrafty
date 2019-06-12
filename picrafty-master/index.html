@@ -12,7 +12,7 @@
   <script src="js_scripts/connect_server.js"></script>
   <script src="js_scripts/getBlock.js"></script>
   <script src="js_scripts/setBlock.js"></script>
-    <script src="js_scripts/postToChat.js"></script>
+  <script src="js_scripts/postToChat.js"></script>
 
   <script src="blocks/lists.js"></script>
   <script src="blocks/logic.js"></script>
@@ -400,7 +400,7 @@
 	Blockly.Python.INFINITE_LOOP_TRAP = null;
 	//This converts the workspace into Code using the Code generation snippet in test_block
     let preamble = "from mine import *\n\n" +
-        "mc = Minecraft().create()\n" +
+        "mc = Minecraft()\n" +
         "\n";
 	var code = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
 	//This is all Preperation For Downloading the file
