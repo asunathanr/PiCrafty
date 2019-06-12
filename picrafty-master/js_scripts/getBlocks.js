@@ -1,4 +1,4 @@
-Blockly.Blocks['getblocks'] = {
+Blockly.Blocks['getBlocks'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Get list of block types.");
@@ -23,7 +23,7 @@ Blockly.Blocks['getblocks'] = {
  this.setHelpUrl("");
   }
 };
-Blockly.Python['getblocks'] = function(block) {
+Blockly.Python['getBlocks'] = function(block) {
   var x0 = block.getFieldValue('X0COORD');
   var x1 = block.getFieldValue('X1COORD');
   var y0 = block.getFieldValue('Y0COORD');
