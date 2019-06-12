@@ -1,19 +1,19 @@
 Blockly.Blocks['postToChat'] = {
-    init: function() {
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.appendDummyInput()
-            .appendField("Post a message to chat");
-        this.appendDummyInput()
-            .appendField("message:")
-            .appendField(new Blockly.FieldTextInput(""), 'MESSAGE');
-        this.setColour(230);
-        this.setTooltip("Post a message to in-game chat.");
-        this.setHelpUrl("");
-    }
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Post to chat.");
+    this.appendValueInput("TOPOST")
+        .setCheck(["String", "Number"]);
+    this.appendDummyInput();
+    this.setOutput(true, null);
+    this.setColour(230);
+ this.setTooltip("Post a message to in game chat.");
+ this.setHelpUrl("");
+  }
 };
 Blockly.Python['postToChat'] = function(block) {
-    var message = block.getFieldValue('MESSAGE');
-    var code = 'mc.setBlock(' + message + ')\n';
-    return code;
+  var value_topost = Blockly.Python.valueToCode(block, 'TOPOST', Blockly.Python.ORDER_ATOMIC);
+  // TODO: Assemble Python into code variable.
+  var code = 'mc.postToChat(' + value_topost + ')\n';
+  return [code, Blockly.Python.ORDER_NONE];
 };
