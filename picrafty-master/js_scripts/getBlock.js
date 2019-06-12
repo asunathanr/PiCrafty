@@ -1,9 +1,9 @@
-Blockly.Blocks['setBlock'] = {
+Blockly.Blocks['getBlock'] = {
     init: function() {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.appendDummyInput()
-            .appendField("Set a block");
+            .appendField("Get a block");
         this.appendDummyInput()
             .appendField("x:")
             .appendField(new Blockly.FieldNumber(), 'X');
@@ -13,24 +13,16 @@ Blockly.Blocks['setBlock'] = {
         this.appendDummyInput()
             .appendField("z:")
             .appendField(new Blockly.FieldNumber(), 'Z');
-        this.appendDummyInput()
-            .appendField("Block ID:")
-            .appendField(new Blockly.FieldNumber(), 'blockId');
-        this.appendDummyInput()
-            .appendField("Block Type")
-            .appendField(new Blockly.FieldNumber(), 'blockType');
         this.setColour(230);
-        this.setTooltip("Sets the block at location (x,y,z) to be the given block id and optional type. A block doesn't have to exist in that location before calling this method.");
+        this.setTooltip("Gets a block at position (x, y, z).");
         this.setHelpUrl("");
     }
 };
-Blockly.Python['setBlock'] = function(block) {
+Blockly.Python['getBlock'] = function(block) {
     var X = block.getFieldValue('X');
     var Y = block.getFieldValue('Y');
     var Z = block.getFieldValue('Z');
-    var blockId = block.getFieldValue('blockId');
-    var blockType = block.getFieldValue('blockType');
-    let argumentString = X + ',' + Y + ',' + Z + ',' + blockId + ',' + blockType;
+    let argumentString = X + ',' + Y + ',' + Z;
     var code = 'mc.setBlock(' + argumentString + ')\n';
     return code;
 };
