@@ -11,6 +11,6 @@ Blockly.Blocks['hello_world'] = {
 Blockly.Python['hello_world'] = function(block) {
   var text_name = block.getFieldValue('NAME');
   // TODO: Assemble Python into code variable.
-  var code = 'print("Hello World, My name is '+ text_name+ '")';
+  var code = 'print("Hello World, My name is '+ text_name + '")';
   return code;
 };
