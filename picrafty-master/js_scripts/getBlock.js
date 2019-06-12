@@ -13,7 +13,7 @@ Blockly.Blocks['getBlock'] = {
             .appendField("z:")
             .appendField(new Blockly.FieldNumber(), 'Z');
         this.setColour(230);
-        this.setTooltip("Gets a block at position (x, y, z).");
+        this.setTooltip("Gets a block at position (x, y, z). Returns block type as int.");
         this.setHelpUrl("");
     }
 };
@@ -22,6 +22,6 @@ Blockly.Python['getBlock'] = function(block) {
     var Y = block.getFieldValue('Y');
     var Z = block.getFieldValue('Z');
     let argumentString = X + ',' + Y + ',' + Z;
-    var code = 'mc.setBlock(' + argumentString + ')\n';
+    var code = 'mc.getBlock(' + argumentString + ')\n';
     return [code, Blockly.Python.ORDER_NONE];
 };
