@@ -360,11 +360,13 @@
         <field name="ADDRESS">localhost</field>
         <field name="PORT">25565</field>
       </block>
+
       <block type="get_block">
         <field name="GETBLOCKXCOORD">0</field>
         <field name="GETBLOCKYCOORD">0</field>
         <field name="GETBLOCKZCOORD">0</field>
       </block>
+
       <block type="setBlock">
         <field name="X">0</field>
         <field name="Y">0</field>
@@ -372,6 +374,7 @@
         <field name="blockId">0</field>
         <field name="blockType">0</field>
       </block>
+
     </category>
     <sep></sep>
     <category name="Variables" colour="#A65C81" custom="VARIABLE"></category>
@@ -390,7 +393,8 @@
 	//This helps Blockly avoid getting hung up
 	Blockly.Python.INFINITE_LOOP_TRAP = null;
 	//This converts the workspace into Code using the Code generation snippet in test_block
-	var code = Blockly.Python.workspaceToCode(demoWorkspace);
+    let preamble = "from mine import *";
+	var code = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
 	//This is all Preperation For Downloading the file
 	var PythonStub = new Blob([code], {type:"text/plain"});
 	var textToSaveAsURL = window.URL.createObjectURL(PythonStub);
