@@ -6,17 +6,17 @@ Blockly.Blocks['getBlocks'] = {
         .appendField("x0:")
         .appendField(new Blockly.FieldTextInput("0"), "X0COORD")
         .appendField("x1:")
-        .appendField(new Blockly.FieldTextInput("0"), "X1COORD");
+        .appendField(new Blockly.FieldTextInput("1"), "X1COORD");
     this.appendDummyInput()
         .appendField("y0:")
         .appendField(new Blockly.FieldTextInput("0"), "Y0COORD")
         .appendField("y1:")
-        .appendField(new Blockly.FieldTextInput("0"), "Y1COORD");
+        .appendField(new Blockly.FieldTextInput("1"), "Y1COORD");
     this.appendDummyInput()
         .appendField("z0:")
         .appendField(new Blockly.FieldTextInput("0"), "Z0COORD")
         .appendField("z1:")
-        .appendField(new Blockly.FieldTextInput("0"), "Z1COORD");
+        .appendField(new Blockly.FieldTextInput("1"), "Z1COORD");
     this.setOutput(true, null);
     this.setColour(230);
  this.setTooltip("Gets types of blocks in a cuboid. Returns a list of ints.");
