@@ -23,5 +23,5 @@ Blockly.Python['getBlock'] = function(block) {
     var Z = block.getFieldValue('Z');
     let argumentString = X + ',' + Y + ',' + Z;
     var code = 'mc.setBlock(' + argumentString + ')\n';
-    return code;
+    return [code, Blockly.Python.ORDER_NONE];
 };
