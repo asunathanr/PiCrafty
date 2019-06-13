@@ -3,7 +3,7 @@ Blockly.Blocks['getPitch'] = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.appendDummyInput()
-            .appendField("Get Player Position");
+            .appendField("Get Player Pitch");
         this.setColour(230);
         this.setTooltip("Returns player position as a Vec3 object.");
         this.setHelpUrl("");

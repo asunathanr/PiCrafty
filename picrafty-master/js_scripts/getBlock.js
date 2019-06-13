@@ -1,6 +1,7 @@
 Blockly.Blocks['getBlock'] = {
     init: function() {
-        this.setOutput(true, null);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
         this.appendDummyInput()
             .appendField("Get a block");
         this.appendDummyInput()

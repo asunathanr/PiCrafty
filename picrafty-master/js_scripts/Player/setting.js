@@ -5,18 +5,19 @@ Blockly.Blocks['player_setting'] = {
         this.setNextStatement(true, null);
         this.appendDummyInput("Player Setting")
             .appendField("Set player settings");
-        this.appendValueInput("Setting Name: ")
+        this.appendDummyInput("Setting Name: ")
             .setCheck(null)
-            .appendField("SETTING");
-        this.appendValueInput("Status: ")
-            .appendField("STATUS");
+            .appendField(new Blockly.FieldTextInput(), "SETTING");
+        this.appendDummyInput("Status: ")
+            .appendField(new Blockly.FieldCheckbox(),"STATUS");
         this.setColour(230);
         this.setTooltip("Sets a particular setting to be either true or false. ");
         this.setHelpUrl("");
     }
 };
 Blockly.Python['player_setting'] = function(block) {
-    let arguments = block.getFieldValue("SETTING") + ',' + block.getFieldValue("STATE");
+    let status = "true" ? block.getFieldValue("STATUS").isChecked() : "false";
+    let arguments = block.getFieldValue("SETTING") + ',' + status;
     var code = 'mc.player.setting(' + arguments + ')\n';
     return code;
 };

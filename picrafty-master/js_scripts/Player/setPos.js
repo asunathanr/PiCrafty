@@ -6,13 +6,13 @@ Blockly.Blocks['setPos'] = {
             .appendField("Set Player Position");
         this.appendDummyInput()
             .appendField("x:")
-            .appendField(Blockly.FieldNumber(), "X");
+            .appendField(new Blockly.FieldNumber(), "X");
         this.appendDummyInput()
             .appendField("y:")
-            .appendField(Blockly.FieldNumber(), "Y");
+            .appendField(new Blockly.FieldNumber(), "Y");
         this.appendDummyInput()
             .appendField("z:")
-            .appendField(Blockly.FieldNumber(), "Z");
+            .appendField(new Blockly.FieldNumber(), "Z");
         this.setColour(230);
         this.setTooltip("Sets player position to new x,y,z coordinates");
         this.setHelpUrl("");
