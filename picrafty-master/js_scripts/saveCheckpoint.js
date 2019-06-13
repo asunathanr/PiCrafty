@@ -1,17 +1,14 @@
 Blockly.Blocks['saveCheckpoint'] = {
-    init: function() {
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.appendDummyInput()
-            .appendField("");
-
-        this.setColour(230);
-        this.setTooltip("Post a message to in-game chat.");
-        this.setHelpUrl("");
-    }
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Save checkpoint.");
+    this.setColour(230);
+ this.setTooltip("Save server state.");
+ this.setHelpUrl("");
+  }
 };
 Blockly.Python['saveCheckpoint'] = function(block) {
-
-    var code = '';
-    return code;
+  // TODO: Assemble Python into code variable.
+  var code = 'mc.saveCheckpoint()\n';
+  return code;
 };

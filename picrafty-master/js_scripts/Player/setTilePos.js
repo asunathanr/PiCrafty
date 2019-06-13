@@ -1,9 +1,9 @@
-Blockly.Blocks['getBlock'] = {
+Blockly.Blocks['setTilePos'] = {
     init: function() {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.appendDummyInput()
-            .appendField("Get a block");
+            .appendField("Set Player Tile Position");
         this.appendDummyInput()
             .appendField("x:")
             .appendField(new Blockly.FieldNumber(), 'X');
@@ -14,15 +14,12 @@ Blockly.Blocks['getBlock'] = {
             .appendField("z:")
             .appendField(new Blockly.FieldNumber(), 'Z');
         this.setColour(230);
-        this.setTooltip("Gets a block at position (x, y, z). Returns block type as int.");
+        this.setTooltip("Sets player position to top of given x,y,z coordinates");
         this.setHelpUrl("");
     }
 };
-Blockly.Python['getBlock'] = function(block) {
-    var X = block.getFieldValue('X');
-    var Y = block.getFieldValue('Y');
-    var Z = block.getFieldValue('Z');
-    let argumentString = X + ',' + Y + ',' + Z;
-    var code = 'mc.getBlock(' + argumentString + ')\n';
-    return [code, Blockly.Python.ORDER_NONE];
+Blockly.Python['setTilePos'] = function(block) {
+    let arguments = block.getFieldValue('X') + block.getFieldValue('Y') + block.getFieldValue('Z');
+    var code = 'mc.player.setTilePos(' + arguments + ')\n';
+    return code;
 };
