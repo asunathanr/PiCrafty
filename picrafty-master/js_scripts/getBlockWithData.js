@@ -23,7 +23,7 @@ Blockly.Python['getBlockWithData'] = function(block) {
   var z = block.getFieldValue('Z');
   let aString = x + ',' + y + ',' + z;
   // TODO: Assemble Python into code variable.
-  var code = 'mc.getBlockWithData(' + aString + ')';
+  var code = 'mc.getBlockWithData(' + aString + ')\n';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
