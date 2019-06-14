@@ -39,7 +39,7 @@ Blockly.Python['setBlocks'] = function(block) {
   var id = block.getFieldValue('ID');
   // TODO: Assemble Python into code variable.
   let aString = x0 + ',' + y0 + ',' + z0 + ',' + x1 + ',' + y1 + ',' + z1 + ',' + type + ',' + id;
-  var code = 'mc.setBlocks('+aString+')';
+  var code = 'mc.setBlocks('+aString+')\n';
   // TODO: Change ORDER_NONE to the correct strength.
   return code;
 };

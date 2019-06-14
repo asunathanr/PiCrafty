@@ -33,7 +33,7 @@ Blockly.Python['getBlocks'] = function(block) {
 
   let argumentString = x0 + ',' + y0 + ',' + z0 + ',' + x1 + ',' + y1 + ',' + z1;
 
-  var code = 'mc.getBlocks(' + argumentString + ')';
+  var code = 'mc.getBlocks(' + argumentString + ')\n';
 
   return [code, Blockly.Python.ORDER_NONE];
 };

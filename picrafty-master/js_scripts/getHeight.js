@@ -18,7 +18,7 @@ Blockly.Python['getHeight'] = function(block) {
   var x = block.getFieldValue('X');
   var z = block.getFieldValue('Z');
   // TODO: Assemble Python into code variable.
-  var code = 'mc.getHeight('+x+', '+z+')';
+  var code = 'mc.getHeight('+x+', '+z+')\n';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
