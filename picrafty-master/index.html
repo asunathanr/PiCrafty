@@ -6,14 +6,34 @@
   <title>HSV_STEAMWORKS: BLOCKLY MC DEMO</title>
   <!-- TODO: this needs to be set up for relative filepaths so that it can be used on any computer -->
   <!-- To get this to run on your machine youll need to make these filepaths point to the following scripts on you machine-->
+
   <script src="js_scripts/blockly_compressed.js"></script>
   <script src="js_scripts/python_compressed.js"></script>
   <script src="js_scripts/test_block.js"></script>
   <script src="js_scripts/connect_server.js"></script>
   <script src="js_scripts/getBlock.js"></script>
+  <script src="js_scripts/getBlockWithData.js"></script>
+  <script src="js_scripts/getHeight.js"></script>
+  <script src="js_scripts/getBlocks.js"></script>
   <script src="js_scripts/setBlock.js"></script>
-    <script src="js_scripts/postToChat.js"></script>
+  <script src="js_scripts/setBlocks.js"></script>
+  <script src="js_scripts/postToChat.js"></script>
+  <script src="js_scripts/getPlayerEntityIds.js"></script>
+  <script src="js_scripts/getPlayerId.js"></script>
+  <script src="js_scripts/saveCheckpoint.js"></script>
+  <script src="js_scripts/setting.js"></script>
 
+  <!-- Minecraft.Player methods -->
+  <script src="js_scripts/Player/setPos.js"></script>
+  <script src="js_scripts/Player/setTilePos.js"></script>
+  <script src="js_scripts/Player/getPos.js"></script>
+  <script src="js_scripts/Player/getTilePos.js"></script>
+  <script src="js_scripts/Player/getDirection.js"></script>
+  <script src="js_scripts/Player/getPitch.js"></script>
+  <script src="js_scripts/Player/getRotation.js"></script>
+  <script src="js_scripts/Player/setting.js"></script>
+
+  <!-- Google implemented blocks -->
   <script src="blocks/lists.js"></script>
   <script src="blocks/logic.js"></script>
   <script src="blocks/loops.js"></script>
@@ -369,6 +389,26 @@
         <field name="Z">0</field>
       </block>
 
+      <block type="getBlockWithData">
+          <field name="X">0</field>
+          <field name="Y">0</field>
+          <field name="Z">0</field>
+      </block>
+      
+      <block type="getHeight">
+          <field name="X">0</field>
+          <field name="Z">0</field>
+      </block>
+
+      <block type="getBlocks">
+        <field name="X0COORD">0</field>
+        <field name="X1COORD">1</field>
+        <field name="Y0COORD">0</field>
+        <field name="Y1COORD">1</field>
+        <field name="Z0COORD">0</field>
+        <field name="Z1COORD">1</field>
+      </block>
+
       <block type="setBlock">
         <field name="X">0</field>
         <field name="Y">0</field>
@@ -377,9 +417,54 @@
         <field name="blockType">0</field>
       </block>
 
+      <block type="setBlocks">
+          <field name="X0">0</field>
+          <field name="X1">1</field>
+          <field name="Y0">0</field>
+          <field name="Y1">1</field>
+          <field name="Z0">0</field>
+          <field name="Z1">1</field>
+          <field name="TYPE">1</field>
+          <field name="ID">0</field>
+        </block>
+
       <block type="postToChat">
-          <field name="MESSAGE"></field>
       </block>
+
+      <block type="getPlayerEntityIds">
+      </block>
+
+      <block type="getPlayerId">
+        </block>
+      <block type="saveCheckpoint"></block>
+      <block type="setting"></block>
+
+      <category name="Player" colour="#a55b6d">
+
+        <block type="setting">
+          <field name="SETTING"></field>
+          <field name="STATUS"></field>
+        </block>
+
+        <block type="setPos">
+          <field name="X">0</field>
+          <field name="Y">0</field>
+          <field name="Z">0</field>
+        </block>
+
+        <block type="setTilePos">
+          <field name="X">0</field>
+          <field name="Y">0</field>
+          <field name="Z">0</field>
+        </block>
+
+
+        <block type="getPos"></block>
+        <block type="getTilePos"></block>
+        <block type="getPitch"></block>
+        <block type="getDirection"></block>
+        <block type="getRotation"></block>
+      </category>
 
     </category>
     <sep></sep>
@@ -400,7 +485,7 @@
 	Blockly.Python.INFINITE_LOOP_TRAP = null;
 	//This converts the workspace into Code using the Code generation snippet in test_block
     let preamble = "from mine import *\n\n" +
-        "mc = Minecraft().create()\n" +
+        "mc = Minecraft()\n" +
         "\n";
 	var code = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
 	//This is all Preperation For Downloading the file
