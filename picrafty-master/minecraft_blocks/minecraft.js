@@ -22,7 +22,6 @@ Blockly.Blocks['minecraft_create'] = {
 Blockly.Python['minecraft_create'] = function(block) {
     var text_address = block.getFieldValue('ADDRESS');
     var number_port = block.getFieldValue('PORT');
-    // TODO: Assemble Python into code variable.
     var code = 'minecraft.Minecraft.create(address=' +text_address+', port=' +number_port+')\n';
     return code;
 };
@@ -126,7 +125,6 @@ Blockly.Python['getBlockWithData'] = function(block) {
     var y = block.getFieldValue('Y');
     var z = block.getFieldValue('Z');
     let aString = x + ',' + y + ',' + z;
-    // TODO: Assemble Python into code variable.
     var code = 'mc.getBlockWithData(' + aString + ')\n';
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
@@ -153,7 +151,6 @@ Blockly.Blocks['getHeight'] = {
 Blockly.Python['getHeight'] = function(block) {
     var x = block.getFieldValue('X');
     var z = block.getFieldValue('Z');
-    // TODO: Assemble Python into code variable.
     var code = 'mc.getHeight('+x+', '+z+')\n';
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
@@ -172,7 +169,6 @@ Blockly.Blocks['getPlayerEntityIds'] = {
     }
 };
 Blockly.Python['getPlayerEntityIds'] = function(block) {
-    // TODO: Assemble Python into code variable.
     var code = 'mc.getPlayerEntityIds()\n';
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
@@ -191,7 +187,6 @@ Blockly.Blocks['getPlayerId'] = {
     }
 };
 Blockly.Python['getPlayerId'] = function(block) {
-    // TODO: Assemble Python into code variable.
     var code = 'mc.getPlayerId()\n';
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
@@ -223,7 +218,6 @@ Blockly.Python['getBlockWithData'] = function(block) {
     var y = block.getFieldValue('Y');
     var z = block.getFieldValue('Z');
     let aString = x + ',' + y + ',' + z;
-    // TODO: Assemble Python into code variable.
     var code = 'mc.getBlockWithData(' + aString + ')\n';
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
@@ -250,7 +244,6 @@ Blockly.Blocks['setting'] = {
 Blockly.Python['setting'] = function(block) {
     var value_setting = Blockly.Python.valueToCode(block, 'SETTING', Blockly.Python.ORDER_ATOMIC);
     var value_flag = Blockly.Python.valueToCode(block, 'FLAG', Blockly.Python.ORDER_ATOMIC);
-    // TODO: Assemble Python into code variable.
     var code = 'mc.setting(' + value_setting + ', ' + value_flag + ')\n';
     return code;
 };
@@ -270,7 +263,6 @@ Blockly.Blocks['postToChat'] = {
 };
 Blockly.Python['postToChat'] = function(block) {
     var value_topost = Blockly.Python.valueToCode(block, 'TOPOST', Blockly.Python.ORDER_ATOMIC);
-    // TODO: Assemble Python into code variable.
     var code = 'mc.postToChat(' + value_topost + ')\n';
     return code;
 };
@@ -397,7 +389,6 @@ Blockly.Python['setBlocks'] = function(block) {
     var z0 = block.getFieldValue('Z0');
     var z1 = block.getFieldValue('Z1');
     var id = block.getFieldValue('ID');
-    // TODO: Assemble Python into code variable.
     let aString = x0 + ',' + y0 + ',' + z0 + ',' + x1 + ',' + y1 + ',' + z1 + ',' + type + ',' + id;
     var code = 'mc.setBlocks('+aString+')\n';
     // TODO: Change ORDER_NONE to the correct strength.
@@ -455,7 +446,6 @@ Blockly.Blocks['saveCheckpoint'] = {
     }
 };
 Blockly.Python['saveCheckpoint'] = function(block) {
-    // TODO: Assemble Python into code variable.
     var code = 'mc.saveCheckpoint()\n';
     return code;
 };
