@@ -4,44 +4,25 @@
 <head>
   <meta charset="utf-8">
   <title>HSV_STEAMWORKS: BLOCKLY MC DEMO</title>
-  <!-- TODO: this needs to be set up for relative filepaths so that it can be used on any computer -->
-  <!-- To get this to run on your machine youll need to make these filepaths point to the following scripts on you machine-->
 
-  <script src="js_scripts/blockly_compressed.js"></script>
-  <script src="js_scripts/python_compressed.js"></script>
-  <script src="js_scripts/test_block.js"></script>
-  <script src="js_scripts/connect_server.js"></script>
-  <script src="js_scripts/getBlock.js"></script>
-  <script src="js_scripts/getBlockWithData.js"></script>
-  <script src="js_scripts/getHeight.js"></script>
-  <script src="js_scripts/getBlocks.js"></script>
-  <script src="js_scripts/setBlock.js"></script>
-  <script src="js_scripts/setBlocks.js"></script>
-  <script src="js_scripts/postToChat.js"></script>
-  <script src="js_scripts/getPlayerEntityIds.js"></script>
-  <script src="js_scripts/getPlayerId.js"></script>
-  <script src="js_scripts/saveCheckpoint.js"></script>
-  <script src="js_scripts/setting.js"></script>
+  <script src="blockly_compressed.js"></script>
+  <script src="python_compressed.js"></script>
 
-  <!-- Minecraft.Player methods -->
-  <script src="js_scripts/Player/setPos.js"></script>
-  <script src="js_scripts/Player/setTilePos.js"></script>
-  <script src="js_scripts/Player/getPos.js"></script>
-  <script src="js_scripts/Player/getTilePos.js"></script>
-  <script src="js_scripts/Player/getDirection.js"></script>
-  <script src="js_scripts/Player/getPitch.js"></script>
-  <script src="js_scripts/Player/getRotation.js"></script>
-  <script src="js_scripts/Player/setting.js"></script>
+  <!-- Minecraft block methods -->
+  <script src="minecraft_blocks/minecraft.js"></script>
+  <script src="minecraft_blocks/player.js"></script>
 
   <!-- Google implemented blocks -->
   <script src="blocks/lists.js"></script>
   <script src="blocks/logic.js"></script>
   <script src="blocks/loops.js"></script>
   <script src="blocks/math.js"></script>
+  <script src="blocks/procedures.js"></script>
   <script src="blocks/text.js"></script>
   <script src="blocks/variables.js"></script>
   <script src="blocks/variables_dynamic.js"></script>
   <script src="msg/js/en.js"></script>
+
   <style>
     body {
       background-color: #fff;
@@ -418,6 +399,8 @@
       </block>
 
       <block type="setBlocks">
+          <mutation vec_input="true"></mutation>
+          <field name="CONFIG">STANDARD</field>
           <field name="X0">0</field>
           <field name="X1">1</field>
           <field name="Y0">0</field>
@@ -469,10 +452,17 @@
     </category>
     <sep></sep>
     <category name="Variables" colour="#A65C81" custom="VARIABLE"></category>
+    <category name="Functions" colour="#A65C81">
+      <block type="procedures_defreturn">
+        <field name="NAME" colour="#A65C81"></field>
+      </block>
+
+      <block type="procedures_defnoreturn" colour="#A65C81"></block>
+
+      <block type="procedures_ifreturn" colour="#A65C81"></block>
+    </category>
   </xml>
 
-  <!-- TODO: this needs to be set up for relative filepaths so that it can be used on any computer -->
-  <!--Speceficially the path for media -->
   <script>
     var demoWorkspace = Blockly.inject('blocklyDiv',
         {media: 'media' + "\\",
