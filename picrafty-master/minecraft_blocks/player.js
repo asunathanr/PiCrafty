@@ -4,7 +4,7 @@
 
 
 Blockly.Blocks['getDirection'] = {
-    init: function() {
+    init: function () {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.appendDummyInput()
@@ -14,7 +14,7 @@ Blockly.Blocks['getDirection'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['getDirection'] = function(block) {
+Blockly.Python['getDirection'] = function (block) {
     var code = 'mc.player.getDirection()\n';
     return code;
 };
@@ -22,7 +22,7 @@ Blockly.Python['getDirection'] = function(block) {
 
 // Minecraft.player.getPitch()
 Blockly.Blocks['getPitch'] = {
-    init: function() {
+    init: function () {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.appendDummyInput()
@@ -32,15 +32,14 @@ Blockly.Blocks['getPitch'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['getPitch'] = function(block) {
+Blockly.Python['getPitch'] = function (block) {
     var code = 'mc.player.getPitch()\n';
     return code;
 };
 
 
-
 Blockly.Blocks['getPos'] = {
-    init: function() {
+    init: function () {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.appendDummyInput()
@@ -50,16 +49,14 @@ Blockly.Blocks['getPos'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['getPos'] = function(block) {
+Blockly.Python['getPos'] = function (block) {
     var code = 'mc.player.getPos()\n';
     return code;
 };
 
 
-
-
 Blockly.Blocks['getRotation'] = {
-    init: function() {
+    init: function () {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.appendDummyInput()
@@ -69,15 +66,14 @@ Blockly.Blocks['getRotation'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['getRotation'] = function(block) {
+Blockly.Python['getRotation'] = function (block) {
     var code = 'mc.player.getRotation()\n';
     return code;
 };
 
 
-
 Blockly.Blocks['getTilePos'] = {
-    init: function() {
+    init: function () {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.appendDummyInput()
@@ -87,16 +83,14 @@ Blockly.Blocks['getTilePos'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['getTilePos'] = function(block) {
+Blockly.Python['getTilePos'] = function (block) {
     var code = 'mc.player.getTilePos()\n';
     return code;
 };
 
 
-
-
 Blockly.Blocks['setPos'] = {
-    init: function() {
+    init: function () {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.appendDummyInput()
@@ -115,16 +109,15 @@ Blockly.Blocks['setPos'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['setPos'] = function(block) {
+Blockly.Python['setPos'] = function (block) {
     let arguments = block.getFieldValue("X") + block.getFieldValue("Y") + block.getFieldValue("Z");
     var code = 'mc.player.setPos(' + arguments + ')\n';
     return code;
 };
 
 
-
 Blockly.Blocks['setTilePos'] = {
-    init: function() {
+    init: function () {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.appendDummyInput()
@@ -143,7 +136,7 @@ Blockly.Blocks['setTilePos'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['setTilePos'] = function(block) {
+Blockly.Python['setTilePos'] = function (block) {
     let arguments = block.getFieldValue('X') + block.getFieldValue('Y') + block.getFieldValue('Z');
     var code = 'mc.player.setTilePos(' + arguments + ')\n';
     return code;
@@ -152,7 +145,7 @@ Blockly.Python['setTilePos'] = function(block) {
 
 // Had to set key as player_setting since a setting key already exists.
 Blockly.Blocks['player_setting'] = {
-    init: function() {
+    init: function () {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.appendDummyInput("Player Setting")
@@ -161,13 +154,13 @@ Blockly.Blocks['player_setting'] = {
             .setCheck(null)
             .appendField(new Blockly.FieldTextInput(), "SETTING");
         this.appendDummyInput("Status: ")
-            .appendField(new Blockly.FieldCheckbox(),"STATUS");
+            .appendField(new Blockly.FieldCheckbox(), "STATUS");
         this.setColour(230);
         this.setTooltip("Sets a particular setting to be either true or false. ");
         this.setHelpUrl("");
     }
 };
-Blockly.Python['player_setting'] = function(block) {
+Blockly.Python['player_setting'] = function (block) {
     let status = "true" ? block.getFieldValue("STATUS").isChecked() : "false";
     let arguments = block.getFieldValue("SETTING") + ',' + status;
     var code = 'mc.player.setting(' + arguments + ')\n';
