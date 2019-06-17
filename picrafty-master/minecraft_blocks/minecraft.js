@@ -4,7 +4,7 @@
 
 
 Blockly.Blocks['minecraft_create'] = {
-    init: function() {
+    init: function () {
         this.appendDummyInput()
             .appendField("Connect to server");
         this.appendDummyInput()
@@ -19,17 +19,16 @@ Blockly.Blocks['minecraft_create'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['minecraft_create'] = function(block) {
+Blockly.Python['minecraft_create'] = function (block) {
     var text_address = block.getFieldValue('ADDRESS');
     var number_port = block.getFieldValue('PORT');
-    var code = 'minecraft.Minecraft.create(address=' +text_address+', port=' +number_port+')\n';
+    var code = 'minecraft.Minecraft.create(address=' + text_address + ', port=' + number_port + ')\n';
     return code;
 };
 
 
-
 Blockly.Blocks['getBlock'] = {
-    init: function() {
+    init: function () {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.appendDummyInput()
@@ -48,7 +47,7 @@ Blockly.Blocks['getBlock'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['getBlock'] = function(block) {
+Blockly.Python['getBlock'] = function (block) {
     var X = block.getFieldValue('X');
     var Y = block.getFieldValue('Y');
     var Z = block.getFieldValue('Z');
@@ -58,9 +57,8 @@ Blockly.Python['getBlock'] = function(block) {
 };
 
 
-
 Blockly.Blocks['getBlocks'] = {
-    init: function() {
+    init: function () {
         this.appendDummyInput()
             .appendField("Get list of block types.");
         this.appendDummyInput()
@@ -84,7 +82,7 @@ Blockly.Blocks['getBlocks'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['getBlocks'] = function(block) {
+Blockly.Python['getBlocks'] = function (block) {
     var x0 = block.getFieldValue('X0COORD');
     var x1 = block.getFieldValue('X1COORD');
     var y0 = block.getFieldValue('Y0COORD');
@@ -100,9 +98,8 @@ Blockly.Python['getBlocks'] = function(block) {
 };
 
 
-
 Blockly.Blocks['getBlockWithData'] = {
-    init: function() {
+    init: function () {
         this.appendDummyInput()
             .appendField("Get block type and id.");
         this.appendDummyInput()
@@ -120,7 +117,7 @@ Blockly.Blocks['getBlockWithData'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['getBlockWithData'] = function(block) {
+Blockly.Python['getBlockWithData'] = function (block) {
     var x = block.getFieldValue('X');
     var y = block.getFieldValue('Y');
     var z = block.getFieldValue('Z');
@@ -131,9 +128,8 @@ Blockly.Python['getBlockWithData'] = function(block) {
 };
 
 
-
 Blockly.Blocks['getHeight'] = {
-    init: function() {
+    init: function () {
         this.appendDummyInput()
             .appendField("Get Height");
         this.appendDummyInput()
@@ -148,18 +144,17 @@ Blockly.Blocks['getHeight'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['getHeight'] = function(block) {
+Blockly.Python['getHeight'] = function (block) {
     var x = block.getFieldValue('X');
     var z = block.getFieldValue('Z');
-    var code = 'mc.getHeight('+x+', '+z+')\n';
+    var code = 'mc.getHeight(' + x + ', ' + z + ')\n';
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
 };
 
 
-
 Blockly.Blocks['getPlayerEntityIds'] = {
-    init: function() {
+    init: function () {
         this.appendDummyInput()
             .appendField("Get player ids.");
         this.setOutput(true, null);
@@ -168,16 +163,15 @@ Blockly.Blocks['getPlayerEntityIds'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['getPlayerEntityIds'] = function(block) {
+Blockly.Python['getPlayerEntityIds'] = function (block) {
     var code = 'mc.getPlayerEntityIds()\n';
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
 };
 
 
-
 Blockly.Blocks['getPlayerId'] = {
-    init: function() {
+    init: function () {
         this.appendDummyInput()
             .appendField("Get player id.");
         this.setOutput(true, null);
@@ -186,16 +180,15 @@ Blockly.Blocks['getPlayerId'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['getPlayerId'] = function(block) {
+Blockly.Python['getPlayerId'] = function (block) {
     var code = 'mc.getPlayerId()\n';
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
 };
 
 
-
 Blockly.Blocks['getBlockWithData'] = {
-    init: function() {
+    init: function () {
         this.appendDummyInput()
             .appendField("Get block type and id.");
         this.appendDummyInput()
@@ -213,7 +206,7 @@ Blockly.Blocks['getBlockWithData'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['getBlockWithData'] = function(block) {
+Blockly.Python['getBlockWithData'] = function (block) {
     var x = block.getFieldValue('X');
     var y = block.getFieldValue('Y');
     var z = block.getFieldValue('Z');
@@ -224,9 +217,8 @@ Blockly.Python['getBlockWithData'] = function(block) {
 };
 
 
-
 Blockly.Blocks['setting'] = {
-    init: function() {
+    init: function () {
         this.appendValueInput("SETTING")
             .setCheck(null)
             .appendField("Setting:");
@@ -241,7 +233,7 @@ Blockly.Blocks['setting'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['setting'] = function(block) {
+Blockly.Python['setting'] = function (block) {
     var value_setting = Blockly.Python.valueToCode(block, 'SETTING', Blockly.Python.ORDER_ATOMIC);
     var value_flag = Blockly.Python.valueToCode(block, 'FLAG', Blockly.Python.ORDER_ATOMIC);
     var code = 'mc.setting(' + value_setting + ', ' + value_flag + ')\n';
@@ -250,7 +242,7 @@ Blockly.Python['setting'] = function(block) {
 
 
 Blockly.Blocks['postToChat'] = {
-    init: function() {
+    init: function () {
         this.appendDummyInput()
             .appendField("Post to chat.");
         this.appendValueInput("TOPOST")
@@ -261,7 +253,7 @@ Blockly.Blocks['postToChat'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['postToChat'] = function(block) {
+Blockly.Python['postToChat'] = function (block) {
     var value_topost = Blockly.Python.valueToCode(block, 'TOPOST', Blockly.Python.ORDER_ATOMIC);
     var code = 'mc.postToChat(' + value_topost + ')\n';
     return code;
@@ -271,10 +263,10 @@ Blockly.Python['postToChat'] = function(block) {
 //Mutator block - SetBlocks will change configuration based on dropdown option selected
 
 Blockly.Blocks['setBlocks'] = {
-    init: function() {
+    init: function () {
 
         // custom dropdown object that will run update shape helper function when option is changed
-        var dropdown = new Blockly.FieldDropdown([["standard","STANDARD"], ["vec3","VEC3"], ["block","BLOCK"]], function(vec_input) {
+        var dropdown = new Blockly.FieldDropdown([["standard", "STANDARD"], ["vec3", "VEC3"], ["block", "BLOCK"]], function (vec_input) {
             this.sourceBlock_.updateShape_(vec_input);
         });
 
@@ -309,7 +301,7 @@ Blockly.Blocks['setBlocks'] = {
     },
 
     // function that will allow changes to save to xml
-    mutationToDom: function() {
+    mutationToDom: function () {
         var containter1 = document.createElement('mutation');
         var vecInput = (this.getFieldValue("CONFIG") == 'VEC3');
         containter1.setAttribute('vec_input', vecInput);
@@ -317,37 +309,37 @@ Blockly.Blocks['setBlocks'] = {
     },
 
     // function to load block from xml?
-    domToMutation: function(xmlElement) {
+    domToMutation: function (xmlElement) {
         var hasVecInput = (xmlElement.getAttribute('vec_input' == 'true'));
         console.log("hasVecInput = ", hasVecInput);
         this.updateShape_(hasVecInput);
     },
 
     // function to update shape of block on dropdown change
-    updateShape_: function(vecInput) {
+    updateShape_: function (vecInput) {
 
 
-        if(vecInput) {  // make sure an option has been passed
-            if(vecInput == "VEC3") {  // if the vec3 option has been selected
-                if(this.getInput("XES")){
+        if (vecInput) {  // make sure an option has been passed
+            if (vecInput == "VEC3") {  // if the vec3 option has been selected
+                if (this.getInput("XES")) {
                     this.removeInput("XES");
                 }
-                if(this.getInput("YES")) {
+                if (this.getInput("YES")) {
                     this.removeInput("YES");
                 }
-                if(this.getInput("ZES")) {
+                if (this.getInput("ZES")) {
                     this.removeInput("ZES");
                 }
-                if(!this.getInput("VEC")) {
+                if (!this.getInput("VEC")) {
                     this.appendValueInput("VEC");
                 }
 
-            } else if(vecInput == "STANDARD") { // if the standard option has been selected
+            } else if (vecInput == "STANDARD") { // if the standard option has been selected
 
-                if(this.getInput("VEC")) {
+                if (this.getInput("VEC")) {
                     this.removeInput("VEC");
                 }
-                if(!this.getInput("XES")) {
+                if (!this.getInput("XES")) {
                     this.appendDummyInput("XES")
                         .appendField("x0:")
                         .appendField(new Blockly.FieldTextInput("0"), "X0")
@@ -355,7 +347,7 @@ Blockly.Blocks['setBlocks'] = {
                         .appendField(new Blockly.FieldTextInput("1"), "X1");
                 }
 
-                if(!this.getInput("YES")) {
+                if (!this.getInput("YES")) {
                     this.appendDummyInput("YES")
                         .appendField("y0:")
                         .appendField(new Blockly.FieldTextInput("0"), "Y0")
@@ -365,7 +357,7 @@ Blockly.Blocks['setBlocks'] = {
                         .appendField(new Blockly.FieldTextInput("1"), "TYPE");
                 }
 
-                if(!this.getInput("ZES")) {
+                if (!this.getInput("ZES")) {
                     this.appendDummyInput("ZES")
                         .appendField("z0:")
                         .appendField(new Blockly.FieldTextInput("0"), "Z0")
@@ -374,13 +366,13 @@ Blockly.Blocks['setBlocks'] = {
                         .appendField("Block      Id:")
                         .appendField(new Blockly.FieldTextInput("0"), "ID");
                 }
-            } else if(vecInput == "BLOCK") { // if the block option has been selected
+            } else if (vecInput == "BLOCK") { // if the block option has been selected
                 console.log("EVERYTHING IS OK")
             }
         }
     }
 };
-Blockly.Python['setBlocks'] = function(block) {
+Blockly.Python['setBlocks'] = function (block) {
     var x0 = block.getFieldValue('X0');
     var x1 = block.getFieldValue('X1');
     var y0 = block.getFieldValue('Y0');
@@ -390,15 +382,14 @@ Blockly.Python['setBlocks'] = function(block) {
     var z1 = block.getFieldValue('Z1');
     var id = block.getFieldValue('ID');
     let aString = x0 + ',' + y0 + ',' + z0 + ',' + x1 + ',' + y1 + ',' + z1 + ',' + type + ',' + id;
-    var code = 'mc.setBlocks('+aString+')\n';
+    var code = 'mc.setBlocks(' + aString + ')\n';
     // TODO: Change ORDER_NONE to the correct strength.
     return code;
 };
 
 
-
 Blockly.Blocks['setBlock'] = {
-    init: function() {
+    init: function () {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.appendDummyInput()
@@ -423,7 +414,7 @@ Blockly.Blocks['setBlock'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['setBlock'] = function(block) {
+Blockly.Python['setBlock'] = function (block) {
     var X = block.getFieldValue('X');
     var Y = block.getFieldValue('Y');
     var Z = block.getFieldValue('Z');
@@ -435,9 +426,8 @@ Blockly.Python['setBlock'] = function(block) {
 };
 
 
-
 Blockly.Blocks['saveCheckpoint'] = {
-    init: function() {
+    init: function () {
         this.appendDummyInput()
             .appendField("Save checkpoint.");
         this.setColour(230);
@@ -445,7 +435,7 @@ Blockly.Blocks['saveCheckpoint'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['saveCheckpoint'] = function(block) {
+Blockly.Python['saveCheckpoint'] = function (block) {
     var code = 'mc.saveCheckpoint()\n';
     return code;
 };
