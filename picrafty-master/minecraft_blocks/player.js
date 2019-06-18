@@ -5,10 +5,9 @@
 
 Blockly.Blocks['getDirection'] = {
     init: function () {
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
         this.appendDummyInput()
             .appendField("Get Player Direction");
+        this.setOutput(true, null);
         this.setColour(230);
         this.setTooltip("Returns player direction as a Vec3 object.");
         this.setHelpUrl("");
@@ -16,17 +15,16 @@ Blockly.Blocks['getDirection'] = {
 };
 Blockly.Python['getDirection'] = function (block) {
     var code = 'mc.player.getDirection()\n';
-    return code;
+    return [code, Blockly.Python.ORDER_NONE];
 };
 
 
 // Minecraft.player.getPitch()
 Blockly.Blocks['getPitch'] = {
     init: function () {
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
         this.appendDummyInput()
             .appendField("Get Player Pitch");
+        this.setOutput(true, null);
         this.setColour(230);
         this.setTooltip("Returns player position as a Vec3 object.");
         this.setHelpUrl("");
@@ -34,16 +32,15 @@ Blockly.Blocks['getPitch'] = {
 };
 Blockly.Python['getPitch'] = function (block) {
     var code = 'mc.player.getPitch()\n';
-    return code;
+    return [code, Blockly.Python.ORDER_NONE];
 };
 
 
 Blockly.Blocks['getPos'] = {
     init: function () {
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
         this.appendDummyInput()
             .appendField("Get Player Position");
+        this.setOutput(true, null);
         this.setColour(230);
         this.setTooltip("Returns player position as a Vec3 object.");
         this.setHelpUrl("");
@@ -51,16 +48,15 @@ Blockly.Blocks['getPos'] = {
 };
 Blockly.Python['getPos'] = function (block) {
     var code = 'mc.player.getPos()\n';
-    return code;
+    return [code, Blockly.Python.ORDER_NONE];;
 };
 
 
 Blockly.Blocks['getRotation'] = {
     init: function () {
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
         this.appendDummyInput()
             .appendField("Get Player Position");
+        this.setOutput(true, null);
         this.setColour(230);
         this.setTooltip("Returns player position as a Vec3 object.");
         this.setHelpUrl("");
@@ -68,16 +64,15 @@ Blockly.Blocks['getRotation'] = {
 };
 Blockly.Python['getRotation'] = function (block) {
     var code = 'mc.player.getRotation()\n';
-    return code;
+    return [code, Blockly.Python.ORDER_NONE];
 };
 
 
 Blockly.Blocks['getTilePos'] = {
     init: function () {
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
         this.appendDummyInput()
             .appendField("Get Tile Position");
+        this.setOutput(true, null);
         this.setColour(230);
         this.setTooltip("Returns position of tile player is standing on");
         this.setHelpUrl("");
@@ -85,7 +80,7 @@ Blockly.Blocks['getTilePos'] = {
 };
 Blockly.Python['getTilePos'] = function (block) {
     var code = 'mc.player.getTilePos()\n';
-    return code;
+    return [code, Blockly.Python.ORDER_NONE];
 };
 
 
