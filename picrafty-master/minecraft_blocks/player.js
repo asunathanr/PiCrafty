@@ -124,7 +124,7 @@ Blockly.Blocks['setPos'] = {
 
     mutationToDom: function () {
         var blockCache = document.createElement('mutation');
-        var vecInput = (this.getFieldValue("CONFIG") == 'VEC3');
+        var vecInput = (this.getFieldValue("CONFIG") === 'VEC3');
         blockCache.setAttribute('vec_input', vecInput);
         return blockCache;
     },
@@ -138,11 +138,15 @@ Blockly.Blocks['setPos'] = {
 
     // function to update shape of block on dropdown change
     updateShape_: function (vecInput) {
-        [
-            ["VEC3", this.updateVec3Shape],
-            ["STANDARD", this.updateStandardShape],
-            ["BLOCK", this.updateBlockShape]
-        ].find((updateList) => { return updateList[0] === vecInput; })[1]();
+        if (vecInput !== null) {
+            [
+                ["VEC3", this.updateVec3Shape],
+                ["STANDARD", this.updateStandardShape],
+                ["BLOCK", this.updateBlockShape]
+            ].find(function (updateList) {
+                return updateList[0] === vecInput;
+            })[1]();
+        }
     },
 
 
