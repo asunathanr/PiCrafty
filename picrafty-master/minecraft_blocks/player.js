@@ -86,26 +86,97 @@ Blockly.Python['getTilePos'] = function (block) {
 
 Blockly.Blocks['setPos'] = {
     init: function () {
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
+        const INPUT_TYPES = [["standard", "STANDARD"], ["vec3", "VEC3"], ["block", "BLOCK"]];
+        var dropdown = new Blockly.FieldDropdown(INPUT_TYPES, function(vec_input) {
+            this.sourceBlock_.updateShape_(vec_input);
+        });
+
+        // initial state of block
+        this.appendDummyInput()
+            .appendField("Set cube of blocks.")
+            .appendField(dropdown, "CONFIG");
         this.appendDummyInput()
             .appendField("Set Player Position");
-        this.appendDummyInput()
+        this.appendDummyInput("XES")
             .appendField("x:")
             .appendField(new Blockly.FieldNumber(), "X");
-        this.appendDummyInput()
+        this.appendDummyInput("YES")
             .appendField("y:")
             .appendField(new Blockly.FieldNumber(), "Y");
-        this.appendDummyInput()
+        this.appendDummyInput("ZES")
             .appendField("z:")
             .appendField(new Blockly.FieldNumber(), "Z");
+
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
         this.setColour(230);
         this.setTooltip("Sets player position to new x,y,z coordinates");
         this.setHelpUrl("");
+    },
+
+    mutationToDom: function () {
+        var blockCache = document.createElement('mutation');
+        var vecInput = (this.getFieldValue("CONFIG") == 'VEC3');
+        blockCache.setAttribute('vec_input', vecInput);
+        return blockCache;
+    },
+
+    // function to load block from xml?
+    domToMutation: function (xmlElement) {
+        var hasVecInput = (xmlElement.getAttribute('vec_input' == 'true'));
+        console.log("hasVecInput = ", hasVecInput);
+        this.updateShape_(hasVecInput);
+    },
+
+    // function to update shape of block on dropdown change
+    updateShape_: function (vecInput) {
+
+        if (vecInput) {  // make sure an option has been passed
+            if (vecInput == "VEC3") {  // if the vec3 option has been selected
+                if (this.getInput("XES")) {
+                    this.removeInput("XES");
+                }
+                if (this.getInput("YES")) {
+                    this.removeInput("YES");
+                }
+                if (this.getInput("ZES")) {
+                    this.removeInput("ZES");
+                }
+                if (!this.getInput("VEC")) {
+                    this.appendValueInput("VEC");
+                }
+
+            } else if (vecInput == "STANDARD") { // if the standard option has been selected
+
+                if (this.getInput("VEC")) {
+                    this.removeInput("VEC");
+                }
+                if (!this.getInput("XES")) {
+                    this.appendDummyInput("XES")
+                        .appendField("x0:")
+                        .appendField(new Blockly.FieldTextInput("0"), "X")
+                }
+
+                if (!this.getInput("YES")) {
+                    this.appendDummyInput("YES")
+                        .appendField("y0:")
+                        .appendField(new Blockly.FieldTextInput("0"), "Y")
+                        .appendField("y1:")
+                }
+
+                if (!this.getInput("ZES")) {
+                    this.appendDummyInput("ZES")
+                        .appendField("z0:")
+                        .appendField(new Blockly.FieldTextInput("1"), "Z")
+                }
+            } else if (vecInput == "BLOCK") { // if the block option has been selected
+                console.log("EVERYTHING IS OK")
+            }
+        }
     }
 };
 Blockly.Python['setPos'] = function (block) {
-    let arguments = block.getFieldValue("X") + block.getFieldValue("Y") + block.getFieldValue("Z");
+    let arguments = block.getFieldValue("X") + ',' + block.getFieldValue("Y") + ',' + block.getFieldValue("Z");
     var code = 'mc.player.setPos(' + arguments + ')\n';
     return code;
 };
