@@ -248,6 +248,8 @@ Blockly.Blocks['postToChat'] = {
         this.appendValueInput("TOPOST")
             .setCheck(["String", "Number"]);
         this.appendDummyInput();
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
         this.setColour(230);
         this.setTooltip("Post a message to in game chat.");
         this.setHelpUrl("");
