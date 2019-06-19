@@ -29,8 +29,6 @@ Blockly.Python['minecraft_create'] = function (block) {
 
 Blockly.Blocks['getBlock'] = {
     init: function () {
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
         this.appendDummyInput()
             .appendField("Get a block");
         this.appendDummyInput()
@@ -42,6 +40,7 @@ Blockly.Blocks['getBlock'] = {
         this.appendDummyInput()
             .appendField("z:")
             .appendField(new Blockly.FieldNumber(), 'Z');
+            this.setOutput(true, null);
         this.setColour(230);
         this.setTooltip("Gets a block at position (x, y, z). Returns block type as int.");
         this.setHelpUrl("");
