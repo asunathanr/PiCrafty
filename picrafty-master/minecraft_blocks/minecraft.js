@@ -325,39 +325,9 @@ Blockly.Blocks['setBlocks'] = {
                 addVectorInput(this);
 
             } else if (vecInput === "STANDARD") { // if the standard option has been selected
-
-                if (this.getInput("VEC")) {
-                    this.removeInput("VEC");
-                }
-                if (!this.getInput("XES")) {
-                    this.appendDummyInput("XES")
-                        .appendField("x0:")
-                        .appendField(new Blockly.FieldTextInput("0"), "X0")
-                        .appendField("x1:")
-                        .appendField(new Blockly.FieldTextInput("1"), "X1");
-                }
-
-                if (!this.getInput("YES")) {
-                    this.appendDummyInput("YES")
-                        .appendField("y0:")
-                        .appendField(new Blockly.FieldTextInput("0"), "Y0")
-                        .appendField("y1:")
-                        .appendField(new Blockly.FieldTextInput("1"), "Y1")
-                        .appendField("Block Type:")
-                        .appendField(new Blockly.FieldTextInput("1"), "TYPE");
-                }
-
-                if (!this.getInput("ZES")) {
-                    this.appendDummyInput("ZES")
-                        .appendField("z0:")
-                        .appendField(new Blockly.FieldTextInput("0"), "Z0")
-                        .appendField("z1:")
-                        .appendField(new Blockly.FieldTextInput("1"), "Z1")
-                        .appendField("Block      Id:")
-                        .appendField(new Blockly.FieldTextInput("0"), "ID");
-                }
+                addVectorCoordinatesCube(this);
             } else if (vecInput === "BLOCK") { // if the block option has been selected
-                console.log("EVERYTHING IS OK")
+                addBlockStandard(this);
             }
         }
     }
@@ -390,22 +360,16 @@ Blockly.Blocks['setBlock'] = {
             .appendField("Set a single block.")
             .appendField(dropdown, "CONFIG");
         this.appendDummyInput("XES")
-            .appendField("x0:")
-            .appendField(new Blockly.FieldTextInput("0"), "X0")
-            .appendField("x1:")
-            .appendField(new Blockly.FieldTextInput("1"), "X1");
+            .appendField("x:")
+            .appendField(new Blockly.FieldTextInput("0"), "X");
         this.appendDummyInput("YES")
-            .appendField("y0:")
-            .appendField(new Blockly.FieldTextInput("0"), "Y0")
-            .appendField("y1:")
-            .appendField(new Blockly.FieldTextInput("1"), "Y1")
+            .appendField("y:")
+            .appendField(new Blockly.FieldTextInput("0"), "Y")
             .appendField("Block Type:")
             .appendField(new Blockly.FieldTextInput("1"), "TYPE");
         this.appendDummyInput("ZES")
-            .appendField("z0:")
-            .appendField(new Blockly.FieldTextInput("0"), "Z0")
-            .appendField("z1:")
-            .appendField(new Blockly.FieldTextInput("1"), "Z1")
+            .appendField("z:")
+            .appendField(new Blockly.FieldTextInput("0"), "Z")
             .appendField("Block      Id:")
             .appendField(new Blockly.FieldTextInput("0"), "ID");
         this.setPreviousStatement(true, null);
@@ -439,39 +403,10 @@ Blockly.Blocks['setBlock'] = {
                 addVectorInput(this);
 
             } else if (vecInput === "STANDARD") { // if the standard option has been selected
-
-                if (this.getInput("VEC")) {
-                    this.removeInput("VEC");
-                }
-                if (!this.getInput("XES")) {
-                    this.appendDummyInput("XES")
-                        .appendField("x0:")
-                        .appendField(new Blockly.FieldTextInput("0"), "X0")
-                        .appendField("x1:")
-                        .appendField(new Blockly.FieldTextInput("1"), "X1");
-                }
-
-                if (!this.getInput("YES")) {
-                    this.appendDummyInput("YES")
-                        .appendField("y0:")
-                        .appendField(new Blockly.FieldTextInput("0"), "Y0")
-                        .appendField("y1:")
-                        .appendField(new Blockly.FieldTextInput("1"), "Y1")
-                        .appendField("Block Type:")
-                        .appendField(new Blockly.FieldTextInput("1"), "TYPE");
-                }
-
-                if (!this.getInput("ZES")) {
-                    this.appendDummyInput("ZES")
-                        .appendField("z0:")
-                        .appendField(new Blockly.FieldTextInput("0"), "Z0")
-                        .appendField("z1:")
-                        .appendField(new Blockly.FieldTextInput("1"), "Z1")
-                        .appendField("Block      Id:")
-                        .appendField(new Blockly.FieldTextInput("0"), "ID");
-                }
+                addVectorCoordinatesSingle(this);
+                
             } else if (vecInput === "BLOCK") { // if the block option has been selected
-                console.log("EVERYTHING IS OK")
+               addBlockStandard(this);
             }
         }
     }
@@ -504,6 +439,7 @@ Blockly.Python['saveCheckpoint'] = function (block) {
 
 // functions that are reused to shape blocks in multiple mutators
 
+// replace manual vector coordinates with vector input
 function addVectorInput(block) {
     if (block.getInput("XES")) {
         block.removeInput("XES");
@@ -516,5 +452,77 @@ function addVectorInput(block) {
     }
     if (!block.getInput("VEC")) {
         block.appendValueInput("VEC");
+    }
+};
+
+// replace vector input with manual vector coordinates for cube
+function addVectorCoordinatesCube(block) {
+    if (block.getInput("VEC")) {
+        block.removeInput("VEC");
+    }
+    if (!block.getInput("XES")) {
+        block.appendDummyInput("XES")
+            .appendField("x0:")
+            .appendField(new Blockly.FieldTextInput("0"), "X0")
+            .appendField("x1:")
+            .appendField(new Blockly.FieldTextInput("1"), "X1");
+    }
+
+    if (!block.getInput("YES")) {
+        block.appendDummyInput("YES")
+            .appendField("y0:")
+            .appendField(new Blockly.FieldTextInput("0"), "Y0")
+            .appendField("y1:")
+            .appendField(new Blockly.FieldTextInput("1"), "Y1")
+            .appendField("Block Type:")
+            .appendField(new Blockly.FieldTextInput("1"), "TYPE");
+    }
+
+    if (!block.getInput("ZES")) {
+        block.appendDummyInput("ZES")
+            .appendField("z0:")
+            .appendField(new Blockly.FieldTextInput("0"), "Z0")
+            .appendField("z1:")
+            .appendField(new Blockly.FieldTextInput("1"), "Z1")
+            .appendField("Block      Id:")
+            .appendField(new Blockly.FieldTextInput("0"), "ID");
+    }
+};
+
+// replace vector input with manual vector coordinates
+function addVectorCoordinatesSingle(block) {
+    if (block.getInput("VEC")) {
+        block.removeInput("VEC");
+    }
+    if (!block.getInput("XES")) {
+        block.appendDummyInput("XES")
+            .appendField("x:")
+            .appendField(new Blockly.FieldTextInput("0"), "X0");
+    }
+
+    if (!block.getInput("YES")) {
+        block.appendDummyInput("YES")
+            .appendField("y:")
+            .appendField(new Blockly.FieldTextInput("0"), "Y0");
+    }
+
+    if (!block.getInput("ZES")) {
+        block.appendDummyInput("ZES")
+            .appendField("z:")
+            .appendField(new Blockly.FieldTextInput("0"), "Z0");
+    }
+};
+
+// replace manual block entries with input type
+function addBlockStandard(block) {
+    if(block.getInput("BLOCKINPUT")) {
+        block.removeInput("BLOCKINPUT");
+    }
+    if(!block.getInput("BLOCKSTANDARD")) {
+        block.appendDummyInput("BLOCKSTANDARD")
+              .appendField("Block Type:")
+              .appendField(new Blockly.FieldTextInput("1"), "TYPE")
+              .appendField("Block ID:")
+              .appendField(new Blockly.FieldTextInput("0", "ID"));
     }
 };
