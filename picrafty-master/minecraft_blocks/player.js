@@ -143,7 +143,7 @@ Blockly.Blocks['setPos'] = {
                 ["VEC3", this.updateVec3Shape],
                 ["STANDARD", this.updateStandardShape],
                 ["BLOCK", this.updateBlockShape]
-            ].find(function (updateList) {
+            ].find((updateList) => {
                 return updateList[0] === vecInput;
             })[1]();
         }
@@ -167,29 +167,23 @@ Blockly.Blocks['setPos'] = {
         if (this.getInput("VEC")) {
             this.removeInput("VEC");
         }
-
         for (let name in VECTOR_NAMES) {
             if (!this.getInput(name)) {
                 this.appendDummyInput(X_NAME)
                     .appendField()
             }
         }
-        if (!this.getInput(X_NAME)) {
-            this.appendDummyInput(X_NAME)
-                .appendField("x:")
-                .appendField(new Blockly.FieldTextInput("0"), X_FIELD)
-        }
-
-        if (!this.getInput(Y_NAME)) {
-            this.appendDummyInput(Y_NAME)
-                .appendField("y:")
-                .appendField(new Blockly.FieldTextInput("0"), Y_FIELD)
-        }
-
-        if (!this.getInput(Z_NAME)) {
-            this.appendDummyInput(Z_NAME)
-                .appendField("z:")
-                .appendField(new Blockly.FieldTextInput("1"), Z_FIELD)
+        const FIELDS = [
+            [X_NAME, "x:", "0", X_FIELD],
+            [Y_NAME, "y:", "0", Y_FIELD],
+            [Z_NAME, "z:", "1", Z_FIELD]
+        ];
+        for (let field in FIELDS) {
+            if (!this.getInput(field[0])) {
+                this.appendDummyInput(field[0])
+                    .appendField(field[1])
+                    .appendField(new Blockly.FieldTextInput(field[2]), field[3]);
+            }
         }
     },
 
