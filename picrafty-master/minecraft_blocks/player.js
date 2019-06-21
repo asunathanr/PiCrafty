@@ -152,7 +152,6 @@ Blockly.Blocks['setPos'] = {
 
     // Change shape of Vec3
     updateVec3Shape: function () {
-
         for (let name in VECTOR_NAMES) {
             if (this.getInput(name)) {
                 this.removeInput(name);
