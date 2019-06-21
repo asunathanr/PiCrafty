@@ -40,6 +40,8 @@
 <body>
   <p>
     <button onclick="showCode()">Show Python Stub</button>
+    <button onclick="save()">Save</button>
+    <button onclick="restore()">Restore</button>
   </p>
   <!-- This is the Div Blockly will render in. size can be adjusted here -->
   <!-- TODO: Have this Dynamicially set based off browser resolutionn(resziable Demo For example) -->
@@ -523,7 +525,23 @@
 	function destroyClickedElement(event)
 	{
 		document.body.removeChild(event.target);
-	}
+  }
+  // https://groups.google.com/forum/#!topic/blockly/NDlC-l6DLEM
+  // TODO: Clean up and finalize save and restore
+  function save() {
+    var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+    
+    localStorage.setItem("blockly.xml", xmlText);
+  }
+  function restore() {
+    var xmlText = localStorage.getItem("blockly.xml");
+    if (xmlText) {
+        Blockly.mainWorkspace.clear();
+        xmlDom = Blockly.Xml.textToDom(xmlText);
+        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
+    }
+  }
   </script>
 </body>
 </html>
