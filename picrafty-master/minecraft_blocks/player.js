@@ -91,6 +91,8 @@ const X_FIELD = "X";
 const Y_FIELD = "Y";
 const Z_FIELD = "Z";
 
+const VECTOR_NAMES = [X_NAME, Y_NAME, Z_NAME];
+
 Blockly.Blocks['setPos'] = {
     init: function () {
         const INPUT_TYPES = [["standard", "STANDARD"], ["vec3", "VEC3"], ["block", "BLOCK"]];
@@ -122,67 +124,70 @@ Blockly.Blocks['setPos'] = {
 
     mutationToDom: function () {
         var blockCache = document.createElement('mutation');
-        var vecInput = (this.getFieldValue("CONFIG") == 'VEC3');
+        var vecInput = (this.getFieldValue("CONFIG") === 'VEC3');
         blockCache.setAttribute('vec_input', vecInput);
         return blockCache;
     },
 
     // function to load block from xml?
     domToMutation: function (xmlElement) {
-        var hasVecInput = (xmlElement.getAttribute('vec_input' == 'true'));
+        var hasVecInput = (xmlElement.getAttribute('vec_input' === 'true'));
         console.log("hasVecInput = ", hasVecInput);
         this.updateShape_(hasVecInput);
     },
 
     // function to update shape of block on dropdown change
     updateShape_: function (vecInput) {
-        if (!vecInput) {
-            return;
+        if (vecInput !== null) {
+            [
+                ["VEC3", this.updateVec3Shape],
+                ["STANDARD", this.updateStandardShape],
+                ["BLOCK", this.updateBlockShape]
+            ].find((updateList) => {
+                return updateList[0] === vecInput;
+            })[1]();
         }
-        const VECTOR_NAMES = [X_NAME, Y_NAME, Z_NAME];
-        if (vecInput == "VEC3") {  // if the vec3 option has been selected
-            for (let name in VECTOR_NAMES) {
-                if (this.getInput(name)) {
-                    this.removeInput(name);
-                }
-            }
-            if (!this.getInput("VEC")) {
-                this.appendValueInput("VEC");
-            }
+    },
 
-        } else if (vecInput == "STANDARD") { // if the standard option has been selected
 
-            if (this.getInput("VEC")) {
-                this.removeInput("VEC");
+    // Change shape of Vec3
+    updateVec3Shape: function () {
+        for (let name in VECTOR_NAMES) {
+            if (this.getInput(name)) {
+                this.removeInput(name);
             }
+        }
+        if (!this.getInput("VEC")) {
+            this.appendValueInput("VEC");
+        }
+    },
 
-            for (let name in VECTOR_NAMES) {
-                if (!this.getInput(name)) {
-                    this.appendDummyInput(X_NAME)
-                        .appendField()
-                }
-            }
-            if (!this.getInput(X_NAME)) {
+    updateStandardShape: function () {
+        if (this.getInput("VEC")) {
+            this.removeInput("VEC");
+        }
+        for (let name in VECTOR_NAMES) {
+            if (!this.getInput(name)) {
                 this.appendDummyInput(X_NAME)
-                    .appendField("x:")
-                    .appendField(new Blockly.FieldTextInput("0"), X_FIELD)
+                    .appendField()
             }
-
-            if (!this.getInput(Y_NAME)) {
-                this.appendDummyInput(Y_NAME)
-                    .appendField("y:")
-                    .appendField(new Blockly.FieldTextInput("0"), Y_FIELD)
-            }
-
-            if (!this.getInput(Z_NAME)) {
-                this.appendDummyInput(Z_NAME)
-                    .appendField("z:")
-                    .appendField(new Blockly.FieldTextInput("1"), Z_FIELD)
-            }
-        } else if (vecInput == "BLOCK") { // if the block option has been selected
-            console.log("EVERYTHING IS OK")
         }
+        const FIELDS = [
+            [X_NAME, "x:", "0", X_FIELD],
+            [Y_NAME, "y:", "0", Y_FIELD],
+            [Z_NAME, "z:", "1", Z_FIELD]
+        ];
+        for (let field in FIELDS) {
+            if (!this.getInput(field[0])) {
+                this.appendDummyInput(field[0])
+                    .appendField(field[1])
+                    .appendField(new Blockly.FieldTextInput(field[2]), field[3]);
+            }
+        }
+    },
 
+    updateBlockShape() {
+        console.log("EVERYTHING IS OK");
     }
 };
 Blockly.Python['setPos'] = function (block) {

@@ -303,14 +303,14 @@ Blockly.Blocks['setBlocks'] = {
     // function that will allow changes to save to xml
     mutationToDom: function () {
         var containter1 = document.createElement('mutation');
-        var vecInput = (this.getFieldValue("CONFIG") == 'VEC3');
+        var vecInput = (this.getFieldValue("CONFIG") === 'VEC3');
         containter1.setAttribute('vec_input', vecInput);
         return containter1;
     },
 
     // function to load block from xml?
     domToMutation: function (xmlElement) {
-        var hasVecInput = (xmlElement.getAttribute('vec_input' == 'true'));
+        var hasVecInput = (xmlElement.getAttribute('vec_input' === 'true'));
         console.log("hasVecInput = ", hasVecInput);
         this.updateShape_(hasVecInput);
     },
