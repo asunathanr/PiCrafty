@@ -425,7 +425,7 @@
 
       <category name="Player" colour="#a55b6d">
 
-        <block type="setting">
+        <block type="player_setting">
           <field name="SETTING"></field>
           <field name="STATUS"></field>
         </block>
@@ -454,8 +454,12 @@
         <block type="getRotation"></block>
       </category>
 
-      <category name="Entity" colour = "A65C81">
-        <block type="entity_getPos"></block>
+      <category name="Entity" colour = "#a55b6d">
+
+        <block type="entity_getPos">
+            <field name="ENTITY_ID"></field>
+        </block>
+
         <block type="entity_setPos"></block>
         <block type="entity_getTilePos"></block>
         <block type="entity_setTilePos"></block>
@@ -497,7 +501,7 @@
         "mc = Minecraft()\n" +
         "\n";
 	var code = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
-	//This is all Preperation For Downloading the file
+	//This is all Preparation For Downloading the file
 	var PythonStub = new Blob([code], {type:"text/plain"});
 	var textToSaveAsURL = window.URL.createObjectURL(PythonStub);
 	var downloadLink = document.createElement("a");

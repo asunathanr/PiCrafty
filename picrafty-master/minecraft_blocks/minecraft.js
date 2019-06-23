@@ -364,7 +364,7 @@ Blockly.Blocks['setBlocks'] = {
                         .appendField("Block      Id:")
                         .appendField(new Blockly.FieldTextInput("0"), "ID");
                 }
-            } else if (vecInput == "BLOCK") { // if the block option has been selected
+            } else if (vecInput === "BLOCK") { // if the block option has been selected
                 console.log("EVERYTHING IS OK")
             }
         }
@@ -380,9 +380,7 @@ Blockly.Python['setBlocks'] = function (block) {
     var z1 = block.getFieldValue('Z1');
     var id = block.getFieldValue('ID');
     let aString = x0 + ',' + y0 + ',' + z0 + ',' + x1 + ',' + y1 + ',' + z1 + ',' + type + ',' + id;
-    let code = 'mc.setBlocks(' + aString + ')\n';
-    // TODO: Change ORDER_NONE to the correct strength.
-    return code;
+    return 'mc.setBlocks(' + aString + ')\n';
 };
 
 
@@ -419,8 +417,7 @@ Blockly.Python['setBlock'] = function (block) {
     var blockId = block.getFieldValue('blockId');
     var blockType = block.getFieldValue('blockType');
     let argumentString = X + ',' + Y + ',' + Z + ',' + blockId + ',' + blockType;
-    var code = 'mc.setBlock(' + argumentString + ')\n';
-    return code;
+    return 'mc.setBlock(' + argumentString + ')\n';
 };
 
 
@@ -434,6 +431,5 @@ Blockly.Blocks['saveCheckpoint'] = {
     }
 };
 Blockly.Python['saveCheckpoint'] = function (block) {
-    var code = 'mc.saveCheckpoint()\n';
-    return code;
+    return 'mc.saveCheckpoint()\n';
 };

@@ -192,8 +192,7 @@ Blockly.Blocks['setPos'] = {
 };
 Blockly.Python['setPos'] = function (block) {
     let arguments = block.getFieldValue(X_FIELD) + ',' + block.getFieldValue(Y_FIELD) + ',' + block.getFieldValue(Z_FIELD);
-    var code = 'mc.player.setPos(' + arguments + ')\n';
-    return code;
+    return 'mc.player.setPos(' + arguments + ')\n';
 };
 
 
@@ -219,8 +218,7 @@ Blockly.Blocks['setTilePos'] = {
 };
 Blockly.Python['setTilePos'] = function (block) {
     let arguments = block.getFieldValue('X') + block.getFieldValue('Y') + block.getFieldValue('Z');
-    var code = 'mc.player.setTilePos(' + arguments + ')\n';
-    return code;
+    return 'mc.player.setTilePos(' + arguments + ')\n';
 };
 
 
@@ -232,9 +230,10 @@ Blockly.Blocks['player_setting'] = {
         this.appendDummyInput("Player Setting")
             .appendField("Set player settings");
         this.appendDummyInput("Setting Name: ")
-            .setCheck(null)
+            .appendField('Setting:')
             .appendField(new Blockly.FieldTextInput(), "SETTING");
         this.appendDummyInput("Status: ")
+            .appendField("Status: ")
             .appendField(new Blockly.FieldCheckbox(), "STATUS");
         this.setColour(230);
         this.setTooltip("Sets a particular setting to be either true or false. ");
@@ -244,6 +243,5 @@ Blockly.Blocks['player_setting'] = {
 Blockly.Python['player_setting'] = function (block) {
     let status = "true" ? block.getFieldValue("STATUS").isChecked() : "false";
     let arguments = block.getFieldValue("SETTING") + ',' + status;
-    var code = 'mc.player.setting(' + arguments + ')\n';
-    return code;
+    return 'mc.player.setting(' + arguments + ')\n';
 };
