@@ -96,7 +96,7 @@ const VECTOR_NAMES = [X_NAME, Y_NAME, Z_NAME];
 Blockly.Blocks['setPos'] = {
     init: function () {
         const INPUT_TYPES = [["standard", "STANDARD"], ["vec3", "VEC3"], ["block", "BLOCK"]];
-        var dropdown = new Blockly.FieldDropdown(INPUT_TYPES, function (vec_input) {
+        let dropdown = new Blockly.FieldDropdown(INPUT_TYPES, function (vec_input) {
             this.sourceBlock_.updateShape_(vec_input);
         });
 
