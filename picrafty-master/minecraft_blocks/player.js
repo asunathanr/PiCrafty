@@ -3,18 +3,20 @@
 // PURPOSE: Implement blocks for all methods in the Minecraft.Player class
 
 
+const BLOCK_COLOR = 230;
+
 Blockly.Blocks['getDirection'] = {
     init: function () {
         this.appendDummyInput()
             .appendField("Get Player Direction");
         this.setOutput(true, null);
-        this.setColour(230);
+        this.setColour(BLOCK_COLOR);
         this.setTooltip("Returns player direction as a Vec3 object.");
         this.setHelpUrl("");
     }
 };
 Blockly.Python['getDirection'] = function (block) {
-    var code = 'mc.player.getDirection()\n';
+    let code = 'mc.player.getDirection()\n';
     return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -25,7 +27,7 @@ Blockly.Blocks['getPitch'] = {
         this.appendDummyInput()
             .appendField("Get Player Pitch");
         this.setOutput(true, null);
-        this.setColour(230);
+        this.setColour(BLOCK_COLOR);
         this.setTooltip("Returns player position as a Vec3 object.");
         this.setHelpUrl("");
     }
@@ -41,7 +43,7 @@ Blockly.Blocks['getPos'] = {
         this.appendDummyInput()
             .appendField("Get Player Position");
         this.setOutput(true, null);
-        this.setColour(230);
+        this.setColour(BLOCK_COLOR);
         this.setTooltip("Returns player position as a Vec3 object.");
         this.setHelpUrl("");
     }
@@ -57,7 +59,7 @@ Blockly.Blocks['getRotation'] = {
         this.appendDummyInput()
             .appendField("Get Player Position");
         this.setOutput(true, null);
-        this.setColour(230);
+        this.setColour(BLOCK_COLOR);
         this.setTooltip("Returns player position as a Vec3 object.");
         this.setHelpUrl("");
     }
@@ -73,7 +75,7 @@ Blockly.Blocks['getTilePos'] = {
         this.appendDummyInput()
             .appendField("Get Tile Position");
         this.setOutput(true, null);
-        this.setColour(230);
+        this.setColour(BLOCK_COLOR);
         this.setTooltip("Returns position of tile player is standing on");
         this.setHelpUrl("");
     }
@@ -96,7 +98,7 @@ const VECTOR_NAMES = [X_NAME, Y_NAME, Z_NAME];
 Blockly.Blocks['setPos'] = {
     init: function () {
         const INPUT_TYPES = [["standard", "STANDARD"], ["vec3", "VEC3"], ["block", "BLOCK"]];
-        var dropdown = new Blockly.FieldDropdown(INPUT_TYPES, function (vec_input) {
+        let dropdown = new Blockly.FieldDropdown(INPUT_TYPES, function (vec_input) {
             this.sourceBlock_.updateShape_(vec_input);
         });
 
@@ -117,7 +119,7 @@ Blockly.Blocks['setPos'] = {
 
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(230);
+        this.setColour(BLOCK_COLOR);
         this.setTooltip("Sets player position to new x,y,z coordinates");
         this.setHelpUrl("");
     },
@@ -192,8 +194,7 @@ Blockly.Blocks['setPos'] = {
 };
 Blockly.Python['setPos'] = function (block) {
     let arguments = block.getFieldValue(X_FIELD) + ',' + block.getFieldValue(Y_FIELD) + ',' + block.getFieldValue(Z_FIELD);
-    var code = 'mc.player.setPos(' + arguments + ')\n';
-    return code;
+    return 'mc.player.setPos(' + arguments + ')\n';
 };
 
 
@@ -212,15 +213,14 @@ Blockly.Blocks['setTilePos'] = {
         this.appendDummyInput()
             .appendField("z:")
             .appendField(new Blockly.FieldNumber(), 'Z');
-        this.setColour(230);
+        this.setColour(BLOCK_COLOR);
         this.setTooltip("Sets player position to top of given x,y,z coordinates");
         this.setHelpUrl("");
     }
 };
 Blockly.Python['setTilePos'] = function (block) {
     let arguments = block.getFieldValue('X') + block.getFieldValue('Y') + block.getFieldValue('Z');
-    var code = 'mc.player.setTilePos(' + arguments + ')\n';
-    return code;
+    return 'mc.player.setTilePos(' + arguments + ')\n';
 };
 
 
@@ -232,11 +232,12 @@ Blockly.Blocks['player_setting'] = {
         this.appendDummyInput("Player Setting")
             .appendField("Set player settings");
         this.appendDummyInput("Setting Name: ")
-            .setCheck(null)
+            .appendField('Setting:')
             .appendField(new Blockly.FieldTextInput(), "SETTING");
         this.appendDummyInput("Status: ")
+            .appendField("Status: ")
             .appendField(new Blockly.FieldCheckbox(), "STATUS");
-        this.setColour(230);
+        this.setColour(BLOCK_COLOR);
         this.setTooltip("Sets a particular setting to be either true or false. ");
         this.setHelpUrl("");
     }
@@ -244,6 +245,5 @@ Blockly.Blocks['player_setting'] = {
 Blockly.Python['player_setting'] = function (block) {
     let status = "true" ? block.getFieldValue("STATUS").isChecked() : "false";
     let arguments = block.getFieldValue("SETTING") + ',' + status;
-    var code = 'mc.player.setting(' + arguments + ')\n';
-    return code;
+    return 'mc.player.setting(' + arguments + ')\n';
 };

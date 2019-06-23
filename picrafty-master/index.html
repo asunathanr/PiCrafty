@@ -7,6 +7,7 @@
 
   <script src="blockly_compressed.js"></script>
   <script src="python_compressed.js"></script>
+  <script src="msg/js/en.js"></script>
 
   <!-- Minecraft block methods -->
   <script src="minecraft_blocks/minecraft.js"></script>
@@ -22,7 +23,7 @@
   <script src="blocks/text.js"></script>
   <script src="blocks/variables.js"></script>
   <script src="blocks/variables_dynamic.js"></script>
-  <script src="msg/js/en.js"></script>
+
 
   <style>
     body {
@@ -36,13 +37,19 @@
   </style>
 </head>
 <body>
-  <p>
-    <button onclick="showCode()">Show Python Stub</button>
-  </p>
+
   <!-- This is the Div Blockly will render in. size can be adjusted here -->
   <!-- TODO: Have this Dynamicially set based off browser resolutionn(resziable Demo For example) -->
   <div id="blocklyDiv" style="height: 600px; width: 800px;"></div>
 
+  <p>
+      <button onclick="showCode()">Show Python Stub</button>
+      <button onclick="displayCodeInBrowser()">View code in browser</button>
+  </p>
+
+  <textarea id="codeArea" style="height: 600px; width: 800px;">
+
+  </textarea>
   <!--This defines the toolbox to be given to Blockly.  -->
   <!--Additional blocks can be added and catogrized.   -->
   <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
@@ -425,7 +432,7 @@
 
       <category name="Player" colour="#a55b6d">
 
-        <block type="setting">
+        <block type="player_setting">
           <field name="SETTING"></field>
           <field name="STATUS"></field>
         </block>
@@ -454,8 +461,12 @@
         <block type="getRotation"></block>
       </category>
 
-      <category name="Entity" colour = "A65C81">
-        <block type="entity_getPos"></block>
+      <category name="Entity" colour = "#a55b6d">
+
+        <block type="entity_getPos">
+            <field name="ENTITY_ID"></field>
+        </block>
+
         <block type="entity_setPos"></block>
         <block type="entity_getTilePos"></block>
         <block type="entity_setTilePos"></block>
@@ -497,7 +508,7 @@
         "mc = Minecraft()\n" +
         "\n";
 	var code = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
-	//This is all Preperation For Downloading the file
+	//This is all Preparation For Downloading the file
 	var PythonStub = new Blob([code], {type:"text/plain"});
 	var textToSaveAsURL = window.URL.createObjectURL(PythonStub);
 	var downloadLink = document.createElement("a");
@@ -517,6 +528,16 @@
 	{
 		document.body.removeChild(event.target);
 	}
+
+	function displayCodeInBrowser()
+    {
+        Blockly.Python.INFINITE_LOOP_TRAP = null;
+        let codeArea = document.getElementById("codeArea");
+        let preamble = "from mine import *\n\n" +
+            "mc = Minecraft()\n" +
+            "\n";
+        codeArea.value = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
+    }
   </script>
 </body>
 </html>

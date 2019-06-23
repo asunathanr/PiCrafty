@@ -234,10 +234,9 @@ Blockly.Blocks['setting'] = {
     }
 };
 Blockly.Python['setting'] = function (block) {
-    var value_setting = Blockly.Python.valueToCode(block, 'SETTING', Blockly.Python.ORDER_ATOMIC);
-    var value_flag = Blockly.Python.valueToCode(block, 'FLAG', Blockly.Python.ORDER_ATOMIC);
-    var code = 'mc.setting(' + value_setting + ', ' + value_flag + ')\n';
-    return code;
+    let value_setting = Blockly.Python.valueToCode(block, 'SETTING', Blockly.Python.ORDER_ATOMIC);
+    let value_flag = Blockly.Python.valueToCode(block, 'FLAG', Blockly.Python.ORDER_ATOMIC);
+    return 'mc.setting(' + value_setting + ', ' + value_flag + ')\n';
 };
 
 
@@ -245,18 +244,18 @@ Blockly.Blocks['postToChat'] = {
     init: function () {
         this.appendDummyInput()
             .appendField("Post to chat.");
-        this.appendValueInput("TOPOST")
-            .setCheck(["String", "Number"]);
-        this.appendDummyInput();
+        this.appendDummyInput("TOPOST")
+            .appendField(new Blockly.FieldTextInput(""), 'TOPOST');
         this.setColour(230);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
         this.setTooltip("Post a message to in game chat.");
         this.setHelpUrl("");
     }
 };
 Blockly.Python['postToChat'] = function (block) {
-    var value_topost = Blockly.Python.valueToCode(block, 'TOPOST', Blockly.Python.ORDER_ATOMIC);
-    var code = 'mc.postToChat(' + value_topost + ')\n';
-    return code;
+    let value_topost = block.getFieldValue('TOPOST');
+    return 'mc.postToChat(' + '"' + value_topost + '"' + ')\n';
 };
 
 
@@ -318,9 +317,8 @@ Blockly.Blocks['setBlocks'] = {
     // function to update shape of block on dropdown change
     updateShape_: function (vecInput) {
 
-
         if (vecInput) {  // make sure an option has been passed
-            if (vecInput == "VEC3") {  // if the vec3 option has been selected
+            if (vecInput === "VEC3") {  // if the vec3 option has been selected
                 if (this.getInput("XES")) {
                     this.removeInput("XES");
                 }
@@ -334,7 +332,7 @@ Blockly.Blocks['setBlocks'] = {
                     this.appendValueInput("VEC");
                 }
 
-            } else if (vecInput == "STANDARD") { // if the standard option has been selected
+            } else if (vecInput === "STANDARD") { // if the standard option has been selected
 
                 if (this.getInput("VEC")) {
                     this.removeInput("VEC");
@@ -366,7 +364,7 @@ Blockly.Blocks['setBlocks'] = {
                         .appendField("Block      Id:")
                         .appendField(new Blockly.FieldTextInput("0"), "ID");
                 }
-            } else if (vecInput == "BLOCK") { // if the block option has been selected
+            } else if (vecInput === "BLOCK") { // if the block option has been selected
                 console.log("EVERYTHING IS OK")
             }
         }
@@ -382,9 +380,7 @@ Blockly.Python['setBlocks'] = function (block) {
     var z1 = block.getFieldValue('Z1');
     var id = block.getFieldValue('ID');
     let aString = x0 + ',' + y0 + ',' + z0 + ',' + x1 + ',' + y1 + ',' + z1 + ',' + type + ',' + id;
-    var code = 'mc.setBlocks(' + aString + ')\n';
-    // TODO: Change ORDER_NONE to the correct strength.
-    return code;
+    return 'mc.setBlocks(' + aString + ')\n';
 };
 
 
@@ -421,8 +417,7 @@ Blockly.Python['setBlock'] = function (block) {
     var blockId = block.getFieldValue('blockId');
     var blockType = block.getFieldValue('blockType');
     let argumentString = X + ',' + Y + ',' + Z + ',' + blockId + ',' + blockType;
-    var code = 'mc.setBlock(' + argumentString + ')\n';
-    return code;
+    return 'mc.setBlock(' + argumentString + ')\n';
 };
 
 
@@ -436,6 +431,5 @@ Blockly.Blocks['saveCheckpoint'] = {
     }
 };
 Blockly.Python['saveCheckpoint'] = function (block) {
-    var code = 'mc.saveCheckpoint()\n';
-    return code;
+    return 'mc.saveCheckpoint()\n';
 };
