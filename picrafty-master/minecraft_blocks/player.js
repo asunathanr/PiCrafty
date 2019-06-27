@@ -3,7 +3,11 @@
 // PURPOSE: Implement blocks for all methods in the Minecraft.Player class
 
 
+// Each block is implemented in two parts: First the new block is added to the Block associative array.
+// Then the appropriate python conversion function is added to the Blockly.Python associative array.
+
 const BLOCK_COLOR = 230;
+
 
 Blockly.Blocks['getDirection'] = {
     init: function () {
@@ -21,7 +25,6 @@ Blockly.Python['getDirection'] = function (block) {
 };
 
 
-// Minecraft.player.getPitch()
 Blockly.Blocks['getPitch'] = {
     init: function () {
         this.appendDummyInput()
@@ -33,7 +36,7 @@ Blockly.Blocks['getPitch'] = {
     }
 };
 Blockly.Python['getPitch'] = function (block) {
-    var code = 'mc.player.getPitch()\n';
+    let code = 'mc.player.getPitch()\n';
     return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -49,7 +52,7 @@ Blockly.Blocks['getPos'] = {
     }
 };
 Blockly.Python['getPos'] = function (block) {
-    var code = 'mc.player.getPos()\n';
+    let code = 'mc.player.getPos()\n';
     return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -60,7 +63,7 @@ Blockly.Blocks['getRotation'] = {
             .appendField("Get Player Position");
         this.setOutput(true, null);
         this.setColour(BLOCK_COLOR);
-        this.setTooltip("Returns player position as a Vec3 object.");
+        this.setTooltip("Returns player rotation as a Vec3 object.");
         this.setHelpUrl("");
     }
 };
@@ -107,14 +110,14 @@ Blockly.Blocks['setPos'] = {
             .appendField(dropdown, "CONFIG");
         this.appendDummyInput()
             .appendField("Set Player Position");
-        this.appendDummyInput(X_NAME)
-            .appendField("x:")
+        this.appendDummyInput()
+            .appendField('x:')
             .appendField(new Blockly.FieldNumber(), X_FIELD);
-        this.appendDummyInput(Y_NAME)
-            .appendField("y:")
+        this.appendDummyInput()
+            .appendField('y:')
             .appendField(new Blockly.FieldNumber(), Y_FIELD);
-        this.appendDummyInput(Z_NAME)
-            .appendField("z:")
+        this.appendDummyInput()
+            .appendField('z:')
             .appendField(new Blockly.FieldNumber(), Z_FIELD);
 
         this.setPreviousStatement(true, null);
@@ -125,15 +128,15 @@ Blockly.Blocks['setPos'] = {
     },
 
     mutationToDom: function () {
-        var blockCache = document.createElement('mutation');
-        var vecInput = (this.getFieldValue("CONFIG") === 'VEC3');
+        let blockCache = document.createElement('mutation');
+        let vecInput = (this.getFieldValue("CONFIG") === 'VEC3');
         blockCache.setAttribute('vec_input', vecInput);
         return blockCache;
     },
 
     // function to load block from xml?
     domToMutation: function (xmlElement) {
-        var hasVecInput = (xmlElement.getAttribute('vec_input' === 'true'));
+        let hasVecInput = (xmlElement.getAttribute('vec_input' === 'true'));
         console.log("hasVecInput = ", hasVecInput);
         this.updateShape_(hasVecInput);
     },
@@ -150,7 +153,6 @@ Blockly.Blocks['setPos'] = {
             })[1]();
         }
     },
-
 
     // Change shape of Vec3
     updateVec3Shape: function () {
@@ -200,22 +202,97 @@ Blockly.Python['setPos'] = function (block) {
 
 Blockly.Blocks['setTilePos'] = {
     init: function () {
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
+        const INPUT_TYPES = [["standard", "STANDARD"], ["vec3", "VEC3"], ["block", "BLOCK"]];
+        let dropdown = new Blockly.FieldDropdown(INPUT_TYPES, function (vec_input) {
+            this.sourceBlock_.updateShape_(vec_input);
+        });
+
+        this.appendDummyInput()
+            .appendField(dropdown, "CONFIG");
         this.appendDummyInput()
             .appendField("Set Player Tile Position");
         this.appendDummyInput()
-            .appendField("x:")
+            .appendField('x:')
             .appendField(new Blockly.FieldNumber(), 'X');
         this.appendDummyInput()
-            .appendField("y:")
+            .appendField('y:')
             .appendField(new Blockly.FieldNumber(), 'Y');
         this.appendDummyInput()
-            .appendField("z:")
+            .appendField('z:')
             .appendField(new Blockly.FieldNumber(), 'Z');
+
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
         this.setColour(BLOCK_COLOR);
         this.setTooltip("Sets player position to top of given x,y,z coordinates");
         this.setHelpUrl("");
+    },
+
+    mutationToDom: function () {
+        let blockCache = document.createElement('mutation');
+        let vecInput = (this.getFieldValue("CONFIG") === 'VEC3');
+        blockCache.setAttribute('vec_input', vecInput);
+        return blockCache;
+    },
+
+    // function to load block from xml?
+    domToMutation: function (xmlElement) {
+        let hasVecInput = (xmlElement.getAttribute('vec_input' === 'true'));
+        console.log("hasVecInput = ", hasVecInput);
+        this.updateShape_(hasVecInput);
+    },
+
+    // function to update shape of block on dropdown change
+    updateShape_: function (vecInput) {
+        if (vecInput !== null) {
+            [
+                ["VEC3", this.updateVec3Shape],
+                ["STANDARD", this.updateStandardShape],
+                ["BLOCK", this.updateBlockShape]
+            ].find((updateList) => {
+                return updateList[0] === vecInput;
+            })[1]();
+        }
+    },
+
+    // Change shape of Vec3
+    updateVec3Shape: function () {
+        for (let name in VECTOR_NAMES) {
+            if (this.getInput(name)) {
+                this.removeInput(name);
+            }
+        }
+        if (!this.getInput("VEC")) {
+            this.appendValueInput("VEC");
+        }
+    },
+
+    updateStandardShape: function () {
+        if (this.getInput("VEC")) {
+            this.removeInput("VEC");
+        }
+        for (let name in VECTOR_NAMES) {
+            if (!this.getInput(name)) {
+                this.appendDummyInput(X_NAME)
+                    .appendField()
+            }
+        }
+        const FIELDS = [
+            [X_NAME, "x:", "0", X_FIELD],
+            [Y_NAME, "y:", "0", Y_FIELD],
+            [Z_NAME, "z:", "1", Z_FIELD]
+        ];
+        for (let field in FIELDS) {
+            if (!this.getInput(field[0])) {
+                this.appendDummyInput(field[0])
+                    .appendField(field[1])
+                    .appendField(new Blockly.FieldTextInput(field[2]), field[3]);
+            }
+        }
+    },
+
+    updateBlockShape() {
+        console.log("EVERYTHING IS OK");
     }
 };
 Blockly.Python['setTilePos'] = function (block) {
