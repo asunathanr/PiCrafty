@@ -549,7 +549,7 @@ function addBlockStandard(block) {
     }
 };
 
-// replace manual block entries with input type
+
 // replace manual block entries with input type
 function addBlockInput(block) {
     if(!block.getInput("BLOCKINPUT")) {
