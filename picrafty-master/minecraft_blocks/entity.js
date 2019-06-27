@@ -19,7 +19,7 @@ Blockly.Blocks['entity_getPos'] = {
         this.setHelpUrl("");
     }
 };
-Blockly.Python['entity_getPos'] = function (block)
+Blockly.Python['entity_getPos'] = function (block) {
     var code = 'mc.entity.getDirection()\n';
 
     return [code, Blockly.Python.ORDER_NONE];
