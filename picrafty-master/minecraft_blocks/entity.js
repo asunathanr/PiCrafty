@@ -8,18 +8,20 @@ const ENTITY_ID_LABEL = "Entity ID:";
 Blockly.Blocks['entity_getPos'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField("Get Entity Position");
-        this.appendDummyInput(ENTITY_ID_LABEL)
-            .appendField(ENTITY_ID_LABEL)
-            .appendField(new Blockly.FieldNumber(), ENTITY_ID);
+
+            .appendField("get entity's position")
+            .appendField(new Blockly.FieldNumber(), 'Entity_ID')
         this.setColour(230);
-        this.setTooltip("Returns entity position as a Vec3 object.");
+        this.setTooltip("Sets entity position to top of given x,y,z coordinates");
         this.setOutput(true, null);
+        this.setColour(230);
+        this.setTooltip("Returns entity direction as a Vec3 object.");
         this.setHelpUrl("");
     }
 };
-Blockly.Python['entity_getPos'] = function (block) {
-    var code = 'mc.entity.getPos(' + block.getFieldValue(ENTITY_ID) +')\n';
+Blockly.Python['entity_getPos'] = function (block)
+    var code = 'mc.entity.getDirection()\n';
+
     return [code, Blockly.Python.ORDER_NONE];
 };
 

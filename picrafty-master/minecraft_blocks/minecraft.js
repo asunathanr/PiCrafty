@@ -29,8 +29,6 @@ Blockly.Python['minecraft_create'] = function (block) {
 
 Blockly.Blocks['getBlock'] = {
     init: function () {
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
         this.appendDummyInput()
             .appendField("Get a block");
         this.appendDummyInput()
@@ -42,6 +40,7 @@ Blockly.Blocks['getBlock'] = {
         this.appendDummyInput()
             .appendField("z:")
             .appendField(new Blockly.FieldNumber(), 'Z');
+            this.setOutput(true, null);
         this.setColour(230);
         this.setTooltip("Gets a block at position (x, y, z). Returns block type as int.");
         this.setHelpUrl("");
@@ -244,8 +243,12 @@ Blockly.Blocks['postToChat'] = {
     init: function () {
         this.appendDummyInput()
             .appendField("Post to chat.");
-        this.appendDummyInput("TOPOST")
-            .appendField(new Blockly.FieldTextInput(""), 'TOPOST');
+
+        this.appendValueInput("TOPOST")
+            .setCheck(["String", "Number"]);
+        this.appendDummyInput();
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
         this.setColour(230);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -319,53 +322,15 @@ Blockly.Blocks['setBlocks'] = {
 
         if (vecInput) {  // make sure an option has been passed
             if (vecInput === "VEC3") {  // if the vec3 option has been selected
-                if (this.getInput("XES")) {
-                    this.removeInput("XES");
-                }
-                if (this.getInput("YES")) {
-                    this.removeInput("YES");
-                }
-                if (this.getInput("ZES")) {
-                    this.removeInput("ZES");
-                }
-                if (!this.getInput("VEC")) {
-                    this.appendValueInput("VEC");
-                }
+                addVectorInput(this);
+                addBlockStandard(this);
 
             } else if (vecInput === "STANDARD") { // if the standard option has been selected
-
-                if (this.getInput("VEC")) {
-                    this.removeInput("VEC");
-                }
-                if (!this.getInput("XES")) {
-                    this.appendDummyInput("XES")
-                        .appendField("x0:")
-                        .appendField(new Blockly.FieldTextInput("0"), "X0")
-                        .appendField("x1:")
-                        .appendField(new Blockly.FieldTextInput("1"), "X1");
-                }
-
-                if (!this.getInput("YES")) {
-                    this.appendDummyInput("YES")
-                        .appendField("y0:")
-                        .appendField(new Blockly.FieldTextInput("0"), "Y0")
-                        .appendField("y1:")
-                        .appendField(new Blockly.FieldTextInput("1"), "Y1")
-                        .appendField("Block Type:")
-                        .appendField(new Blockly.FieldTextInput("1"), "TYPE");
-                }
-
-                if (!this.getInput("ZES")) {
-                    this.appendDummyInput("ZES")
-                        .appendField("z0:")
-                        .appendField(new Blockly.FieldTextInput("0"), "Z0")
-                        .appendField("z1:")
-                        .appendField(new Blockly.FieldTextInput("1"), "Z1")
-                        .appendField("Block      Id:")
-                        .appendField(new Blockly.FieldTextInput("0"), "ID");
-                }
+                addVectorCoordinatesCube(this);
+                addBlockStandard(this);
             } else if (vecInput === "BLOCK") { // if the block option has been selected
-                console.log("EVERYTHING IS OK")
+                addBlockStandard(this);
+                addVectorCoordinatesCube(this);
             }
         }
     }
@@ -386,38 +351,94 @@ Blockly.Python['setBlocks'] = function (block) {
 
 Blockly.Blocks['setBlock'] = {
     init: function () {
+        // custom dropdown object that will run update shape helper function when option is changed
+        var dropdown = new Blockly.FieldDropdown([["standard", "STANDARD"], ["vec3", "VEC3"], ["block", "BLOCK"]], function (vec_input) {
+            this.sourceBlock_.updateShape_(vec_input);
+        });
+
+        // initial state of block
+        this.appendDummyInput()
+            .appendField("Set a single block.")
+            .appendField(dropdown, "CONFIG");
+        this.appendDummyInput("XES")
+            .appendField("x:")
+            .appendField(new Blockly.FieldTextInput("0"), "X");
+        this.appendDummyInput("YES")
+            .appendField("y:")
+            .appendField(new Blockly.FieldTextInput("0"), "Y")
+            .appendField("Block Type:")
+            .appendField(new Blockly.FieldTextInput("1"), "TYPE");
+        this.appendDummyInput("ZES")
+            .appendField("z:")
+            .appendField(new Blockly.FieldTextInput("0"), "Z")
+            .appendField("Block      Id:")
+            .appendField(new Blockly.FieldTextInput("0"), "ID");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.appendDummyInput()
-            .appendField("Set a block");
-        this.appendDummyInput()
-            .appendField("x:")
-            .appendField(new Blockly.FieldNumber(), 'X');
-        this.appendDummyInput()
-            .appendField("y:")
-            .appendField(new Blockly.FieldNumber(), 'Y');
-        this.appendDummyInput()
-            .appendField("z:")
-            .appendField(new Blockly.FieldNumber(), 'Z');
-        this.appendDummyInput()
-            .appendField("Block ID:")
-            .appendField(new Blockly.FieldNumber(), 'blockId');
-        this.appendDummyInput()
-            .appendField("Block Type")
-            .appendField(new Blockly.FieldNumber(), 'blockType');
         this.setColour(230);
-        this.setTooltip("Sets the block at location (x,y,z) to be the given block id and optional type. A block doesn't have to exist in that location before calling this method.");
+        this.setTooltip("");
         this.setHelpUrl("");
+    },
+
+     // function that will allow changes to save to xml
+     mutationToDom: function () {
+        var containter1 = document.createElement('mutation');
+        var vecInput = (this.getFieldValue("CONFIG") === 'VEC3');
+        containter1.setAttribute('vec_input', vecInput);
+        return containter1;
+    },
+
+    // function to load block from xml?
+    domToMutation: function (xmlElement) {
+        var hasVecInput = (xmlElement.getAttribute('vec_input' === 'true'));
+        console.log("hasVecInput = ", hasVecInput);
+        this.updateShape_(hasVecInput);
+    },
+
+    // function to update shape of block on dropdown change
+    updateShape_: function (vecInput) {
+
+
+        if (vecInput) {  // make sure an option has been passed
+            if (vecInput === "VEC3") {  // if the vec3 option has been selected
+                addVectorInput(this);
+                addBlockStandard(this);
+
+            } else if (vecInput === "STANDARD") { // if the standard option has been selected
+                addVectorCoordinatesSingle(this);
+                addBlockStandard(this);
+                
+            } else if (vecInput === "BLOCK") { // if the block option has been selected
+               addBlockInput(this);
+               addVectorCoordinatesSingle(this);
+            }
+        }
     }
 };
 Blockly.Python['setBlock'] = function (block) {
-    var X = block.getFieldValue('X');
-    var Y = block.getFieldValue('Y');
-    var Z = block.getFieldValue('Z');
-    var blockId = block.getFieldValue('blockId');
-    var blockType = block.getFieldValue('blockType');
-    let argumentString = X + ',' + Y + ',' + Z + ',' + blockId + ',' + blockType;
-    return 'mc.setBlock(' + argumentString + ')\n';
+
+    var status = block.getFieldValue('CONFIG');
+
+    if(status === "STANDARD") {
+        var X = block.getFieldValue('X');
+        var Y = block.getFieldValue('Y');
+        var Z = block.getFieldValue('Z');
+        var blockId = block.getFieldValue('blockId');
+        var blockType = block.getFieldValue('blockType');
+        let argumentString = X + ',' + Y + ',' + Z + ',' + blockId + ',' + blockType;
+        var code = 'mc.setBlock(' + argumentString + ')\n';
+        return code;
+    } else if (status === "VEC3") {
+        var varName = Blockly.Python.valueToCode(block, "VEC", Blockly.Python.ORDER_ATOMIC);
+        var blockType = block.getFieldValue("TYPE");
+        var blockId = block.getFieldValue("ID");
+        console.log(varName);
+        let argumentString = varName + ', ' + blockType + ', ' + blockId;
+        var code = 'mc.setBlock(' + argumentString + ')\n';
+        return code;
+    }
+
+   
 };
 
 
@@ -432,4 +453,109 @@ Blockly.Blocks['saveCheckpoint'] = {
 };
 Blockly.Python['saveCheckpoint'] = function (block) {
     return 'mc.saveCheckpoint()\n';
+};
+
+// functions that are reused to shape blocks in multiple mutators
+
+// replace manual vector coordinates with vector input
+function addVectorInput(block) {
+    if (block.getInput("XES")) {
+        block.removeInput("XES");
+    }
+    if (block.getInput("YES")) {
+        block.removeInput("YES");
+    }
+    if (block.getInput("ZES")) {
+        block.removeInput("ZES");
+    }
+    if (!block.getInput("VEC")) {
+        block.appendValueInput("VEC");
+    }
+
+    var xCheck = new Blockly.FieldCheckbox("FALSE", function(xChecked) {
+        block.sourceBlock_.updateShape_(xChecked);
+    });
+};
+
+// replace vector input with manual vector coordinates for cube
+function addVectorCoordinatesCube(block) {
+    if (block.getInput("VEC")) {
+        block.removeInput("VEC");
+    }
+    if (!block.getInput("XES")) {
+        block.appendDummyInput("XES")
+            .appendField("x0:")
+            .appendField(new Blockly.FieldTextInput("0"), "X0")
+            .appendField("x1:")
+            .appendField(new Blockly.FieldTextInput("1"), "X1");
+    }
+
+    if (!block.getInput("YES")) {
+        block.appendDummyInput("YES")
+            .appendField("y0:")
+            .appendField(new Blockly.FieldTextInput("0"), "Y0")
+            .appendField("y1:")
+            .appendField(new Blockly.FieldTextInput("1"), "Y1")
+            .appendField("Block Type:")
+            .appendField(new Blockly.FieldTextInput("1"), "TYPE");
+    }
+
+    if (!block.getInput("ZES")) {
+        block.appendDummyInput("ZES")
+            .appendField("z0:")
+            .appendField(new Blockly.FieldTextInput("0"), "Z0")
+            .appendField("z1:")
+            .appendField(new Blockly.FieldTextInput("1"), "Z1")
+            .appendField("Block      Id:")
+            .appendField(new Blockly.FieldTextInput("0"), "ID");
+    }
+};
+
+// replace vector input with manual vector coordinates
+function addVectorCoordinatesSingle(block) {
+    if (block.getInput("VEC")) {
+        block.removeInput("VEC");
+    }
+    if (!block.getInput("XES")) {
+        block.appendDummyInput("XES")
+            .appendField("x:")
+            .appendField(new Blockly.FieldTextInput("0"), "X");
+    }
+
+    if (!block.getInput("YES")) {
+        block.appendDummyInput("YES")
+            .appendField("y:")
+            .appendField(new Blockly.FieldTextInput("0"), "Y");
+    }
+
+    if (!block.getInput("ZES")) {
+        block.appendDummyInput("ZES")
+            .appendField("z:")
+            .appendField(new Blockly.FieldTextInput("0"), "Z");
+    }
+};
+
+// replace input block entry with manual fields
+function addBlockStandard(block) {
+    if(block.getInput("BLOCKINPUT")) {
+        block.removeInput("BLOCKINPUT");
+    }
+    if(!block.getInput("BLOCKSTANDARD")) {
+        block.appendDummyInput("BLOCKSTANDARD")
+              .appendField("Block Type:")
+              .appendField(new Blockly.FieldTextInput("1"), "TYPE")
+              .appendField("Block ID:")
+              .appendField(new Blockly.FieldTextInput("0"), "ID");
+    }
+};
+
+// replace manual block entries with input type
+// replace manual block entries with input type
+function addBlockInput(block) {
+    if(!block.getInput("BLOCKINPUT")) {
+        block.appendValueInput("BLOCKINPUT");
+    }
+    if(block.getInput("BLOCKSTANDARD")) {
+        block.removeInput("BLOCKSTANDARD");
+    }
 };

@@ -60,7 +60,7 @@ Blockly.Python['getPos'] = function (block) {
 Blockly.Blocks['getRotation'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField("Get Player Position");
+            .appendField("Get Player Rotation");
         this.setOutput(true, null);
         this.setColour(BLOCK_COLOR);
         this.setTooltip("Returns player rotation as a Vec3 object.");

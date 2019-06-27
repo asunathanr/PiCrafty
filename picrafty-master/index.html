@@ -12,6 +12,8 @@
   <!-- Minecraft block methods -->
   <script src="minecraft_blocks/minecraft.js"></script>
   <script src="minecraft_blocks/player.js"></script>
+  <script src="minecraft_blocks/vectorAttributes.js"></script>
+  <script src="minecraft_blocks/setVecAttrTo.js"></script>
   <script src="minecraft_blocks/entity.js"></script>
 
   <!-- Google implemented blocks -->
@@ -44,6 +46,8 @@
 
   <p>
       <button onclick="showCode()">Show Python Stub</button>
+      <button onclick="save()">Save</button>
+      <button onclick="restore()">Restore</button>
       <button onclick="displayCodeInBrowser()">View code in browser</button>
   </p>
 
@@ -399,6 +403,8 @@
       </block>
 
       <block type="setBlock">
+        <mutation vec_input="true"></mutation>
+        <field name="CONFIG">STANDARD</field>
         <field name="X">0</field>
         <field name="Y">0</field>
         <field name="Z">0</field>
@@ -461,6 +467,16 @@
         <block type="getRotation"></block>
       </category>
 
+
+      <category name="Vectors" colour="#a55b6d">
+
+        <block type="set_vector_attribute_to"></block>
+        <block type="vector_x_attribute"></block>
+        <block type="vector_y_attribute"></block>
+        <block type="vector_z_attribute"></block>
+        
+      </category>
+      
       <category name="Entity" colour = "#a55b6d">
 
         <block type="entity_getPos">
@@ -480,6 +496,19 @@
     <category name="Variables" colour="#A65C81" custom="VARIABLE"></category>
 
 
+      <category name="Entity" colour = "#A65C81">
+        <block type="entity_getPos"></block>
+        <block type="entity_setPos"></block>
+        <block type="enetity_getTilePos"></block>
+        <block type="entity_setTilePos"></block>
+        <block type="entity_getRotation"></block>
+        <block type="entity_getPitch"></block>
+        <block type="entity_getDirection"></block>
+      </category>
+
+    </category>
+    <sep></sep>
+    <category name="Variables" colour="#A65C81" custom="VARIABLE"></category>
 
 
     <category name="Functions" colour="#A65C81">
@@ -527,6 +556,25 @@
 	function destroyClickedElement(event)
 	{
 		document.body.removeChild(event.target);
+
+  }
+  // https://groups.google.com/forum/#!topic/blockly/NDlC-l6DLEM
+  // TODO: Clean up and finalize save and restore
+  function save() {
+    var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+    
+    localStorage.setItem("blockly.xml", xmlText);
+  }
+  function restore() {
+    var xmlText = localStorage.getItem("blockly.xml");
+    if (xmlText) {
+        Blockly.mainWorkspace.clear();
+        xmlDom = Blockly.Xml.textToDom(xmlText);
+        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
+    }
+  }
+
 	}
 
 	function displayCodeInBrowser()
