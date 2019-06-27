@@ -3,21 +3,25 @@
 // PURPOSE: Implement blocks to map to Minecraft().entity methods.
 
 const ENTITY_ID = 'ENTITY_ID';
+const ENTITY_ID_LABEL = "Entity ID:";
 
 Blockly.Blocks['entity_getPos'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField("get entity position");
-        this.appendDummyInput()
-            .appendField(new Blockly.FieldNumber(), ENTITY_ID);
+
+            .appendField("get entity's position")
+            .appendField(new Blockly.FieldNumber(), 'Entity_ID')
         this.setColour(230);
-        this.setTooltip("Returns entity position as a Vec3 object.");
+        this.setTooltip("Sets entity position to top of given x,y,z coordinates");
         this.setOutput(true, null);
+        this.setColour(230);
+        this.setTooltip("Returns entity direction as a Vec3 object.");
         this.setHelpUrl("");
     }
 };
 Blockly.Python['entity_getPos'] = function (block) {
-    var code = 'mc.entity.getPos(' + block.getFieldValue(ENTITY_ID) +')\n';
+    var code = 'mc.entity.getDirection()\n';
+
     return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -26,13 +30,17 @@ Blockly.Blocks['entity_setPos'] = {
     init: function () {
         this.appendDummyInput()
             .appendField("Set entity's position");
-        this.appendDummyInput()
+        this.appendDummyInput(ENTITY_ID_LABEL)
+            .appendField(ENTITY_ID_LABEL)
             .appendField(new Blockly.FieldNumber(), ENTITY_ID);
-        this.appendDummyInput()
+        this.appendDummyInput("x:")
+            .appendField("x:")
             .appendField(new Blockly.FieldNumber(), 'X');
-        this.appendDummyInput()
+        this.appendDummyInput("y:")
+            .appendField("y:")
             .appendField(new Blockly.FieldNumber(), 'Y');
-        this.appendDummyInput()
+        this.appendDummyInput("z:")
+            .appendField("z:")
             .appendField(new Blockly.FieldNumber(), 'Z');
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -55,7 +63,8 @@ Blockly.Blocks['entity_getTilePos'] = {
     init: function () {
         this.appendDummyInput()
             .appendField("Get Entity Tile Position");
-        this.appendDummyInput()
+        this.appendDummyInput(ENTITY_ID_LABEL)
+            .appendField(ENTITY_ID_LABEL)
             .appendField(new Blockly.FieldNumber(), ENTITY_ID);
         this.setColour(230);
         this.setTooltip("Gets entity tile position to top of given x,y,z coordinates");
@@ -74,13 +83,17 @@ Blockly.Blocks['entity_setTilePos'] = {
     init: function () {
         this.appendDummyInput()
             .appendField("Set entity tile position");
-        this.appendDummyInput()
+        this.appendDummyInput(ENTITY_ID_LABEL)
+            .appendField(ENTITY_ID_LABEL)
             .appendField(new Blockly.FieldNumber(), ENTITY_ID);
-        this.appendDummyInput()
+        this.appendDummyInput("x:")
+            .appendField("x:")
             .appendField(new Blockly.FieldNumber(), 'X');
-        this.appendDummyInput()
+        this.appendDummyInput("y:")
+            .appendField("y:")
             .appendField(new Blockly.FieldNumber(), 'Y');
-        this.appendDummyInput()
+        this.appendDummyInput("z:")
+            .appendField("z:")
             .appendField(new Blockly.FieldNumber(), 'Z');
         this.setColour(230);
         this.setTooltip("Sets entity position to top of given x,y,z coordinates");
@@ -101,9 +114,10 @@ Blockly.Python['entity_setTilePos'] = function (block) {
 Blockly.Blocks['entity_getRotation'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField("Get Entity Rotation.");
-        this.appendDummyInput()
-            .appendField(new Blockly.FieldNumber(), 'Entity_ID');
+            .appendField("Get Entity Rotation");
+        this.appendDummyInput(ENTITY_ID_LABEL)
+            .appendField(ENTITY_ID_LABEL)
+            .appendField(new Blockly.FieldNumber(), ENTITY_ID);
         this.setOutput(true, null);
         this.setColour(230);
         this.setTooltip("Get entity rotation as a floating point value.");
@@ -120,7 +134,8 @@ Blockly.Blocks['entity_getPitch'] = {
     init: function () {
         this.appendDummyInput()
             .appendField("Get Entity Pitch");
-        this.appendDummyInput("Entity ID")
+        this.appendDummyInput(ENTITY_ID_LABEL)
+            .appendField(ENTITY_ID_LABEL)
             .appendField(new Blockly.FieldNumber(), ENTITY_ID);
         this.setColour(230);
         this.setOutput(true, null);
@@ -139,7 +154,8 @@ Blockly.Blocks['entity_getDirection'] = {
     init: function () {
         this.appendDummyInput()
             .appendField("Get Entity Direction");
-        this.appendDummyInput("Entity ID")
+        this.appendDummyInput(ENTITY_ID_LABEL)
+            .appendField(ENTITY_ID_LABEL)
             .appendField(new Blockly.FieldNumber(), ENTITY_ID);
         this.setOutput(true, null);
         this.setTooltip("Returns entity direction as a Vec3 object.");
