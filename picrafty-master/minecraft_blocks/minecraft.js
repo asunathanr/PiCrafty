@@ -475,7 +475,7 @@ function addVectorInput(block) {
     var xCheck = new Blockly.FieldCheckbox("FALSE", function(xChecked) {
         block.sourceBlock_.updateShape_(xChecked);
     });
-};
+}
 
 // replace vector input with manual vector coordinates for cube
 function addVectorCoordinatesCube(block) {

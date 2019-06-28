@@ -5,22 +5,30 @@
 const ENTITY_ID = 'ENTITY_ID';
 const ENTITY_ID_LABEL = "Entity ID:";
 
-Blockly.Blocks['entity_getPos'] = {
-    init: function () {
-        this.appendDummyInput()
 
-            .appendField("get entity's position")
-            .appendField(new Blockly.FieldNumber(), 'Entity_ID')
-        this.setColour(230);
-        this.setTooltip("Sets entity position to top of given x,y,z coordinates");
-        this.setOutput(true, null);
-        this.setColour(230);
-        this.setTooltip("Returns entity direction as a Vec3 object.");
-        this.setHelpUrl("");
+// BLOCK:  mc.entity.getPos()
+Blockly.defineBlocksWithJsonArray([
+    {
+        "type": "entity_getPos",
+        "message0": "Get entity position",
+        "message1": ENTITY_ID_LABEL + "%1",
+        "args1": [
+            {
+                "type": "field_input",
+                "name": ENTITY_ID,
+                "text": "0"
+            }
+        ],
+        "output": "Number",
+        "colour": BLOCK_COLOR,
+        "tooltip": "Returns entity position as a Vec3 object.",
+        "helpUrl": "documentation/index.html"
     }
-};
+]);
 Blockly.Python['entity_getPos'] = function (block) {
-    return ['mc.entity.getDirection()\n', Blockly.Python.ORDER_NONE];
+    let entity_id = block.getFieldValue(ENTITY_ID);
+    let code = "mc.entity.getPos(" + entity_id + ")\n";
+    return [code, Blockly.Python.ORDER_NONE];
 };
 
 
@@ -30,16 +38,16 @@ Blockly.Blocks['entity_setPos'] = {
             .appendField("Set entity's position");
         this.appendDummyInput(ENTITY_ID_LABEL)
             .appendField(ENTITY_ID_LABEL)
-            .appendField(new Blockly.FieldNumber(), ENTITY_ID);
+            .appendField(new Blockly.FieldTextInput("0"), ENTITY_ID);
         this.appendDummyInput("x:")
             .appendField("x:")
-            .appendField(new Blockly.FieldNumber(), 'X');
+            .appendField(new Blockly.FieldTextInput("0"), 'X');
         this.appendDummyInput("y:")
             .appendField("y:")
-            .appendField(new Blockly.FieldNumber(), 'Y');
+            .appendField(new Blockly.FieldTextInput("0"), 'Y');
         this.appendDummyInput("z:")
             .appendField("z:")
-            .appendField(new Blockly.FieldNumber(), 'Z');
+            .appendField(new Blockly.FieldTextInput("0"), 'Z');
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(230);
@@ -83,16 +91,16 @@ Blockly.Blocks['entity_setTilePos'] = {
             .appendField("Set entity tile position");
         this.appendDummyInput(ENTITY_ID_LABEL)
             .appendField(ENTITY_ID_LABEL)
-            .appendField(new Blockly.FieldNumber(), ENTITY_ID);
+            .appendField(new Blockly.FieldTextInput("0"), ENTITY_ID);
         this.appendDummyInput("x:")
             .appendField("x:")
-            .appendField(new Blockly.FieldNumber(), 'X');
+            .appendField(new Blockly.FieldTextInput("0"), 'X');
         this.appendDummyInput("y:")
             .appendField("y:")
-            .appendField(new Blockly.FieldNumber(), 'Y');
+            .appendField(new Blockly.FieldTextInput("0"), 'Y');
         this.appendDummyInput("z:")
             .appendField("z:")
-            .appendField(new Blockly.FieldNumber(), 'Z');
+            .appendField(new Blockly.FieldTextInput("0"), 'Z');
         this.setColour(230);
         this.setTooltip("Sets entity position to top of given x,y,z coordinates");
         this.setPreviousStatement(true, null);
