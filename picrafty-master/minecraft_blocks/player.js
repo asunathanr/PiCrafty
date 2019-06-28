@@ -25,6 +25,7 @@ Blockly.Python['getDirection'] = function (block) {
 };
 
 
+// BLOCK: mc.player.getPitch()
 Blockly.defineBlocksWithJsonArray([
     {
         "type": "getPitch",
@@ -41,52 +42,55 @@ Blockly.Python['getPitch'] = function (block) {
 };
 
 
-Blockly.Blocks['getPos'] = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField("Get Player Position");
-        this.setOutput(true, null);
-        this.setColour(BLOCK_COLOR);
-        this.setTooltip("Returns player position as a Vec3 object.");
-        this.setHelpUrl("");
+Blockly.defineBlocksWithJsonArray([
+    {
+        "type": "getPos",
+        "message0": "Get Player Position",
+        "output": "Number",
+        "colour": BLOCK_COLOR,
+        "tooltip": "Returns player position as a Vec3 object.",
+        "helpUrl": "documentation/index.html"
     }
-};
+]);
 Blockly.Python['getPos'] = function (block) {
     let code = 'mc.player.getPos()\n';
     return [code, Blockly.Python.ORDER_NONE];
 };
 
 
-Blockly.Blocks['getRotation'] = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField("Get Player Rotation");
-        this.setOutput(true, null);
-        this.setColour(BLOCK_COLOR);
-        this.setTooltip("Returns player rotation as a Vec3 object.");
-        this.setHelpUrl("");
+// BLOCK: mc.player.getRotation()
+Blockly.defineBlocksWithJsonArray([
+    {
+        "type": "getRotation",
+        "message0": "Get player rotation",
+        "output": "Number",
+        "colour": BLOCK_COLOR,
+        "tooltip": "Returns player rotation as a Vec3 object.",
+        "helpUrl": "documentation/index.html"
     }
-};
+]);
 Blockly.Python['getRotation'] = function (block) {
     var code = 'mc.player.getRotation()\n';
     return [code, Blockly.Python.ORDER_NONE];
 };
 
 
-Blockly.Blocks['getTilePos'] = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField("Get Tile Position");
-        this.setOutput(true, null);
-        this.setColour(BLOCK_COLOR);
-        this.setTooltip("Returns position of tile player is standing on");
-        this.setHelpUrl("");
+// BLOCK: mc.player.getTilePos()
+Blockly.defineBlocksWithJsonArray([
+    {
+        "type": "getTilePos",
+        "message0": "Get tile position",
+        "output": "Number",
+        "colour": BLOCK_COLOR,
+        "tooltip": "Returns position of tile player is standing on.",
+        "helpUrl": "documentation/index.html"
     }
-};
+]);
 Blockly.Python['getTilePos'] = function (block) {
     var code = 'mc.player.getTilePos()\n';
     return [code, Blockly.Python.ORDER_NONE];
 };
+
 
 const X_NAME = "XES";
 const Y_NAME = "YES";
