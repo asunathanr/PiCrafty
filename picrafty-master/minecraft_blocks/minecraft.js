@@ -547,7 +547,7 @@ function addBlockStandard(block) {
               .appendField("Block ID:")
               .appendField(new Blockly.FieldTextInput("0"), "ID");
     }
-};
+}
 
 
 // replace manual block entries with input type
@@ -558,4 +558,4 @@ function addBlockInput(block) {
     if(block.getInput("BLOCKSTANDARD")) {
         block.removeInput("BLOCKSTANDARD");
     }
-};
+}

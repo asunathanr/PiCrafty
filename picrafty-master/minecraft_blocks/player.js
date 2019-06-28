@@ -9,6 +9,7 @@
 const BLOCK_COLOR = 230;
 
 Blockly.defineBlocksWithJsonArray([
+
     // BLOCK:  mc.player.getDirection()
     {
     "type": "getDirection",
@@ -99,8 +100,6 @@ const X_FIELD = "X";
 const Y_FIELD = "Y";
 const Z_FIELD = "Z";
 
-const VECTOR_NAMES = [X_NAME, Y_NAME, Z_NAME];
-
 Blockly.Blocks['setPos'] = {
     init: function () {
         const INPUT_TYPES = [["standard", "STANDARD"], ["vec3", "VEC3"]];
@@ -149,17 +148,19 @@ Blockly.Blocks['setPos'] = {
             if (vecInput === "VEC3") {  // if the vec3 option has been selected
                 addVectorInput(this);
                 addBlockInput(this);
-
             } else if (vecInput === "STANDARD") { // if the standard option has been selected
                 addVectorCoordinatesSingle(this);
                 addBlockInput(this);
-
             }
         }
     },
 };
 Blockly.Python['setPos'] = function (block) {
-    let arguments = block.getFieldValue(X_FIELD) + ',' + block.getFieldValue(Y_FIELD) + ',' + block.getFieldValue(Z_FIELD);
+    let arguments = [
+        block.getFieldValue(X_FIELD),
+        block.getFieldValue(Y_FIELD),
+        block.getFieldValue(Z_FIELD)
+    ].join(', ');
     return 'mc.player.setPos(' + arguments + ')\n';
 };
 
