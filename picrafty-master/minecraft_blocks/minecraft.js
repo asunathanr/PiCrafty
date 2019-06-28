@@ -475,7 +475,7 @@ function addVectorInput(block) {
     var xCheck = new Blockly.FieldCheckbox("FALSE", function(xChecked) {
         block.sourceBlock_.updateShape_(xChecked);
     });
-};
+}
 
 // replace vector input with manual vector coordinates for cube
 function addVectorCoordinatesCube(block) {
@@ -547,7 +547,7 @@ function addBlockStandard(block) {
               .appendField("Block ID:")
               .appendField(new Blockly.FieldTextInput("0"), "ID");
     }
-};
+}
 
 
 // replace manual block entries with input type
@@ -558,4 +558,4 @@ function addBlockInput(block) {
     if(block.getInput("BLOCKSTANDARD")) {
         block.removeInput("BLOCKSTANDARD");
     }
-};
+}

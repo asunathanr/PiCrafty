@@ -8,8 +8,9 @@
 
 const BLOCK_COLOR = 230;
 
-// BLOCK:  mc.player.getDirection()
 Blockly.defineBlocksWithJsonArray([
+
+    // BLOCK:  mc.player.getDirection()
     {
     "type": "getDirection",
     "message0": 'Get player direction',
@@ -17,16 +18,9 @@ Blockly.defineBlocksWithJsonArray([
     "colour": BLOCK_COLOR,
     "tooltip": "Returns player direction as a Vec3 object.",
     "helpUrl": "documentation/index.html"
-    }
-]);
-Blockly.Python['getDirection'] = function (block) {
-    let code = 'mc.player.getDirection()\n';
-    return [code, Blockly.Python.ORDER_NONE];
-};
+    },
 
-
-// BLOCK: mc.player.getPitch()
-Blockly.defineBlocksWithJsonArray([
+    // BLOCK: mc.player.getPitch()
     {
         "type": "getPitch",
         "message0": "Get Player Pitch",
@@ -34,15 +28,9 @@ Blockly.defineBlocksWithJsonArray([
         "colour": BLOCK_COLOR,
         "tooltip": "Returns player pitch as a Vec3 object.",
         "helpUrl": "documentation/index.html"
-    }
-]);
-Blockly.Python['getPitch'] = function (block) {
-    let code = 'mc.player.getPitch()\n';
-    return [code, Blockly.Python.ORDER_NONE];
-};
+    },
 
-
-Blockly.defineBlocksWithJsonArray([
+    // BLOCK: mc.player.getPos()
     {
         "type": "getPos",
         "message0": "Get Player Position",
@@ -50,16 +38,9 @@ Blockly.defineBlocksWithJsonArray([
         "colour": BLOCK_COLOR,
         "tooltip": "Returns player position as a Vec3 object.",
         "helpUrl": "documentation/index.html"
-    }
-]);
-Blockly.Python['getPos'] = function (block) {
-    let code = 'mc.player.getPos()\n';
-    return [code, Blockly.Python.ORDER_NONE];
-};
+    },
 
-
-// BLOCK: mc.player.getRotation()
-Blockly.defineBlocksWithJsonArray([
+    // BLOCK: mc.player.getRotation()
     {
         "type": "getRotation",
         "message0": "Get player rotation",
@@ -67,16 +48,9 @@ Blockly.defineBlocksWithJsonArray([
         "colour": BLOCK_COLOR,
         "tooltip": "Returns player rotation as a Vec3 object.",
         "helpUrl": "documentation/index.html"
-    }
-]);
-Blockly.Python['getRotation'] = function (block) {
-    var code = 'mc.player.getRotation()\n';
-    return [code, Blockly.Python.ORDER_NONE];
-};
+    },
 
-
-// BLOCK: mc.player.getTilePos()
-Blockly.defineBlocksWithJsonArray([
+    // BLOCK: mc.player.getTilePos()
     {
         "type": "getTilePos",
         "message0": "Get tile position",
@@ -86,6 +60,32 @@ Blockly.defineBlocksWithJsonArray([
         "helpUrl": "documentation/index.html"
     }
 ]);
+
+
+Blockly.Python['getDirection'] = function (block) {
+    let code = 'mc.player.getDirection()\n';
+    return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+Blockly.Python['getPitch'] = function (block) {
+    let code = 'mc.player.getPitch()\n';
+    return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+Blockly.Python['getPos'] = function (block) {
+    let code = 'mc.player.getPos()\n';
+    return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+Blockly.Python['getRotation'] = function (block) {
+    var code = 'mc.player.getRotation()\n';
+    return [code, Blockly.Python.ORDER_NONE];
+};
+
+
 Blockly.Python['getTilePos'] = function (block) {
     var code = 'mc.player.getTilePos()\n';
     return [code, Blockly.Python.ORDER_NONE];
@@ -99,8 +99,6 @@ const Z_NAME = "ZES";
 const X_FIELD = "X";
 const Y_FIELD = "Y";
 const Z_FIELD = "Z";
-
-const VECTOR_NAMES = [X_NAME, Y_NAME, Z_NAME];
 
 Blockly.Blocks['setPos'] = {
     init: function () {
@@ -150,17 +148,19 @@ Blockly.Blocks['setPos'] = {
             if (vecInput === "VEC3") {  // if the vec3 option has been selected
                 addVectorInput(this);
                 addBlockInput(this);
-
             } else if (vecInput === "STANDARD") { // if the standard option has been selected
                 addVectorCoordinatesSingle(this);
                 addBlockInput(this);
-
             }
         }
     },
 };
 Blockly.Python['setPos'] = function (block) {
-    let arguments = block.getFieldValue(X_FIELD) + ',' + block.getFieldValue(Y_FIELD) + ',' + block.getFieldValue(Z_FIELD);
+    let arguments = [
+        block.getFieldValue(X_FIELD),
+        block.getFieldValue(Y_FIELD),
+        block.getFieldValue(Z_FIELD)
+    ].join(', ');
     return 'mc.player.setPos(' + arguments + ')\n';
 };
 
