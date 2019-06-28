@@ -163,6 +163,7 @@ Blockly.Blocks['entity_setTilePos'] = {
     }
 };
 
+
 Blockly.Python['entity_setTilePos'] = function (block) {
     let entityId = block.getField(ENTITY_ID);
     let X = block.getFieldValue('X');
@@ -172,12 +173,10 @@ Blockly.Python['entity_setTilePos'] = function (block) {
 };
 
 
-
 Blockly.Python['entity_getRotation'] = function (block) {
     let code = 'mc.entity.getRotation(' + block.getFieldValue(ENTITY_ID) + ')\n';
     return [code, Blockly.Python.ORDER_NONE];
 };
-
 
 
 Blockly.Python['entity_getPitch'] = function (block) {
@@ -185,7 +184,6 @@ Blockly.Python['entity_getPitch'] = function (block) {
     let code = 'mc.entity.getPitch(' + entityId + '\n';
     return [code, Blockly.Python.ORDER_NONE];
 };
-
 
 
 Blockly.Python['entity_getDirection'] = function (block) {
