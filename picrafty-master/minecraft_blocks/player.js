@@ -8,8 +8,8 @@
 
 const BLOCK_COLOR = 230;
 
-// BLOCK:  mc.player.getDirection()
 Blockly.defineBlocksWithJsonArray([
+    // BLOCK:  mc.player.getDirection()
     {
     "type": "getDirection",
     "message0": 'Get player direction',
@@ -17,16 +17,9 @@ Blockly.defineBlocksWithJsonArray([
     "colour": BLOCK_COLOR,
     "tooltip": "Returns player direction as a Vec3 object.",
     "helpUrl": "documentation/index.html"
-    }
-]);
-Blockly.Python['getDirection'] = function (block) {
-    let code = 'mc.player.getDirection()\n';
-    return [code, Blockly.Python.ORDER_NONE];
-};
+    },
 
-
-// BLOCK: mc.player.getPitch()
-Blockly.defineBlocksWithJsonArray([
+    // BLOCK: mc.player.getPitch()
     {
         "type": "getPitch",
         "message0": "Get Player Pitch",
@@ -34,15 +27,9 @@ Blockly.defineBlocksWithJsonArray([
         "colour": BLOCK_COLOR,
         "tooltip": "Returns player pitch as a Vec3 object.",
         "helpUrl": "documentation/index.html"
-    }
-]);
-Blockly.Python['getPitch'] = function (block) {
-    let code = 'mc.player.getPitch()\n';
-    return [code, Blockly.Python.ORDER_NONE];
-};
+    },
 
-
-Blockly.defineBlocksWithJsonArray([
+    // BLOCK: mc.player.getPos()
     {
         "type": "getPos",
         "message0": "Get Player Position",
@@ -50,16 +37,9 @@ Blockly.defineBlocksWithJsonArray([
         "colour": BLOCK_COLOR,
         "tooltip": "Returns player position as a Vec3 object.",
         "helpUrl": "documentation/index.html"
-    }
-]);
-Blockly.Python['getPos'] = function (block) {
-    let code = 'mc.player.getPos()\n';
-    return [code, Blockly.Python.ORDER_NONE];
-};
+    },
 
-
-// BLOCK: mc.player.getRotation()
-Blockly.defineBlocksWithJsonArray([
+    // BLOCK: mc.player.getRotation()
     {
         "type": "getRotation",
         "message0": "Get player rotation",
@@ -67,16 +47,9 @@ Blockly.defineBlocksWithJsonArray([
         "colour": BLOCK_COLOR,
         "tooltip": "Returns player rotation as a Vec3 object.",
         "helpUrl": "documentation/index.html"
-    }
-]);
-Blockly.Python['getRotation'] = function (block) {
-    var code = 'mc.player.getRotation()\n';
-    return [code, Blockly.Python.ORDER_NONE];
-};
+    },
 
-
-// BLOCK: mc.player.getTilePos()
-Blockly.defineBlocksWithJsonArray([
+    // BLOCK: mc.player.getTilePos()
     {
         "type": "getTilePos",
         "message0": "Get tile position",
@@ -86,6 +59,32 @@ Blockly.defineBlocksWithJsonArray([
         "helpUrl": "documentation/index.html"
     }
 ]);
+
+
+Blockly.Python['getDirection'] = function (block) {
+    let code = 'mc.player.getDirection()\n';
+    return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+Blockly.Python['getPitch'] = function (block) {
+    let code = 'mc.player.getPitch()\n';
+    return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+Blockly.Python['getPos'] = function (block) {
+    let code = 'mc.player.getPos()\n';
+    return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+Blockly.Python['getRotation'] = function (block) {
+    var code = 'mc.player.getRotation()\n';
+    return [code, Blockly.Python.ORDER_NONE];
+};
+
+
 Blockly.Python['getTilePos'] = function (block) {
     var code = 'mc.player.getTilePos()\n';
     return [code, Blockly.Python.ORDER_NONE];
