@@ -25,16 +25,16 @@ Blockly.Python['getDirection'] = function (block) {
 };
 
 
-Blockly.Blocks['getPitch'] = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField("Get Player Pitch");
-        this.setOutput(true, null);
-        this.setColour(BLOCK_COLOR);
-        this.setTooltip("Returns player position as a Vec3 object.");
-        this.setHelpUrl("");
+Blockly.defineBlocksWithJsonArray([
+    {
+        "type": "getPitch",
+        "message0": "Get Player Pitch",
+        "output": "Number",
+        "colour": BLOCK_COLOR,
+        "tooltip": "Returns player pitch as a Vec3 object.",
+        "helpUrl": "documentation/index.html"
     }
-};
+]);
 Blockly.Python['getPitch'] = function (block) {
     let code = 'mc.player.getPitch()\n';
     return [code, Blockly.Python.ORDER_NONE];
@@ -112,13 +112,13 @@ Blockly.Blocks['setPos'] = {
 
         this.appendDummyInput(X_NAME)
             .appendField('x:')
-            .appendField(new Blockly.FieldNumber(), X_NAME);
+            .appendField(new Blockly.FieldTextInput("0"), X_NAME);
         this.appendDummyInput(Y_NAME)
             .appendField('y:')
-            .appendField(new Blockly.FieldNumber(), Y_NAME);
+            .appendField(new Blockly.FieldTextInput("0"), Y_NAME);
         this.appendDummyInput(Z_NAME)
             .appendField('z:')
-            .appendField(new Blockly.FieldNumber(), Z_NAME);
+            .appendField(new Blockly.FieldTextInput("0"), Z_NAME);
 
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -227,8 +227,6 @@ Blockly.Python['setTilePos'] = function (block) {
 // Had to set key as player_setting since a setting key already exists.
 Blockly.Blocks['player_setting'] = {
     init: function () {
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
         this.appendDummyInput("Player Setting")
             .appendField("Set player settings");
         this.appendDummyInput("Setting Name: ")
@@ -237,6 +235,8 @@ Blockly.Blocks['player_setting'] = {
         this.appendDummyInput("Status: ")
             .appendField("Status: ")
             .appendField(new Blockly.FieldCheckbox(), "STATUS");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
         this.setColour(BLOCK_COLOR);
         this.setTooltip("Sets a particular setting to be either true or false. ");
         this.setHelpUrl("");
