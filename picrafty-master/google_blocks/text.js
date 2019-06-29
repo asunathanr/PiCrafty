@@ -19,7 +19,7 @@
  */
 
 /**
- * @fileoverview Text blocks for Blockly.
+ * @fileoverview Text google_blocks for Blockly.
  * @author fraser@google.com (Neil Fraser)
  */
 'use strict';
@@ -32,7 +32,7 @@ goog.require('Blockly');
 
 
 /**
- * Unused constant for the common HSV hue for all blocks in this category.
+ * Unused constant for the common HSV hue for all google_blocks in this category.
  * @deprecated Use Blockly.Msg['TEXTS_HUE']. (2018 April 5)
  */
 Blockly.Constants.Text.HUE = 160;
@@ -619,7 +619,7 @@ Blockly.Constants.Text.QUOTE_IMAGE_MIXIN = {
 
   /**
    * A helper function that generates a FieldImage of an opening or
-   * closing double quote. The selected quote will be adapted for RTL blocks.
+   * closing double quote. The selected quote will be adapted for RTL google_blocks.
    * @param {boolean} open If the image should be open quote (“ in LTR).
    *                       Otherwise, a closing quote is used (” in LTR).
    * @return {!Blockly.FieldImage} The new field.
@@ -714,13 +714,13 @@ Blockly.Constants.Text.TEXT_JOIN_MUTATOR_MIXIN = {
     }
     this.itemCount_ = connections.length;
     this.updateShape_();
-    // Reconnect any child blocks.
+    // Reconnect any child google_blocks.
     for (var i = 0; i < this.itemCount_; i++) {
       Blockly.Mutator.reconnect(connections[i], this, 'ADD' + i);
     }
   },
   /**
-   * Store pointers to any connected child blocks.
+   * Store pointers to any connected child google_blocks.
    * @param {!Blockly.Block} containerBlock Root block in mutator.
    * @this Blockly.Block
    */

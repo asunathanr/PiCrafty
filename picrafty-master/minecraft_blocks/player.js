@@ -1,6 +1,6 @@
 // FILE: player.js
 // AUTHOR: Richie Burch; Nathan Robertson
-// PURPOSE: Implement blocks for all methods in the Minecraft.Player class
+// PURPOSE: Implement google_blocks for all methods in the Minecraft.Player class
 
 
 // Each block is implemented in two parts: First the new block is added to the Block associative array.
@@ -253,7 +253,7 @@ Blockly.Python['player_setting'] = function (block) {
 };
 
 
-// functions that are reused to shape blocks in multiple mutators
+// functions that are reused to shape google_blocks in multiple mutators
 
 // replace manual vector coordinates with vector input
 function addVectorInput(block) {

@@ -19,7 +19,7 @@
  */
 
 /**
- * @fileoverview Variable blocks for Blockly.
+ * @fileoverview Variable google_blocks for Blockly.
 
  * This file is scraped to extract a .json file of block definitions. The array
  * passed to defineBlocksWithJsonArray(..) must be strict JSON: double quotes
@@ -36,7 +36,7 @@ goog.require('Blockly');
 
 
 /**
- * Unused constant for the common HSV hue for all blocks in this category.
+ * Unused constant for the common HSV hue for all google_blocks in this category.
  * @deprecated Use Blockly.Msg['VARIABLES_DYNAMIC_HUE']. (2018 April 5)
  */
 Blockly.Constants.VariablesDynamic.HUE = 310;
@@ -81,9 +81,9 @@ Blockly.defineBlocksWithJsonArray([ // BEGIN JSON EXTRACT
 ]); // END JSON EXTRACT (Do not delete this comment.)
 
 /**
- * Mixin to add context menu items to create getter/setter blocks for this
+ * Mixin to add context menu items to create getter/setter google_blocks for this
  * setter/getter.
- * Used by blocks 'variables_set_dynamic' and 'variables_get_dynamic'.
+ * Used by google_blocks 'variables_set_dynamic' and 'variables_get_dynamic'.
  * @mixin
  * @augments Blockly.Block
  * @package
@@ -96,7 +96,7 @@ Blockly.Constants.VariablesDynamic.CUSTOM_CONTEXT_MENU_VARIABLE_GETTER_SETTER_MI
    * @this Blockly.Block
    */
   customContextMenu: function(options) {
-    // Getter blocks have the option to create a setter block, and vice versa.
+    // Getter google_blocks have the option to create a setter block, and vice versa.
     if (!this.isInFlyout) {
       var opposite_type;
       var contextMenuMsg;

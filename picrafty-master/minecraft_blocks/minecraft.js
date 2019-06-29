@@ -1,6 +1,6 @@
 // FILE: minecraft.js
 // AUTHOR: Richie Burch; Nathan Robertson
-// PURPOSE: Implement blocks for all methods found in the Minecraft class
+// PURPOSE: Implement google_blocks for all methods found in the Minecraft class
 
 
 Blockly.Blocks['minecraft_create'] = {
@@ -77,7 +77,7 @@ Blockly.Blocks['getBlocks'] = {
             .appendField(new Blockly.FieldTextInput("1"), "Z1COORD");
         this.setOutput(true, null);
         this.setColour(230);
-        this.setTooltip("Gets types of blocks in a cuboid. Returns a list of ints.");
+        this.setTooltip("Gets types of google_blocks in a cuboid. Returns a list of ints.");
         this.setHelpUrl("");
     }
 };
@@ -274,7 +274,7 @@ Blockly.Blocks['setBlocks'] = {
 
         // initial state of block
         this.appendDummyInput()
-            .appendField("Set cube of blocks.")
+            .appendField("Set cube of google_blocks.")
             .appendField(dropdown, "CONFIG");
         this.appendDummyInput("XES")
             .appendField("x0:")
@@ -455,7 +455,7 @@ Blockly.Python['saveCheckpoint'] = function (block) {
     return 'mc.saveCheckpoint()\n';
 };
 
-// functions that are reused to shape blocks in multiple mutators
+// functions that are reused to shape google_blocks in multiple mutators
 
 // replace manual vector coordinates with vector input
 function addVectorInput(block) {

@@ -19,7 +19,7 @@
  */
 
 /**
- * @fileoverview Variable blocks for Blockly.
+ * @fileoverview Variable google_blocks for Blockly.
 
  * This file is scraped to extract a .json file of block definitions. The array
  * passed to defineBlocksWithJsonArray(..) must be strict JSON: double quotes
@@ -37,7 +37,7 @@ goog.require('Blockly');
 
 
 /**
- * Unused constant for the common HSV hue for all blocks in this category.
+ * Unused constant for the common HSV hue for all google_blocks in this category.
  * @deprecated Use Blockly.Msg['VARIABLES_HUE']. (2018 April 5)
  */
 Blockly.Constants.Variables.HUE = 330;
@@ -85,9 +85,9 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 ]);  // END JSON EXTRACT (Do not delete this comment.)
 
 /**
- * Mixin to add context menu items to create getter/setter blocks for this
+ * Mixin to add context menu items to create getter/setter google_blocks for this
  * setter/getter.
- * Used by blocks 'variables_set' and 'variables_get'.
+ * Used by google_blocks 'variables_set' and 'variables_get'.
  * @mixin
  * @augments Blockly.Block
  * @package
@@ -101,7 +101,7 @@ Blockly.Constants.Variables.CUSTOM_CONTEXT_MENU_VARIABLE_GETTER_SETTER_MIXIN = {
    */
   customContextMenu: function(options) {
     if (!this.isInFlyout){
-      // Getter blocks have the option to create a setter block, and vice versa.
+      // Getter google_blocks have the option to create a setter block, and vice versa.
       if (this.type == 'variables_get') {
         var opposite_type = 'variables_set';
         var contextMenuMsg = Blockly.Msg['VARIABLES_GET_CREATE_SET'];
@@ -121,7 +121,7 @@ Blockly.Constants.Variables.CUSTOM_CONTEXT_MENU_VARIABLE_GETTER_SETTER_MIXIN = {
       xmlBlock.appendChild(xmlField);
       option.callback = Blockly.ContextMenu.callbackFactory(this, xmlBlock);
       options.push(option);
-      // Getter blocks have the option to rename or delete that variable.
+      // Getter google_blocks have the option to rename or delete that variable.
     } else {
       if (this.type == 'variables_get' || this.type == 'variables_get_reporter'){
         var renameOption = {

@@ -19,7 +19,7 @@
  */
 
 /**
- * @fileoverview Logic blocks for Blockly.
+ * @fileoverview Logic google_blocks for Blockly.
  *
  * This file is scraped to extract a .json file of block definitions. The array
  * passed to defineBlocksWithJsonArray(..) must be strict JSON: double quotes
@@ -36,7 +36,7 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly');
 
 /**
- * Unused constant for the common HSV hue for all blocks in this category.
+ * Unused constant for the common HSV hue for all google_blocks in this category.
  * @deprecated Use Blockly.Msg['LOGIC_HUE']. (2018 April 5)
  */
 Blockly.Constants.Logic.HUE = 210;
@@ -238,7 +238,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   }
 ]);  // END JSON EXTRACT (Do not delete this comment.)
 
-Blockly.defineBlocksWithJsonArray([ // Mutator blocks. Do not extract.
+Blockly.defineBlocksWithJsonArray([ // Mutator google_blocks. Do not extract.
   // Block representing the if statement in the controls_if mutator.
   {
     "type": "controls_if_if",
@@ -271,7 +271,7 @@ Blockly.defineBlocksWithJsonArray([ // Mutator blocks. Do not extract.
 
 /**
  * Tooltip text, keyed by block OP value. Used by logic_compare and
- * logic_operation blocks.
+ * logic_operation google_blocks.
  * @see {Blockly.Extensions#buildTooltipForDropdown}
  * @package
  * @readonly
@@ -295,7 +295,7 @@ Blockly.Extensions.register('logic_op_tooltip',
         'OP', Blockly.Constants.Logic.TOOLTIPS_BY_OP));
 
 /**
- * Mutator methods added to controls_if blocks.
+ * Mutator methods added to controls_if google_blocks.
  * @mixin
  * @augments Blockly.Block
  * @package
@@ -387,12 +387,12 @@ Blockly.Constants.Logic.CONTROLS_IF_MUTATOR_MIXIN = {
           clauseBlock.nextConnection.targetBlock();
     }
     this.updateShape_();
-    // Reconnect any child blocks.
+    // Reconnect any child google_blocks.
     this.reconnectChildBlocks_(valueConnections, statementConnections,
         elseStatementConnection);
   },
   /**
-   * Store pointers to any connected child blocks.
+   * Store pointers to any connected child google_blocks.
    * @param {!Blockly.Block} containerBlock Root block in mutator.
    * @this Blockly.Block
    */
@@ -423,7 +423,7 @@ Blockly.Constants.Logic.CONTROLS_IF_MUTATOR_MIXIN = {
     }
   },
   /**
-   * Reconstructs the block with all child blocks attached.
+   * Reconstructs the block with all child google_blocks attached.
    */
   rebuildShape_: function() {
     var valueConnections = [null];
@@ -475,7 +475,7 @@ Blockly.Constants.Logic.CONTROLS_IF_MUTATOR_MIXIN = {
     }
   },
   /**
-   * Reconnects child blocks.
+   * Reconnects child google_blocks.
    * @param {!Array<?Blockly.RenderedConnection>} valueConnections List of value
    * connectsions for if input.
    * @param {!Array<?Blockly.RenderedConnection>} statementConnections List of
@@ -498,7 +498,7 @@ Blockly.Extensions.registerMutator('controls_if_mutator',
     ['controls_if_elseif', 'controls_if_else']);
 /**
  * "controls_if" extension function. Adds mutator, shape updating methods, and
- * dynamic tooltip to "controls_if" blocks.
+ * dynamic tooltip to "controls_if" google_blocks.
  * @this Blockly.Block
  * @package
  */
@@ -543,7 +543,7 @@ Blockly.Constants.Logic.LOGIC_COMPARE_ONCHANGE_MIXIN = {
 
     var blockA = this.getInputTargetBlock('A');
     var blockB = this.getInputTargetBlock('B');
-    // Disconnect blocks that existed prior to this change if they don't match.
+    // Disconnect google_blocks that existed prior to this change if they don't match.
     if (blockA && blockB &&
         !blockA.outputConnection.checkType_(blockB.outputConnection)) {
       // Mismatch between two inputs.  Revert the block connections,
@@ -575,7 +575,7 @@ Blockly.Constants.Logic.LOGIC_COMPARE_ONCHANGE_MIXIN = {
 
 /**
  * "logic_compare" extension function. Adds type left and right side type
- * checking to "logic_compare" blocks.
+ * checking to "logic_compare" google_blocks.
  * @this Blockly.Block
  * @package
  * @readonly
@@ -608,7 +608,7 @@ Blockly.Constants.Logic.LOGIC_TERNARY_ONCHANGE_MIXIN = {
     var blockA = this.getInputTargetBlock('THEN');
     var blockB = this.getInputTargetBlock('ELSE');
     var parentConnection = this.outputConnection.targetConnection;
-    // Disconnect blocks that existed prior to this change if they don't match.
+    // Disconnect google_blocks that existed prior to this change if they don't match.
     if ((blockA || blockB) && parentConnection) {
       for (var i = 0; i < 2; i++) {
         var block = (i == 1) ? blockA : blockB;
