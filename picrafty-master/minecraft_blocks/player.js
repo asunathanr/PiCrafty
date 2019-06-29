@@ -8,6 +8,14 @@
 
 const BLOCK_COLOR = 230;
 
+const X_NAME = "XES";
+const Y_NAME = "YES";
+const Z_NAME = "ZES";
+
+const X_FIELD = "X";
+const Y_FIELD = "Y";
+const Z_FIELD = "Z";
+
 Blockly.defineBlocksWithJsonArray([
 
     // BLOCK:  mc.player.getDirection()
@@ -62,43 +70,24 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 
-Blockly.Python['getDirection'] = function (block) {
-    let code = 'mc.player.getDirection()\n';
-    return [code, Blockly.Python.ORDER_NONE];
+// Had to set key as player_setting since a setting key already exists.
+Blockly.Blocks['player_setting'] = {
+    init: function () {
+        this.appendDummyInput("Player Setting")
+            .appendField("Set player settings");
+        this.appendDummyInput("Setting Name: ")
+            .appendField('Setting:')
+            .appendField(new Blockly.FieldTextInput(), "SETTING");
+        this.appendDummyInput("Status: ")
+            .appendField("Status: ")
+            .appendField(new Blockly.FieldCheckbox(), "STATUS");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(BLOCK_COLOR);
+        this.setTooltip("Sets a particular setting to be either true or false. ");
+        this.setHelpUrl("");
+    }
 };
-
-
-Blockly.Python['getPitch'] = function (block) {
-    let code = 'mc.player.getPitch()\n';
-    return [code, Blockly.Python.ORDER_NONE];
-};
-
-
-Blockly.Python['getPos'] = function (block) {
-    let code = 'mc.player.getPos()\n';
-    return [code, Blockly.Python.ORDER_NONE];
-};
-
-
-Blockly.Python['getRotation'] = function (block) {
-    var code = 'mc.player.getRotation()\n';
-    return [code, Blockly.Python.ORDER_NONE];
-};
-
-
-Blockly.Python['getTilePos'] = function (block) {
-    var code = 'mc.player.getTilePos()\n';
-    return [code, Blockly.Python.ORDER_NONE];
-};
-
-
-const X_NAME = "XES";
-const Y_NAME = "YES";
-const Z_NAME = "ZES";
-
-const X_FIELD = "X";
-const Y_FIELD = "Y";
-const Z_FIELD = "Z";
 
 Blockly.Blocks['setPos'] = {
     init: function () {
@@ -114,13 +103,13 @@ Blockly.Blocks['setPos'] = {
 
         this.appendDummyInput(X_NAME)
             .appendField('x:')
-            .appendField(new Blockly.FieldTextInput("0"), X_NAME);
+            .appendField(new Blockly.FieldTextInput("0"), X_FIELD);
         this.appendDummyInput(Y_NAME)
             .appendField('y:')
-            .appendField(new Blockly.FieldTextInput("0"), Y_NAME);
+            .appendField(new Blockly.FieldTextInput("0"), Y_FIELD);
         this.appendDummyInput(Z_NAME)
             .appendField('z:')
-            .appendField(new Blockly.FieldTextInput("0"), Z_NAME);
+            .appendField(new Blockly.FieldTextInput("0"), Z_FIELD);
 
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -155,14 +144,6 @@ Blockly.Blocks['setPos'] = {
         }
     },
 };
-Blockly.Python['setPos'] = function (block) {
-    let arguments = [
-        block.getFieldValue(X_FIELD),
-        block.getFieldValue(Y_FIELD),
-        block.getFieldValue(Z_FIELD)
-    ].join(', ');
-    return 'mc.player.setPos(' + arguments + ')\n';
-};
 
 
 Blockly.Blocks['setTilePos'] = {
@@ -179,13 +160,13 @@ Blockly.Blocks['setTilePos'] = {
 
         this.appendDummyInput(X_NAME)
             .appendField('x:')
-            .appendField(new Blockly.FieldNumber(), X_NAME);
+            .appendField(new Blockly.FieldNumber(), X_FIELD);
         this.appendDummyInput(Y_NAME)
             .appendField('y:')
-            .appendField(new Blockly.FieldNumber(), Y_NAME);
+            .appendField(new Blockly.FieldNumber(), Y_FIELD);
         this.appendDummyInput(Z_NAME)
             .appendField('z:')
-            .appendField(new Blockly.FieldNumber(), Z_NAME);
+            .appendField(new Blockly.FieldNumber(), Z_FIELD);
 
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -222,30 +203,59 @@ Blockly.Blocks['setTilePos'] = {
         }
     },
 };
+
+
+Blockly.Python['getDirection'] = function (block) {
+    let code = 'mc.player.getDirection()\n';
+    return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+Blockly.Python['getPitch'] = function (block) {
+    let code = 'mc.player.getPitch()\n';
+    return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+Blockly.Python['getPos'] = function (block) {
+    let code = 'mc.player.getPos()\n';
+    return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+Blockly.Python['getRotation'] = function (block) {
+    var code = 'mc.player.getRotation()\n';
+    return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+Blockly.Python['getTilePos'] = function (block) {
+    var code = 'mc.player.getTilePos()\n';
+    return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+Blockly.Python['setPos'] = function (block) {
+    let arguments = [
+        block.getFieldValue(X_FIELD),
+        block.getFieldValue(Y_FIELD),
+        block.getFieldValue(Z_FIELD)
+    ].join(', ');
+    return 'mc.player.setPos(' + arguments + ')\n';
+};
+
+
 Blockly.Python['setTilePos'] = function (block) {
-    let arguments = block.getFieldValue('X') + block.getFieldValue('Y') + block.getFieldValue('Z');
+    let arguments = [
+        block.getFieldValue('X'),
+        block.getFieldValue('Y'),
+        block.getFieldValue('Z')
+    ].join(", ");
     return 'mc.player.setTilePos(' + arguments + ')\n';
 };
 
 
-// Had to set key as player_setting since a setting key already exists.
-Blockly.Blocks['player_setting'] = {
-    init: function () {
-        this.appendDummyInput("Player Setting")
-            .appendField("Set player settings");
-        this.appendDummyInput("Setting Name: ")
-            .appendField('Setting:')
-            .appendField(new Blockly.FieldTextInput(), "SETTING");
-        this.appendDummyInput("Status: ")
-            .appendField("Status: ")
-            .appendField(new Blockly.FieldCheckbox(), "STATUS");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(BLOCK_COLOR);
-        this.setTooltip("Sets a particular setting to be either true or false. ");
-        this.setHelpUrl("");
-    }
-};
+
 Blockly.Python['player_setting'] = function (block) {
     let status = "true" ? block.getFieldValue("STATUS").isChecked() : "false";
     let arguments = block.getFieldValue("SETTING") + ',' + status;
