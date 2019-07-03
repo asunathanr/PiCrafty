@@ -56,6 +56,7 @@
 </head>
 
 <body>
+  <!-- table to divide up sections for blockly, buttons, and code in browser -->
   <table>
     <tr>
       <td id="blocklyArea">
@@ -80,7 +81,6 @@
     </tr>
   </table>
   <!-- This is the Div Blockly will render in. size can be adjusted here -->
-  <!-- TODO: Have this Dynamicially set based off browser resolutionn(resziable Demo For example) -->
   <div id="blocklyDiv" style="position: absolute;"></div>
 
   
@@ -88,7 +88,7 @@
  
 
   <!--This defines the toolbox to be given to Blockly.  -->
-  <!--Additional blocks can be added and catogrized.   -->
+  <!--Additional blocks can be added and categorized.   -->
   <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
     <category name="Logic" colour="#5C81A6">
       <block type="controls_if"></block>
@@ -555,12 +555,6 @@
     </category>
   </xml>
 
-  <!-- <script>
-    var demoWorkspace = Blockly.inject('blocklyDiv',
-        {media: 'media' + "\\",
-         toolbox: document.getElementById('toolbox')});
-  </script> -->
-  <!-- this resizes the blockly workspace to the top half of the viewable area -->
   <script>
     var blocklyArea = document.getElementById('blocklyArea');
     var blocklyDiv = document.getElementById('blocklyDiv');
@@ -589,12 +583,6 @@
     Blockly.svgResize(demoWorkspace);
   </script>
 
-<!-- this resizes the code display area to the bottom half of the viewable area-->
-<script>
-var codeDisplayArea = document.getElementById('codeArea');
-
-</script>
-
 <script>
 	function showCode() {
 	// Generate python  code and display it/Save It.
@@ -621,12 +609,13 @@ var codeDisplayArea = document.getElementById('codeArea');
 
 		//Helpful for Debugging
 		//alert(code);
-	}
+  }
+  
 	function destroyClickedElement(event)
 	{
 		document.body.removeChild(event.target);
-
   }
+  
   // https://groups.google.com/forum/#!topic/blockly/NDlC-l6DLEM
   // TODO: Clean up and finalize save and restore
   function save() {
