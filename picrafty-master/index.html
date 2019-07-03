@@ -30,6 +30,9 @@
   <style>
     html, body {
       height: 100%;
+      margin: 0;
+    }
+    body {
       background-color: #fff;
       font-family: sans-serif;
     }
@@ -44,8 +47,10 @@
     #blocklyArea {
       height: 50%;
     }
-    #codeArea {
+    textarea {
       height: 50%;
+      width: 100%;
+      resize:none
     }
   </style>
 </head>
@@ -57,16 +62,21 @@
       <td id="blocklyArea">
       </td>
     </tr>
-    <tr>
+    <tr id="buttons">
+      <td>
       <p>
         <button onclick="showCode()">Show Python Stub</button>
         <button onclick="save()">Save</button>
         <button onclick="restore()">Restore</button>
         <button onclick="displayCodeInBrowser()">View code in browser</button>
     </p>
+  </td>
     </tr>
     <tr>
-      <td id="codeArea">
+      <td id="codeAreaRow">
+        <form>
+          <textarea id="codeArea" style="position:absolute"></textarea>
+        </form>
       </td>
     </tr>
   </table>
@@ -76,7 +86,8 @@
 
   
 
-  <textarea id="codeArea" style="position: relative;"></textarea>
+ 
+
   <!--This defines the toolbox to be given to Blockly.  -->
   <!--Additional blocks can be added and catogrized.   -->
   <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
@@ -550,7 +561,7 @@
         {media: 'media' + "\\",
          toolbox: document.getElementById('toolbox')});
   </script> -->
-
+  <!-- this resizes the blockly workspace to the top half of the viewable area -->
   <script>
     var blocklyArea = document.getElementById('blocklyArea');
     var blocklyDiv = document.getElementById('blocklyDiv');
@@ -579,7 +590,13 @@
     Blockly.svgResize(demoWorkspace);
   </script>
 
-  <script>
+<!-- this resizes the code display area to the bottom half of the viewable area-->
+<script>
+var codeDisplayArea = document.getElementById('codeArea');
+
+</script>
+
+<script>
 	function showCode() {
 	// Generate python  code and display it/Save It.
 	//This helps Blockly avoid getting hung up
