@@ -12,11 +12,6 @@ const ENTITY_ARGS = {
     "name": ENTITY_ID,
     "text": "0"
 };
-<<<<<<< HEAD
-Blockly.Python['entity_getPos'] = function (block) {
-    var code = 'mc.entity.getDirection()\n';
-=======
->>>>>>> develop
 
 
 // JSON Block Layout
