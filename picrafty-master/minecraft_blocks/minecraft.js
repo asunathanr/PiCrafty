@@ -152,7 +152,7 @@ Blockly.defineBlocksWithJsonArray([
     "colour": 230,
     "tooltip": "",
     "helpUrl": ""
-  }
+  },
   // mc.setBlock()
   {
     "type": "setBlock",
@@ -170,7 +170,8 @@ Blockly.defineBlocksWithJsonArray([
         "name": "block"
       }
     ],
-    "output": null,
+    "previousStatement": null,
+    "nextStatement": null,
     "colour": 230,
     "tooltip": "Set a single block.",
     "helpUrl": ""
@@ -229,31 +230,12 @@ Blockly.Python['setBlocks'] = function(block) {
     var value_block = Blockly.Python.valueToCode(block, 'block', Blockly.Python.ORDER_ATOMIC);
     var code = 'mc.setBlocks('+value_vec1+', '+value_vec2+', '+value_block+')\n';
     return code;
-  };
+};
 
 
-Blockly.Python['setBlock'] = function (block) {
-
-    var status = block.getFieldValue('CONFIG');
-
-    if(status === "STANDARD") {
-        var X = block.getFieldValue('X');
-        var Y = block.getFieldValue('Y');
-        var Z = block.getFieldValue('Z');
-        var blockId = block.getFieldValue('blockId');
-        var blockType = block.getFieldValue('blockType');
-        let argumentString = X + ',' + Y + ',' + Z + ',' + blockId + ',' + blockType;
-        var code = 'mc.setBlock(' + argumentString + ')\n';
-        return code;
-    } else if (status === "VEC3") {
-        var varName = Blockly.Python.valueToCode(block, "VEC", Blockly.Python.ORDER_ATOMIC);
-        var blockType = block.getFieldValue("TYPE");
-        var blockId = block.getFieldValue("ID");
-        console.log(varName);
-        let argumentString = varName + ', ' + blockType + ', ' + blockId;
-        var code = 'mc.setBlock(' + argumentString + ')\n';
-        return code;
-    }
-
-   
+  Blockly.Python['setBlock'] = function(block) {
+    var value_vec = Blockly.Python.valueToCode(block, 'vec', Blockly.Python.ORDER_ATOMIC);
+    var value_block = Blockly.Python.valueToCode(block, 'block', Blockly.Python.ORDER_ATOMIC);
+    var code = 'mc.setBlock('+value_vec+', '+value_block+')\n';
+    return code;
 };
