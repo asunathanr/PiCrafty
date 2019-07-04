@@ -147,11 +147,12 @@ Blockly.defineBlocksWithJsonArray([
         "name": "block"
       }
     ],
-    "output": null,
+    "previousStatement": null,
+    "nextStatement": null,
     "colour": 230,
     "tooltip": "",
     "helpUrl": ""
-  },
+  }
   // mc.setBlock()
   {
     "type": "setBlock",
@@ -222,18 +223,13 @@ Blockly.Python['postToChat'] = function (block) {
     return 'mc.postToChat(' + '"' + value_topost + '"' + ')\n';
 };
 
-Blockly.Python['setBlocks'] = function (block) {
-    var x0 = block.getFieldValue('X0');
-    var x1 = block.getFieldValue('X1');
-    var y0 = block.getFieldValue('Y0');
-    var y1 = block.getFieldValue('Y1');
-    var type = block.getFieldValue('TYPE');
-    var z0 = block.getFieldValue('Z0');
-    var z1 = block.getFieldValue('Z1');
-    var id = block.getFieldValue('ID');
-    let aString = x0 + ',' + y0 + ',' + z0 + ',' + x1 + ',' + y1 + ',' + z1 + ',' + type + ',' + id;
-    return 'mc.setBlocks(' + aString + ')\n';
-};
+Blockly.Python['setBlocks'] = function(block) {
+    var value_vec1 = Blockly.Python.valueToCode(block, 'vec1', Blockly.Python.ORDER_ATOMIC);
+    var value_vec2 = Blockly.Python.valueToCode(block, 'vec2', Blockly.Python.ORDER_ATOMIC);
+    var value_block = Blockly.Python.valueToCode(block, 'block', Blockly.Python.ORDER_ATOMIC);
+    var code = 'mc.setBlocks('+value_vec1+', '+value_vec2+', '+value_block+')\n';
+    return code;
+  };
 
 
 Blockly.Python['setBlock'] = function (block) {
