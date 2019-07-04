@@ -217,16 +217,6 @@ Blockly.Python['getPlayerId'] = function (block) {
     return [code, Blockly.Python.ORDER_NONE];
 };
 
-Blockly.Python['getBlockWithData'] = function (block) {
-    var x = block.getFieldValue('X');
-    var y = block.getFieldValue('Y');
-    var z = block.getFieldValue('Z');
-    let aString = x + ',' + y + ',' + z;
-    var code = 'mc.getBlockWithData(' + aString + ')\n';
-    // TODO: Change ORDER_NONE to the correct strength.
-    return [code, Blockly.Python.ORDER_NONE];
-};
-
 Blockly.Python['postToChat'] = function (block) {
     let value_topost = block.getFieldValue('TOPOST');
     return 'mc.postToChat(' + '"' + value_topost + '"' + ')\n';
