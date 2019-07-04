@@ -6,6 +6,7 @@
 // Each block is implemented in two parts: First the new block is added to the Block associative array.
 // Then the appropriate python conversion function is added to the Blockly.Python associative array.
 
+
 const BLOCK_COLOR = 230;
 
 
@@ -158,10 +159,6 @@ Blockly.Python['getTilePos'] = function (block) {
     var code = 'mc.player.getTilePos()\n';
     return [code, Blockly.Python.ORDER_NONE];
 };
-
-
-
-
 
 
 Blockly.Python['player_setting'] = function (block) {
