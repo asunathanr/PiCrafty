@@ -176,12 +176,11 @@ Blockly.defineBlocksWithJsonArray([
   }])
 
 // Code generators
-Blockly.Python['getBlock'] = function (block) {
-    var X = block.getFieldValue('X');
-    var Y = block.getFieldValue('Y');
-    var Z = block.getFieldValue('Z');
-    let argumentString = X + ',' + Y + ',' + Z;
-    var code = 'mc.getBlock(' + argumentString + ')\n';
+Blockly.Python['getBlock'] = function(block) {
+    var value_vec = Blockly.Python.valueToCode(block, 'vec', Blockly.Python.ORDER_ATOMIC);
+    // TODO: Assemble Python into code variable.
+    var code = 'mc.getBlock('+value_vec+')\n';
+    // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
 };
 
