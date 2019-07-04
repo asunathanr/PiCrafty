@@ -99,6 +99,17 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 
+Blockly.Python['setPos'] = function (block) {
+    let arguments = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
+    return 'mc.player.setPos(' + arguments + ')\n';
+};
+
+
+Blockly.Python['setTilePos'] = function (block) {
+    let arguments = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
+    return 'mc.player.setPos(' + arguments + ')\n';
+};
+
 // Had to set key as player_setting since a setting key already exists.
 Blockly.Blocks['player_setting'] = {
     init: function () {
@@ -138,7 +149,7 @@ Blockly.Python['getPos'] = function (block) {
 
 
 Blockly.Python['getRotation'] = function (block) {
-    var code = 'mc.player.getRotation()\n';
+    let code = 'mc.player.getRotation()\n';
     return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -149,16 +160,7 @@ Blockly.Python['getTilePos'] = function (block) {
 };
 
 
-Blockly.Python['setPos'] = function (block) {
-    let arguments = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
-    return 'mc.player.setPos(' + arguments + ')\n';
-};
 
-
-Blockly.Python['setTilePos'] = function (block) {
-    let arguments = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
-    return 'mc.player.setPos(' + arguments + ')\n';
-};
 
 
 
