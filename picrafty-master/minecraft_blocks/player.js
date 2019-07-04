@@ -166,3 +166,16 @@ Blockly.Python['player_setting'] = function (block) {
     let arguments = block.getFieldValue("SETTING") + ',' + status;
     return 'mc.player.setting(' + arguments + ')\n';
 };
+
+
+
+// HELPERS
+// TODO: Write makeFunctionCall body
+/**
+ * @function makeFunctionCall
+ * @param functionName
+ * @param arguments
+ */
+let makeFunctionCall = (functionName, arguments) => {
+
+};

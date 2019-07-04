@@ -61,7 +61,6 @@ Blockly.defineBlocksWithJsonArray([
                 "type": "input_value",
                 "name": "CURRENT_MCBLOCK",
             },
-
             {
                 "type": "input_value",
                 "name": "NEW_DATA"
@@ -79,15 +78,33 @@ Blockly.defineBlocksWithJsonArray([
 
 
 Blockly.Python['mcblock_setBlock'] = function (block) {
-    return 'hello_world\n';
+    let variable = retrieveValue(block, "VAR");
+    let new_mcblock = retrieveValue(block, "NEW_MCBLOCK");
+    return variable + " = " + new_mcblock + "\n";
 };
 
 
 Blockly.Python['mcblock_setType'] = function (block) {
-    return 'hello_world\n';
+    let current_mcblock = retrieveValue(block, "CURRENT_MCBLOCK");
+    let new_type = retrieveValue(block, "NEW_TYPE");
+    return current_mcblock + ".type" + " = " + new_type + "\n";
 };
 
 
 Blockly.Python['mcblock_setData'] = function (block) {
-    return 'hello_world\n';
+    let current_mcblock = retrieveValue(block, "CURRENT_MCBLOCK");
+    let new_data = retrieveValue(block, "NEW_DATA");
+    return current_mcblock + ".data" + " = " + new_data + "\n";
+};
+
+
+
+/**
+ * @function retrieveValue: Retrieves a new value from
+ * @param block: Blockly block which contains value input
+ * @param name: Name of particular value input to retrieve from block
+ * @param order: Precedence of retrieved value compared to other blocks around it (defaults to atomic)
+ */
+let retrieveValue = (block, name, order=Blockly.Python.ORDER_ATOMIC) => {
+    return Blockly.Python.valueToCode(block, name, order);
 };
