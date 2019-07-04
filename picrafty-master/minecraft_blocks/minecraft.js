@@ -1,6 +1,6 @@
 // FILE: minecraft.js
 // AUTHOR: Richie Burch; Nathan Robertson
-// PURPOSE: Implement blocks for all methods found in the Minecraft class
+// PURPOSE: Implement google_blocks for all methods found in the Minecraft class
 
 
 
@@ -185,11 +185,13 @@ Blockly.Python['getBlock'] = function(block) {
     return [code, Blockly.Python.ORDER_NONE];
 };
 
+
 Blockly.Python['getBlocks'] = function(block) {
     var value_vec1 = Blockly.Python.valueToCode(block, 'vec1', Blockly.Python.ORDER_ATOMIC);
     var value_vec2 = Blockly.Python.valueToCode(block, 'vec2', Blockly.Python.ORDER_ATOMIC);
     var code = 'mc.getBlocks('+value_vec1+', '+value_vec2+')\n';
     // TODO: Change ORDER_NONE to the correct strength.
+
     return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -224,12 +226,14 @@ Blockly.Python['postToChat'] = function (block) {
     return 'mc.postToChat(' + '"' + value_topost + '"' + ')\n';
 };
 
+
 Blockly.Python['setBlocks'] = function(block) {
     var value_vec1 = Blockly.Python.valueToCode(block, 'vec1', Blockly.Python.ORDER_ATOMIC);
     var value_vec2 = Blockly.Python.valueToCode(block, 'vec2', Blockly.Python.ORDER_ATOMIC);
     var value_block = Blockly.Python.valueToCode(block, 'block', Blockly.Python.ORDER_ATOMIC);
     var code = 'mc.setBlocks('+value_vec1+', '+value_vec2+', '+value_block+')\n';
     return code;
+
 };
 
 

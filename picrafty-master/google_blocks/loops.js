@@ -19,7 +19,7 @@
  */
 
 /**
- * @fileoverview Loop blocks for Blockly.
+ * @fileoverview Loop google_blocks for Blockly.
  *
  * This file is scraped to extract a .json file of block definitions. The array
  * passed to defineBlocksWithJsonArray(..) must be strict JSON: double quotes
@@ -37,7 +37,7 @@ goog.require('Blockly');
 
 
 /**
- * Unused constant for the common HSV hue for all blocks in this category.
+ * Unused constant for the common HSV hue for all google_blocks in this category.
  * @deprecated Use Blockly.Msg['LOOPS_HUE']. (2018 April 5)
  */
 Blockly.Constants.Loops.HUE = 120;
@@ -244,7 +244,7 @@ Blockly.Extensions.register('controls_flow_tooltip',
 
 /**
  * Mixin to add a context menu item to create a 'variables_get' block.
- * Used by blocks 'controls_for' and 'controls_forEach'.
+ * Used by google_blocks 'controls_for' and 'controls_forEach'.
  * @mixin
  * @augments Blockly.Block
  * @package
