@@ -19,7 +19,7 @@
  */
 
 /**
- * @fileoverview Colour blocks for Blockly.
+ * @fileoverview Colour google_blocks for Blockly.
  *
  * This file is scraped to extract a .json file of block definitions. The array
  * passed to defineBlocksWithJsonArray(..) must be strict JSON: double quotes
@@ -37,7 +37,7 @@ goog.require('Blockly');
 
 
 /**
- * Unused constant for the common HSV hue for all blocks in this category.
+ * Unused constant for the common HSV hue for all google_blocks in this category.
  * @deprecated Use Blockly.Msg['COLOUR_HUE']. (2018 April 5)
  */
 Blockly.Constants.Colour.HUE = 20;

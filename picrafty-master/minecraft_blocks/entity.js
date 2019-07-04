@@ -1,6 +1,6 @@
 // FILE: entity.js
 // AUTHOR: Matt Hardin, Nathan Robertson
-// PURPOSE: Implement blocks to map to Minecraft().entity methods.
+// PURPOSE: Implement google_blocks to map to Minecraft().entity methods.
 
 const ENTITY_ID = 'ENTITY_ID';
 const ENTITY_ID_LABEL = "Entity ID:";
@@ -15,7 +15,7 @@ const ENTITY_ARGS = {
 
 Blockly.Python['entity_getPos'] = function (block) {
     var code = 'mc.entity.getDirection()\n';
-
+};
 
 // JSON Block Layout
 

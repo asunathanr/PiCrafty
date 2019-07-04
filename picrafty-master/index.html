@@ -15,16 +15,17 @@
   <script src="minecraft_blocks/vectorAttributes.js"></script>
   <script src="minecraft_blocks/setVecAttrTo.js"></script>
   <script src="minecraft_blocks/entity.js"></script>
+  <script src="minecraft_blocks/mcBlock.js"></script>
 
   <!-- Google implemented blocks -->
-  <script src="blocks/lists.js"></script>
-  <script src="blocks/logic.js"></script>
-  <script src="blocks/loops.js"></script>
-  <script src="blocks/math.js"></script>
-  <script src="blocks/procedures.js"></script>
-  <script src="blocks/text.js"></script>
-  <script src="blocks/variables.js"></script>
-  <script src="blocks/variables_dynamic.js"></script>
+  <script src="google_blocks/lists.js"></script>
+  <script src="google_blocks/logic.js"></script>
+  <script src="google_blocks/loops.js"></script>
+  <script src="google_blocks/math.js"></script>
+  <script src="google_blocks/procedures.js"></script>
+  <script src="google_blocks/text.js"></script>
+  <script src="google_blocks/variables.js"></script>
+  <script src="google_blocks/variables_dynamic.js"></script>
 
 
   <style>
@@ -479,15 +480,11 @@
         </block>
 
         <block type="setPos">
-          <field name="X">0</field>
-          <field name="Y">0</field>
-          <field name="Z">0</field>
+
         </block>
 
         <block type="setTilePos">
-          <field name="X">0</field>
-          <field name="Y">0</field>
-          <field name="Z">0</field>
+
         </block>
 
 
@@ -524,6 +521,12 @@
         <block type="entity_getRotation"></block>
         <block type="entity_getPitch"></block>
         <block type="entity_getDirection"></block>
+      </category>
+
+      <category name="Minecraft Block" colour="#A65C81">
+        <block type="mcblock_setBlock"></block>
+        <block type="mcblock_setType"></block>
+        <block type="mcblock_setData"></block>
       </category>
 
     </category> <!-- End of Minecraft Category -->
