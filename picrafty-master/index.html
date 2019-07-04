@@ -16,7 +16,7 @@
   <script src="minecraft_blocks/setVecAttrTo.js"></script>
   <script src="minecraft_blocks/entity.js"></script>
 
-  <!-- Google implemented google_blocks -->
+  <!-- Google implemented blocks -->
   <script src="google_blocks/lists.js"></script>
   <script src="google_blocks/logic.js"></script>
   <script src="google_blocks/loops.js"></script>
@@ -28,36 +28,69 @@
 
 
   <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
     body {
-      background-color: #fff;
+      background-color: slategray;
       font-family: sans-serif;
     }
     h1 {
       font-weight: normal;
       font-size: 140%;
     }
+    table {
+      height: 100%;
+      width: 100%;
+    }
+    #blocklyArea {
+      height: 80%;
+    }
+    textarea {
+      height: 90%;
+      width: 100%;
+      resize:none
+    }
   </style>
 </head>
+
+
 <body>
-
-  <div id="main-container" style="margin-left: 10em; margin-top: 5em;">
+  <!-- table to divide up sections for blockly, buttons, and code in browser -->
+  <table>
+    <tr>
+      <td id="blocklyArea">
+      </td>
+    </tr>
+    <tr id="buttons">
+      <td>
+        <p>
+          <button onclick="showCode()">Show Python Stub</button>
+          <button onclick="save()">Save</button>
+          <button onclick="restore()">Restore</button>
+          <button onclick="displayCodeInBrowser()">View code in browser</button>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td id="codeAreaRow">
+        <form>
+          <textarea id="codeArea" style="position:absolute "></textarea>
+        </form>
+      </td>
+    </tr>
+  </table>
+  
   <!-- This is the Div Blockly will render in. size can be adjusted here -->
-  <!-- TODO: Have this Dynamicially set based off browser resolutionn(resziable Demo For example) -->
-  <div id="blocklyDiv" style="height: 600px; width: 800px;"></div>
+  <div id="blocklyDiv" style="position: absolute;"></div>
 
-  <p>
-      <button onclick="showCode()">Show Python Stub</button>
-      <button onclick="save()">Save</button>
-      <button onclick="restore()">Restore</button>
-      <button onclick="displayCodeInBrowser()">View code in browser</button>
-  </p>
+  
 
-  <textarea id="codeArea" style="height: 600px; width: 800px;">
+ 
 
-  </textarea>
-  </div>
   <!--This defines the toolbox to be given to Blockly.  -->
-  <!--Additional google_blocks can be added and catogrized.   -->
+  <!--Additional blocks can be added and categorized.   -->
   <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
     <category name="Logic" colour="#5C81A6">
       <block type="controls_if"></block>
@@ -511,11 +544,34 @@
   </xml>
 
   <script>
-    var demoWorkspace = Blockly.inject('blocklyDiv',
+    var blocklyArea = document.getElementById('blocklyArea');
+    var blocklyDiv = document.getElementById('blocklyDiv');
+    var demoWorkspace = Blockly.inject(blocklyDiv,
         {media: 'media' + "\\",
          toolbox: document.getElementById('toolbox')});
+    var onresize = function(e) {
+      // Compute the absolute coordinates and dimensions of blocklyArea.
+      var element = blocklyArea;
+      var x = 0;
+      var y = 0;
+      do {
+        x += element.offsetLeft;
+        y += element.offsetTop;
+        element = element.offsetParent;
+      } while (element);
+      // Position blocklyDiv over blocklyArea.
+      blocklyDiv.style.left = x + 'px';
+      blocklyDiv.style.top = y + 'px';
+      blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+      blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+      Blockly.svgResize(demoWorkspace);
+    };
+    window.addEventListener('resize', onresize, false);
+    onresize();
+    Blockly.svgResize(demoWorkspace);
   </script>
-  <script>
+
+<script>
 	function showCode() {
 	// Generate python  code and display it/Save It.
 	//This helps Blockly avoid getting hung up
@@ -524,8 +580,9 @@
     let preamble = "from mine import *\n\n" +
         "mc = Minecraft()\n" +
         "\n";
-	var code = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
-	//This is all Preparation For Downloading the file
+
+  var code = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
+  //This is all Preparation For Downloading the file
 	var PythonStub = new Blob([code], {type:"text/plain"});
 	var textToSaveAsURL = window.URL.createObjectURL(PythonStub);
 	var downloadLink = document.createElement("a");
@@ -540,12 +597,13 @@
 
 		//Helpful for Debugging
 		//alert(code);
-	}
+  }
+  
 	function destroyClickedElement(event)
 	{
 		document.body.removeChild(event.target);
-
   }
+  
   // https://groups.google.com/forum/#!topic/blockly/NDlC-l6DLEM
   // TODO: Clean up and finalize save and restore
   function save() {
@@ -558,7 +616,7 @@
     var xmlText = localStorage.getItem("blockly.xml");
     if (xmlText) {
         Blockly.mainWorkspace.clear();
-        let xmlDom = Blockly.Xml.textToDom(xmlText);
+        xmlDom = Blockly.Xml.textToDom(xmlText);
         Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
     }
   }
