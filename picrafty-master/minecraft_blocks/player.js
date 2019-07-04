@@ -18,6 +18,24 @@ const Z_FIELD = "Z";
 
 Blockly.defineBlocksWithJsonArray([
 
+    // BLOCK: mc.player.setPos()
+    {
+        "type":"setPos",
+        "message0": "Set Player's position",
+        "message1": "%1",
+        "args1": [
+            {
+                "type": "input_value",
+                "name": "VEC3",
+            }
+        ],
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": BLOCK_COLOR,
+        "tooltip": "Sets player position to new x,y,z coordinates",
+        "helpUrl": "",
+    },
+
     // BLOCK:  mc.player.getDirection()
     {
     "type": "getDirection",
@@ -87,62 +105,6 @@ Blockly.Blocks['player_setting'] = {
         this.setTooltip("Sets a particular setting to be either true or false. ");
         this.setHelpUrl("");
     }
-};
-
-Blockly.Blocks['setPos'] = {
-    init: function () {
-        const INPUT_TYPES = [["standard", "STANDARD"], ["vec3", "VEC3"]];
-        let dropdown = new Blockly.FieldDropdown(INPUT_TYPES, function (vec_input) {
-            this.sourceBlock_.updateShape_(vec_input);
-        });
-
-        // initial state of block
-        this.appendDummyInput()
-            .appendField("Set Player Position")
-            .appendField(dropdown, "CONFIG");
-
-        this.appendDummyInput(X_NAME)
-            .appendField('x:')
-            .appendField(new Blockly.FieldTextInput("0"), X_FIELD);
-        this.appendDummyInput(Y_NAME)
-            .appendField('y:')
-            .appendField(new Blockly.FieldTextInput("0"), Y_FIELD);
-        this.appendDummyInput(Z_NAME)
-            .appendField('z:')
-            .appendField(new Blockly.FieldTextInput("0"), Z_FIELD);
-
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(BLOCK_COLOR);
-        this.setTooltip("Sets player position to new x,y,z coordinates");
-        this.setHelpUrl("");
-    },
-
-    mutationToDom: function () {
-        let blockCache = document.createElement('mutation');
-        let vecInput = (this.getFieldValue("CONFIG") === 'VEC3');
-        blockCache.setAttribute('vec_input', vecInput);
-        return blockCache;
-    },
-
-    // function to load block from xml?
-    domToMutation: function (xmlElement) {
-        let hasVecInput = (xmlElement.getAttribute('vec_input' === 'true'));
-        this.updateShape_(hasVecInput);
-    },
-
-    // function to update shape of block on dropdown change
-    updateShape_: function (vecInput) {
-        if (vecInput) {  // make sure an option has been passed
-            if (vecInput === "VEC3") {  // if the vec3 option has been selected
-                addVectorInput(this);
-                addBlockInput(this);
-            } else if (vecInput === "STANDARD") { // if the standard option has been selected
-                addVectorCoordinatesSingle(this);
-                addBlockInput(this);
-            }
-        }
-    },
 };
 
 
@@ -236,11 +198,7 @@ Blockly.Python['getTilePos'] = function (block) {
 
 
 Blockly.Python['setPos'] = function (block) {
-    let arguments = [
-        block.getFieldValue(X_FIELD),
-        block.getFieldValue(Y_FIELD),
-        block.getFieldValue(Z_FIELD)
-    ].join(', ');
+    let arguments = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
     return 'mc.player.setPos(' + arguments + ')\n';
 };
 
@@ -285,39 +243,6 @@ function addVectorInput(block) {
     });
 }
 
-// replace vector input with manual vector coordinates for cube
-function addVectorCoordinatesCube(block) {
-    if (block.getInput("VEC")) {
-        block.removeInput("VEC");
-    }
-    if (!block.getInput("XES")) {
-        block.appendDummyInput("XES")
-            .appendField("x0:")
-            .appendField(new Blockly.FieldTextInput("0"), "X0")
-            .appendField("x1:")
-            .appendField(new Blockly.FieldTextInput("1"), "X1");
-    }
-
-    if (!block.getInput("YES")) {
-        block.appendDummyInput("YES")
-            .appendField("y0:")
-            .appendField(new Blockly.FieldTextInput("0"), "Y0")
-            .appendField("y1:")
-            .appendField(new Blockly.FieldTextInput("1"), "Y1")
-            .appendField("Block Type:")
-            .appendField(new Blockly.FieldTextInput("1"), "TYPE");
-    }
-
-    if (!block.getInput("ZES")) {
-        block.appendDummyInput("ZES")
-            .appendField("z0:")
-            .appendField(new Blockly.FieldTextInput("0"), "Z0")
-            .appendField("z1:")
-            .appendField(new Blockly.FieldTextInput("1"), "Z1")
-            .appendField("Block      Id:")
-            .appendField(new Blockly.FieldTextInput("0"), "ID");
-    }
-}
 
 // replace vector input with manual vector coordinates
 function addVectorCoordinatesSingle(block) {
