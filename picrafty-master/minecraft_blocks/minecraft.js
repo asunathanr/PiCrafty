@@ -198,13 +198,12 @@ Blockly.Python['getBlockWithData'] = function(block) {
     return [code, Blockly.Python.ORDER_NONE];
   };
 
-Blockly.Python['getHeight'] = function (block) {
-    var x = block.getFieldValue('X');
-    var z = block.getFieldValue('Z');
-    var code = 'mc.getHeight(' + x + ', ' + z + ')\n';
+  Blockly.Python['getHeight'] = function(block) {
+    var value_vec = Blockly.Python.valueToCode(block, 'vec', Blockly.Python.ORDER_ATOMIC);
+    var code = 'mc.getHeight('+value_vec+')\n';
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
-};
+  };
 
 Blockly.Python['getPlayerEntityIds'] = function (block) {
     var code = 'mc.getPlayerEntityIds()\n';
