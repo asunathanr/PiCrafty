@@ -146,8 +146,8 @@ Blockly.Python['getTilePos'] = function (block) {
 
 /**
  * @function makeFunctionCall: Constructs a string representing a python function call
- * @param functionName
- * @param arguments
+ * @param functionName: string
+ * @param arguments: array (empty by default)
  */
 let makeFunctionCall = (functionName, arguments=[]) => {
     return functionName + "(" + arguments.join(", ") + ")\n"
