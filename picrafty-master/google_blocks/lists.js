@@ -19,7 +19,7 @@
  */
 
 /**
- * @fileoverview List blocks for Blockly.
+ * @fileoverview List google_blocks for Blockly.
  *
  * This file is scraped to extract a .json file of block definitions. The array
  * passed to defineBlocksWithJsonArray(..) must be strict JSON: double quotes
@@ -36,7 +36,7 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly');
 
 /**
- * Unused constant for the common HSV hue for all blocks in this category.
+ * Unused constant for the common HSV hue for all google_blocks in this category.
  * @deprecated Use Blockly.Msg['LISTS_HUE']. (2018 April 5)
  */
 Blockly.Constants.Lists.HUE = 260;
@@ -200,13 +200,13 @@ Blockly.Blocks['lists_create_with'] = {
     }
     this.itemCount_ = connections.length;
     this.updateShape_();
-    // Reconnect any child blocks.
+    // Reconnect any child google_blocks.
     for (var i = 0; i < this.itemCount_; i++) {
       Blockly.Mutator.reconnect(connections[i], this, 'ADD' + i);
     }
   },
   /**
-   * Store pointers to any connected child blocks.
+   * Store pointers to any connected child google_blocks.
    * @param {!Blockly.Block} containerBlock Root block in mutator.
    * @this Blockly.Block
    */

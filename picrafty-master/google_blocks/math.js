@@ -19,7 +19,7 @@
  */
 
 /**
- * @fileoverview Math blocks for Blockly.
+ * @fileoverview Math google_blocks for Blockly.
  *
  * This file is scraped to extract a .json file of block definitions. The array
  * passed to defineBlocksWithJsonArray(..) must be strict JSON: double quotes
@@ -37,7 +37,7 @@ goog.require('Blockly');
 
 
 /**
- * Unused constant for the common HSV hue for all blocks in this category.
+ * Unused constant for the common HSV hue for all google_blocks in this category.
  * @deprecated Use Blockly.Msg['MATH_HUE']. (2018 April 5)
  */
 Blockly.Constants.Math.HUE = 230;
@@ -399,7 +399,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 ]);  // END JSON EXTRACT (Do not delete this comment.)
 
 /**
- * Mapping of math block OP value to tooltip message for blocks
+ * Mapping of math block OP value to tooltip message for google_blocks
  * math_arithmetic, math_simple, math_trig, and math_on_lists.
  * @see {Blockly.Extensions#buildTooltipForDropdown}
  * @package
@@ -560,7 +560,7 @@ Blockly.Constants.Math.LIST_MODES_MUTATOR_MIXIN = {
 };
 
 /**
- * Extension to 'math_on_list' blocks that allows support of
+ * Extension to 'math_on_list' google_blocks that allows support of
  * modes operation (outputs a list of numbers).
  * @this Blockly.Block
  * @package

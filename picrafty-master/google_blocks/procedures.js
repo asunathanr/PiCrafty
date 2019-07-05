@@ -19,7 +19,7 @@
  */
 
 /**
- * @fileoverview Procedure blocks for Blockly.
+ * @fileoverview Procedure google_blocks for Blockly.
  * @author fraser@google.com (Neil Fraser)
  */
 'use strict';
@@ -496,7 +496,7 @@ Blockly.Blocks['procedures_mutatorcontainer'] = {
 
     var block = this.workspace.getBlockById(event.blockId);
     // This is to handle the one none variable block
-    // Happens when all the blocks are regenerated
+    // Happens when all the google_blocks are regenerated
     if (!block.getField('NAME')) {
       return;
     }
@@ -507,7 +507,7 @@ Blockly.Blocks['procedures_mutatorcontainer'] = {
       // This means the parameter name is not in use and we can create the variable.
       variable = this.workspace.createVariable(varName);
     }
-    // If the blocks are connected we don't have to check duplicate variables
+    // If the google_blocks are connected we don't have to check duplicate variables
     // This only happens if the dialog box is open
     if (block.previousConnection.isConnected() || block.nextConnection.isConnected()) {
       return;
@@ -743,7 +743,7 @@ Blockly.Blocks['procedures_callnoreturn'] = {
 
     this.updateShape_();
     this.quarkIds_ = paramIds;
-    // Reconnect any child blocks.
+    // Reconnect any child google_blocks.
     if (this.quarkIds_) {
       for (var i = 0; i < this.arguments_.length; i++) {
         var quarkId = this.quarkIds_[i];
@@ -950,7 +950,7 @@ Blockly.Blocks['procedures_callnoreturn'] = {
   customContextMenu: function(options) {
     if (!this.workspace.isMovable()) {
       // If we center on the block and the workspace isn't movable we could
-      // loose blocks at the edges of the workspace.
+      // loose google_blocks at the edges of the workspace.
       return;
     }
 

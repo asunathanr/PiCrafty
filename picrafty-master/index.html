@@ -3,7 +3,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>HSV_STEAMWORKS: BLOCKLY MC DEMO</title>
+  <title>PiCrafty</title>
 
   <script src="blockly_compressed.js"></script>
   <script src="python_compressed.js"></script>
@@ -15,47 +15,82 @@
   <script src="minecraft_blocks/vectorAttributes.js"></script>
   <script src="minecraft_blocks/setVecAttrTo.js"></script>
   <script src="minecraft_blocks/entity.js"></script>
+  <script src="minecraft_blocks/mcBlock.js"></script>
 
   <!-- Google implemented blocks -->
-  <script src="blocks/lists.js"></script>
-  <script src="blocks/logic.js"></script>
-  <script src="blocks/loops.js"></script>
-  <script src="blocks/math.js"></script>
-  <script src="blocks/procedures.js"></script>
-  <script src="blocks/text.js"></script>
-  <script src="blocks/variables.js"></script>
-  <script src="blocks/variables_dynamic.js"></script>
+  <script src="google_blocks/lists.js"></script>
+  <script src="google_blocks/logic.js"></script>
+  <script src="google_blocks/loops.js"></script>
+  <script src="google_blocks/math.js"></script>
+  <script src="google_blocks/procedures.js"></script>
+  <script src="google_blocks/text.js"></script>
+  <script src="google_blocks/variables.js"></script>
+  <script src="google_blocks/variables_dynamic.js"></script>
 
 
   <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
     body {
-      background-color: #fff;
+      background-color: slategray;
       font-family: sans-serif;
     }
     h1 {
       font-weight: normal;
       font-size: 140%;
     }
+    table {
+      height: 100%;
+      width: 100%;
+    }
+    #blocklyArea {
+      height: 80%;
+    }
+    textarea {
+      height: 90%;
+      width: 100%;
+      resize:none
+    }
   </style>
 </head>
+
 <body>
-
+  <!-- table to divide up sections for blockly, buttons, and code in browser -->
+  <table>
+    <tr>
+      <td id="blocklyArea">
+      </td>
+    </tr>
+    <tr id="buttons">
+      <td>
+        <p>
+          <button onclick="showCode()">Show Python Stub</button>
+          <button onclick="save()">Save</button>
+          <button onclick="restore()">Restore</button>
+          <button onclick="displayCodeInBrowser()">View code in browser</button>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td id="codeAreaRow">
+        <form>
+          <textarea id="codeArea" style="position:absolute "></textarea>
+        </form>
+      </td>
+    </tr>
+  </table>
+  
   <!-- This is the Div Blockly will render in. size can be adjusted here -->
-  <!-- TODO: Have this Dynamicially set based off browser resolutionn(resziable Demo For example) -->
-  <div id="blocklyDiv" style="height: 600px; width: 800px;"></div>
+  <div id="blocklyDiv" style="position: absolute;"></div>
 
-  <p>
-      <button onclick="showCode()">Show Python Stub</button>
-      <button onclick="save()">Save</button>
-      <button onclick="restore()">Restore</button>
-      <button onclick="displayCodeInBrowser()">View code in browser</button>
-  </p>
+  
 
-  <textarea id="codeArea" style="height: 600px; width: 800px;">
+ 
 
-  </textarea>
   <!--This defines the toolbox to be given to Blockly.  -->
-  <!--Additional blocks can be added and catogrized.   -->
+  <!--Additional blocks can be added and categorized.   -->
   <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
     <category name="Logic" colour="#5C81A6">
       <block type="controls_if"></block>
@@ -371,70 +406,24 @@
       </block>
     </category>
     <category name="Minecraft" colour="#a55b6d">
-      <block type="minecraft_create">
-        <field name="ADDRESS">localhost</field>
-        <field name="PORT">25565</field>
-      </block>
 
-      <block type="getBlock">
-        <field name="X">0</field>
-        <field name="Y">0</field>
-        <field name="Z">0</field>
-      </block>
+      <block type="getBlock"></block>
 
-      <block type="getBlockWithData">
-          <field name="X">0</field>
-          <field name="Y">0</field>
-          <field name="Z">0</field>
-      </block>
+      <block type="getBlockWithData"></block>
       
-      <block type="getHeight">
-          <field name="X">0</field>
-          <field name="Z">0</field>
-      </block>
+      <block type="getHeight"></block>
 
-      <block type="getBlocks">
-        <field name="X0COORD">0</field>
-        <field name="X1COORD">1</field>
-        <field name="Y0COORD">0</field>
-        <field name="Y1COORD">1</field>
-        <field name="Z0COORD">0</field>
-        <field name="Z1COORD">1</field>
-      </block>
+      <block type="getBlocks"></block>
 
-      <block type="setBlock">
-        <mutation vec_input="true"></mutation>
-        <field name="CONFIG">STANDARD</field>
-        <field name="X">0</field>
-        <field name="Y">0</field>
-        <field name="Z">0</field>
-        <field name="blockId">0</field>
-        <field name="blockType">0</field>
-      </block>
+      <block type="setBlock"></block>
 
-      <block type="setBlocks">
-          <mutation vec_input="true"></mutation>
-          <field name="CONFIG">STANDARD</field>
-          <field name="X0">0</field>
-          <field name="X1">1</field>
-          <field name="Y0">0</field>
-          <field name="Y1">1</field>
-          <field name="Z0">0</field>
-          <field name="Z1">1</field>
-          <field name="TYPE">1</field>
-          <field name="ID">0</field>
-        </block>
+      <block type="setBlocks"></block>
 
-      <block type="postToChat">
-      </block>
+      <block type="postToChat"></block>
 
-      <block type="getPlayerEntityIds">
-      </block>
+      <block type="getPlayerEntityIds"></block>
 
-      <block type="getPlayerId">
-        </block>
-      <block type="saveCheckpoint"></block>
-      <block type="setting"></block>
+      <block type="getPlayerId"></block>
 
       <category name="Player" colour="#a55b6d">
 
@@ -444,15 +433,11 @@
         </block>
 
         <block type="setPos">
-          <field name="X">0</field>
-          <field name="Y">0</field>
-          <field name="Z">0</field>
+
         </block>
 
         <block type="setTilePos">
-          <field name="X">0</field>
-          <field name="Y">0</field>
-          <field name="Z">0</field>
+
         </block>
 
 
@@ -491,6 +476,12 @@
         <block type="entity_getDirection"></block>
       </category>
 
+      <category name="Minecraft Block" colour="#A65C81">
+        <block type="mcblock_setBlock"></block>
+        <block type="mcblock_setType"></block>
+        <block type="mcblock_setData"></block>
+      </category>
+
     </category> <!-- End of Minecraft Category -->
 
     <sep></sep>
@@ -509,11 +500,34 @@
   </xml>
 
   <script>
-    var demoWorkspace = Blockly.inject('blocklyDiv',
+    var blocklyArea = document.getElementById('blocklyArea');
+    var blocklyDiv = document.getElementById('blocklyDiv');
+    var demoWorkspace = Blockly.inject(blocklyDiv,
         {media: 'media' + "\\",
          toolbox: document.getElementById('toolbox')});
+    var onresize = function(e) {
+      // Compute the absolute coordinates and dimensions of blocklyArea.
+      var element = blocklyArea;
+      var x = 0;
+      var y = 0;
+      do {
+        x += element.offsetLeft;
+        y += element.offsetTop;
+        element = element.offsetParent;
+      } while (element);
+      // Position blocklyDiv over blocklyArea.
+      blocklyDiv.style.left = x + 'px';
+      blocklyDiv.style.top = y + 'px';
+      blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+      blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+      Blockly.svgResize(demoWorkspace);
+    };
+    window.addEventListener('resize', onresize, false);
+    onresize();
+    Blockly.svgResize(demoWorkspace);
   </script>
-  <script>
+
+<script>
 	function showCode() {
 	// Generate python  code and display it/Save It.
 	//This helps Blockly avoid getting hung up
@@ -522,8 +536,9 @@
     let preamble = "from mine import *\n\n" +
         "mc = Minecraft()\n" +
         "\n";
-	var code = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
-	//This is all Preparation For Downloading the file
+
+  var code = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
+  //This is all Preparation For Downloading the file
 	var PythonStub = new Blob([code], {type:"text/plain"});
 	var textToSaveAsURL = window.URL.createObjectURL(PythonStub);
 	var downloadLink = document.createElement("a");
@@ -538,12 +553,13 @@
 
 		//Helpful for Debugging
 		//alert(code);
-	}
+  }
+  
 	function destroyClickedElement(event)
 	{
 		document.body.removeChild(event.target);
-
   }
+  
   // https://groups.google.com/forum/#!topic/blockly/NDlC-l6DLEM
   // TODO: Clean up and finalize save and restore
   function save() {
