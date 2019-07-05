@@ -3,9 +3,6 @@
 // PURPOSE: Code to display and generate minecraft blocks
 
 
-
-
-
 Blockly.defineBlocksWithJsonArray([
 
     // BLOCK: mcblock_setBlock

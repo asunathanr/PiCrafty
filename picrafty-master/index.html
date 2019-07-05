@@ -49,6 +49,7 @@
       height: 80%;
     }
     textarea {
+      background-color: white;
       height: 90%;
       width: 100%;
       resize:none
@@ -75,9 +76,9 @@
     </tr>
     <tr>
       <td id="codeAreaRow">
-        <form>
-          <textarea id="codeArea" style="position:absolute "></textarea>
-        </form>
+
+          <textarea id="codeArea" style="position:absolute; "></textarea>
+
       </td>
     </tr>
   </table>
@@ -426,11 +427,6 @@
       <block type="getPlayerId"></block>
 
       <category name="Player" colour="#a55b6d">
-
-        <block type="player_setting">
-          <field name="SETTING"></field>
-          <field name="STATUS"></field>
-        </block>
 
         <block type="setPos">
 

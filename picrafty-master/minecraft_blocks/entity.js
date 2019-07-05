@@ -14,12 +14,50 @@ const ENTITY_ARGS = {
 };
 
 
-
 // JSON Block Layout
 
-// BLOCK:  mc.entity.getPos()
+
 Blockly.defineBlocksWithJsonArray([
-    // mc.entity.getPos()
+
+    // BLOCK: mc.entity.setPos()
+    {
+        "type":"entity_setPos",
+        "message0": "Set an entities position",
+        "message1": ENTITY_MESSAGE + "Vector3: %2",
+        "args1": [
+            ENTITY_ARGS,
+            {
+                "type": "input_value",
+                "name": "VEC3",
+            }
+        ],
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": BLOCK_COLOR,
+        "tooltip": "Sets an entities position to new x,y,z coordinates",
+        "helpUrl": "",
+    },
+
+    // BLOCK: mc.entity.setTilePos()
+    {
+        "type": "entity_setTilePos",
+        "message0": "Set entity tile position",
+        "message1": ENTITY_MESSAGE + "Vector3: %2",
+        "args1": [
+            ENTITY_ARGS,
+            {
+                "type": "input_value",
+                "name": "VEC3",
+            }
+        ],
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": BLOCK_COLOR,
+        "tooltip": "Sets an entities tile position to new x,y,z coordinates",
+        "helpUrl": "",
+    },
+
+    // BLOCK: mc.entity.getPos()
     {
         "type": "entity_getPos",
         "message0": "Get entity position",
@@ -33,7 +71,7 @@ Blockly.defineBlocksWithJsonArray([
         "helpUrl": "documentation/index.html"
     },
 
-    // mc.entity.getTilePos()
+    // BLOCK: mc.entity.getTilePos()
     {
         "type": "entity_getTilePos",
         "message0": "Get entity tile position",
@@ -47,7 +85,7 @@ Blockly.defineBlocksWithJsonArray([
         "helpUrl": "documentation/index.html"
     },
 
-    // mc.entity.getTilePos()
+    // BLOCK: mc.entity.getTilePos()
     {
         "type": "entity_getRotation",
         "message0": "Get entity rotation",
@@ -61,7 +99,7 @@ Blockly.defineBlocksWithJsonArray([
         "helpUrl": "documentation/index.html"
     },
 
-    // mc.entity.getPitch()
+    // BLOCK: mc.entity.getPitch()
     {
         "type": "entity_getPitch",
         "message0": "Get entity pitch",
@@ -75,7 +113,7 @@ Blockly.defineBlocksWithJsonArray([
         "helpUrl": "documentation/index.html"
     },
 
-    // mc.entity.getDirection()
+    // BLOCK: mc.entity.getDirection()
     {
         "type": "entity_getDirection",
         "message0": "Get entity tile position",
@@ -100,29 +138,6 @@ Blockly.Python['entity_getPos'] = function (block) {
 };
 
 
-Blockly.Blocks['entity_setPos'] = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField("Set entity's position");
-        this.appendDummyInput(ENTITY_ID_LABEL)
-            .appendField(ENTITY_ID_LABEL)
-            .appendField(new Blockly.FieldTextInput("0"), ENTITY_ID);
-        this.appendDummyInput("x:")
-            .appendField("x:")
-            .appendField(new Blockly.FieldTextInput("0"), 'X');
-        this.appendDummyInput("y:")
-            .appendField("y:")
-            .appendField(new Blockly.FieldTextInput("0"), 'Y');
-        this.appendDummyInput("z:")
-            .appendField("z:")
-            .appendField(new Blockly.FieldTextInput("0"), 'Z');
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(230);
-        this.setTooltip("Sets entity's position to top of given x,y,z coordinates");
-        this.setHelpUrl("");
-    }
-};
 Blockly.Python['entity_setPos'] = function (block) {
     let entityId = block.getFieldValue(ENTITY_ID);
     let x = block.getFieldValue('X');
@@ -133,44 +148,19 @@ Blockly.Python['entity_setPos'] = function (block) {
 };
 
 
-Blockly.Python['entity_getTilePos'] = function (block) {
-    let entityId = block.getFieldValue(ENTITY_ID);
-    let code = 'mc.entity.getTilePos(' + entityId + ')\n';
-    return [code, Blockly.Python.ORDER_NONE];
-};
-
-
-Blockly.Blocks['entity_setTilePos'] = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField("Set entity tile position");
-        this.appendDummyInput(ENTITY_ID_LABEL)
-            .appendField(ENTITY_ID_LABEL)
-            .appendField(new Blockly.FieldTextInput("0"), ENTITY_ID);
-        this.appendDummyInput("x:")
-            .appendField("x:")
-            .appendField(new Blockly.FieldTextInput("0"), 'X');
-        this.appendDummyInput("y:")
-            .appendField("y:")
-            .appendField(new Blockly.FieldTextInput("0"), 'Y');
-        this.appendDummyInput("z:")
-            .appendField("z:")
-            .appendField(new Blockly.FieldTextInput("0"), 'Z');
-        this.setColour(230);
-        this.setTooltip("Sets entity position to top of given x,y,z coordinates");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setHelpUrl("");
-    }
-};
-
-
 Blockly.Python['entity_setTilePos'] = function (block) {
     let entityId = block.getField(ENTITY_ID);
     let X = block.getFieldValue('X');
     let Y = block.getFieldValue('Y');
     let Z = block.getFieldValue('Z');
     return 'mc.entity.setTilePos(' + [entityId, X, Y, Z].join(',') + ')\n';
+};
+
+
+Blockly.Python['entity_getTilePos'] = function (block) {
+    let entityId = block.getFieldValue(ENTITY_ID);
+    let code = 'mc.entity.getTilePos(' + entityId + ')\n';
+    return [code, Blockly.Python.ORDER_NONE];
 };
 
 

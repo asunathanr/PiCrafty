@@ -101,81 +101,54 @@ Blockly.defineBlocksWithJsonArray([
 
 
 Blockly.Python['setPos'] = function (block) {
-    let arguments = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
-    return 'mc.player.setPos(' + arguments + ')\n';
+    let vector3 = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
+    return makeFunctionCall("mc.player.setPos", [vector3]);
 };
 
 
 Blockly.Python['setTilePos'] = function (block) {
-    let arguments = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
-    return 'mc.player.setPos(' + arguments + ')\n';
-};
-
-// Had to set key as player_setting since a setting key already exists.
-Blockly.Blocks['player_setting'] = {
-    init: function () {
-        this.appendDummyInput("Player Setting")
-            .appendField("Set player settings");
-        this.appendDummyInput("Setting Name: ")
-            .appendField('Setting:')
-            .appendField(new Blockly.FieldTextInput(), "SETTING");
-        this.appendDummyInput("Status: ")
-            .appendField("Status: ")
-            .appendField(new Blockly.FieldCheckbox(), "STATUS");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(BLOCK_COLOR);
-        this.setTooltip("Sets a particular setting to be either true or false. ");
-        this.setHelpUrl("");
-    }
+    let vector3 = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
+    return makeFunctionCall("mc,.player.setTilePos", [vector3]);
 };
 
 
 Blockly.Python['getDirection'] = function (block) {
-    let code = 'mc.player.getDirection()\n';
+    let code = makeFunctionCall("mc.player.getDirection");
     return [code, Blockly.Python.ORDER_NONE];
 };
 
 
 Blockly.Python['getPitch'] = function (block) {
-    let code = 'mc.player.getPitch()\n';
+    let code = makeFunctionCall("mc.player.getPitch");
     return [code, Blockly.Python.ORDER_NONE];
 };
 
 
 Blockly.Python['getPos'] = function (block) {
-    let code = 'mc.player.getPos()\n';
+    let code = makeFunctionCall("mc.player.getPos");
     return [code, Blockly.Python.ORDER_NONE];
 };
 
 
 Blockly.Python['getRotation'] = function (block) {
-    let code = 'mc.player.getRotation()\n';
+    let code = makeFunctionCall("mc.player.getRotation");
     return [code, Blockly.Python.ORDER_NONE];
 };
 
 
 Blockly.Python['getTilePos'] = function (block) {
-    var code = 'mc.player.getTilePos()\n';
+    let code = makeFunctionCall("mc.player.getTilePos");
     return [code, Blockly.Python.ORDER_NONE];
 };
 
 
-Blockly.Python['player_setting'] = function (block) {
-    let status = "true" ? block.getFieldValue("STATUS").isChecked() : "false";
-    let arguments = block.getFieldValue("SETTING") + ',' + status;
-    return 'mc.player.setting(' + arguments + ')\n';
-};
-
-
-
 // HELPERS
-// TODO: Write makeFunctionCall body
-/**
- * @function makeFunctionCall
- * @param functionName
- * @param arguments
- */
-let makeFunctionCall = (functionName, arguments) => {
 
+/**
+ * @function makeFunctionCall: Constructs a string representing a python function call
+ * @param functionName: string
+ * @param arguments: array (empty by default)
+ */
+let makeFunctionCall = (functionName, arguments=[]) => {
+    return functionName + "(" + arguments.join(", ") + ")\n"
 };
